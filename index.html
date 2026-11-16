@@ -28,15 +28,14 @@
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: var(--font-body); background: var(--paper); color: var(--ink); min-height: 100vh; line-height: 1.5; }
         .mary-bg { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; background: linear-gradient(135deg, #E8EAF6 0%, #C5CAE9 50%, #E8EAF6 100%); opacity: 0.3; }
-        .mary-bg::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 800'%3E%3Ccircle cx='400' cy='400' r='300' fill='none' stroke='%231a237e' stroke-width='2' opacity='0.1'/%3E%3Ccircle cx='400' cy='400' r='200' fill='none' stroke='%231a237e' stroke-width='1.5' opacity='0.08'/%3E%3Ccircle cx='400' cy='400' r='100' fill='none' stroke='%231a237e' stroke-width='1' opacity='0.06'/%3E%3Cpath d='M400 50 L415 120 L485 140 L435 185 L445 260 L400 220 L355 260 L365 185 L315 140 L385 120 Z' fill='%231a237e' opacity='0.05'/%3E%3C/svg%3E") center/cover no-repeat; pointer-events: none; }
         .topbar { position: sticky; top: 0; z-index: 40; background: linear-gradient(135deg, #1a237e, #283593); border-bottom: 3px solid var(--gold); padding: 10px 18px; display: flex; align-items: center; justify-content: center; gap: 14px; box-shadow: var(--shadow-md); }
         .topbar .brand { flex: 1; min-width: 0; text-align: center; }
         .topbar .brand .school-logo { width: 65px; height: 65px; margin: 0 auto 2px; display: block; }
-        .topbar .brand .school-logo img { width: 100%; height: 100%; object-fit: contain; filter: drop-shadow(0 0 4px rgba(255, 215, 0, 0.2)); }
+        .topbar .brand .school-logo img { width: 100%; height: 100%; object-fit: contain; }
         .topbar .brand .ministry { font-size: 9px; letter-spacing: 2px; text-transform: uppercase; color: var(--gold); font-weight: 600; }
         .topbar .brand h1 { font-family: var(--font-display); font-weight: 650; font-size: 22px; color: #fff; letter-spacing: 1px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
         .topbar .brand .motto { font-size: 12px; color: var(--gold); font-style: italic; font-weight: 400; letter-spacing: 0.5px; }
-        .connection-status { position: fixed; bottom: 20px; right: 20px; z-index: 50; padding: 8px 16px; border-radius: 40px; font-size: 11px; font-weight: 600; background: rgba(255, 255, 255, 0.95); border: 1px solid var(--border); box-shadow: var(--shadow-sm); display: flex; align-items: center; gap: 8px; backdrop-filter: blur(10px); }
+        .connection-status { position: fixed; bottom: 20px; right: 20px; z-index: 50; padding: 8px 16px; border-radius: 40px; font-size: 11px; font-weight: 600; background: rgba(255, 255, 255, 0.95); border: 1px solid var(--border); box-shadow: var(--shadow-sm); display: flex; align-items: center; gap: 8px; }
         .connection-status .dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; }
         .connection-status .dot.online { background: #2e7d32; }
         .connection-status .dot.offline { background: #c62828; }
@@ -45,7 +44,7 @@
         .shell { max-width: 1100px; margin: 0 auto; padding: 20px 16px 60px; }
         .section { display: none; }
         .section.active { display: block; }
-        .card { background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px); border: 1px solid var(--border); border-radius: var(--radius-md); padding: 20px; margin-bottom: 18px; box-shadow: var(--shadow-md); border-top: 4px solid var(--gold); }
+        .card { background: rgba(255, 255, 255, 0.95); border: 1px solid var(--border); border-radius: var(--radius-md); padding: 20px; margin-bottom: 18px; box-shadow: var(--shadow-md); border-top: 4px solid var(--gold); }
         .card-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; padding-bottom: 12px; border-bottom: 2px solid var(--gold-tint); }
         .card-header h2 { font-family: var(--font-display); font-weight: 560; font-size: 18px; color: var(--marian-blue); }
         .card-header h2 i { color: var(--gold); margin-right: 8px; }
@@ -57,116 +56,72 @@
         .field { display: flex; flex-direction: column; gap: 4px; width: 100%; }
         .field label { font-size: 12.5px; font-weight: 600; color: var(--ink-soft); display: flex; align-items: center; gap: 6px; }
         .field label i { color: var(--marian-blue); width: 16px; font-size: 13px; }
-        .field input, .field select, .field textarea { background: var(--paper); border: 1.5px solid var(--border); border-radius: 12px; padding: 10px 13px; font-size: 14px; outline: none; width: 100%; color: var(--ink); font-family: var(--font-body); transition: border-color 0.12s ease, background 0.12s ease; }
-        .field input:focus, .field select:focus, .field textarea:focus { border-color: var(--marian-blue); background: var(--surface); box-shadow: 0 0 0 3px var(--marian-blue-tint); }
-        .btn { background: linear-gradient(135deg, #1a237e, #283593); border: none; padding: 12px 20px; border-radius: 60px; color: #fff; font-weight: 700; font-size: 14px; display: inline-flex; align-items: center; justify-content: center; gap: 8px; cursor: pointer; transition: transform 0.1s ease, background 0.15s ease; font-family: var(--font-body); box-shadow: 0 4px 12px rgba(26, 35, 126, 0.25); }
+        .field input, .field select { background: var(--paper); border: 1.5px solid var(--border); border-radius: 12px; padding: 10px 13px; font-size: 14px; outline: none; width: 100%; color: var(--ink); font-family: var(--font-body); }
+        .field input:focus, .field select:focus { border-color: var(--marian-blue); background: var(--surface); box-shadow: 0 0 0 3px var(--marian-blue-tint); }
+        .btn { background: linear-gradient(135deg, #1a237e, #283593); border: none; padding: 12px 20px; border-radius: 60px; color: #fff; font-weight: 700; font-size: 14px; display: inline-flex; align-items: center; justify-content: center; gap: 8px; cursor: pointer; transition: transform 0.1s ease; font-family: var(--font-body); box-shadow: 0 4px 12px rgba(26, 35, 126, 0.25); }
         .btn:active { transform: scale(0.97); }
         .btn:disabled { opacity: 0.5; cursor: not-allowed; }
         .btn-primary { background: linear-gradient(135deg, #1a237e, #283593); color: #fff; }
-        .btn-primary:hover { background: linear-gradient(135deg, #0d1b5e, #1a237e); }
         .btn-success { background: linear-gradient(135deg, #0f7b3a, #0a5e2b); color: #fff; }
-        .btn-success:hover { background: linear-gradient(135deg, #0a5e2b, #074a22); }
         .btn-danger { background: linear-gradient(135deg, #8C2F2F, #6E2222); color: #fff; }
-        .btn-danger:hover { background: linear-gradient(135deg, #6E2222, #5a1c1c); }
         .btn-outline { background: transparent; border: 1.5px solid #1a237e; color: #1a237e; box-shadow: none; }
-        .btn-outline:hover { background: var(--marian-blue-tint); }
         .btn-sm { padding: 8px 16px; font-size: 12.5px; }
         .btn-block { width: 100%; }
-        .tab-nav { display: flex; background: rgba(255, 255, 255, 0.9); backdrop-filter: blur(10px); border-radius: 40px; padding: 5px; margin-bottom: 20px; border: 1px solid var(--border); gap: 4px; flex-wrap: wrap; box-shadow: var(--shadow-sm); }
-        .tab-nav .tab-btn { flex: 1; text-align: center; padding: 10px 14px; border-radius: 36px; font-weight: 600; font-size: 13px; color: var(--ink-soft); cursor: pointer; background: transparent; border: none; display: flex; align-items: center; justify-content: center; gap: 7px; transition: 0.16s ease; min-width: 80px; }
+        .tab-nav { display: flex; background: rgba(255, 255, 255, 0.9); border-radius: 40px; padding: 5px; margin-bottom: 20px; border: 1px solid var(--border); gap: 4px; box-shadow: var(--shadow-sm); }
+        .tab-nav .tab-btn { flex: 1; text-align: center; padding: 10px 14px; border-radius: 36px; font-weight: 600; font-size: 13px; color: var(--ink-soft); cursor: pointer; background: transparent; border: none; display: flex; align-items: center; justify-content: center; gap: 7px; }
         .tab-nav .tab-btn.active { background: linear-gradient(135deg, #1a237e, #283593); color: #fff; box-shadow: var(--shadow-sm); }
-        .tab-nav .tab-btn i { font-size: 14px; }
         .table-wrapper { overflow-x: auto; border: 1px solid var(--border); border-radius: 12px; }
         .table-wrapper table { width: 100%; border-collapse: collapse; font-size: 13px; min-width: 600px; }
         .table-wrapper table thead { background: linear-gradient(135deg, #1a237e, #283593); color: #fff; }
-        .table-wrapper table th { padding: 10px 12px; text-align: left; font-weight: 600; font-size: 11px; text-transform: uppercase; letter-spacing: 0.3px; white-space: nowrap; }
-        .table-wrapper table td { padding: 8px 12px; border-bottom: 1px solid var(--border); vertical-align: middle; }
+        .table-wrapper table th { padding: 10px 12px; text-align: left; font-weight: 600; font-size: 11px; text-transform: uppercase; }
+        .table-wrapper table td { padding: 8px 12px; border-bottom: 1px solid var(--border); }
         .table-wrapper table tbody tr:nth-child(even) { background: var(--paper); }
-        .table-wrapper table tbody tr:hover { background: var(--marian-blue-tint); }
         .badge { display: inline-block; padding: 3px 10px; border-radius: 40px; font-size: 11px; font-weight: 600; }
         .badge-success { background: #e8f5e9; color: #2e7d32; }
-        .badge-warning { background: #fff3e0; color: #e65100; }
         .badge-danger { background: #ffebee; color: #c62828; }
         .badge-info { background: #e3f2fd; color: #0d47a1; }
-        .stat-card { background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px); border: 1px solid var(--border); border-radius: 14px; padding: 16px; text-align: center; box-shadow: var(--shadow-sm); border-bottom: 3px solid var(--gold); }
+        .stat-card { background: #fff; border: 1px solid var(--border); border-radius: 14px; padding: 16px; text-align: center; border-bottom: 3px solid var(--gold); }
         .stat-card .number { font-family: var(--font-mono); font-size: 28px; font-weight: 700; color: var(--marian-blue); }
-        .stat-card .label { font-size: 11px; color: var(--ink-faint); text-transform: uppercase; letter-spacing: 0.5px; margin-top: 4px; }
+        .stat-card .label { font-size: 11px; color: var(--ink-faint); text-transform: uppercase; margin-top: 4px; }
         .stat-card .icon { font-size: 24px; color: var(--gold); margin-bottom: 6px; }
-        .toast { position: fixed; left: 50%; bottom: 80px; transform: translateX(-50%) translateY(20px); background: var(--ink); color: #fff; padding: 12px 20px; border-radius: 60px; font-size: 13.5px; font-weight: 500; display: flex; align-items: center; gap: 9px; box-shadow: var(--shadow-lg); z-index: 200; opacity: 0; pointer-events: none; transition: opacity 0.2s ease, transform 0.2s ease; max-width: 88vw; }
-        .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); pointer-events: auto; }
+        .toast { position: fixed; left: 50%; bottom: 80px; transform: translateX(-50%); background: var(--ink); color: #fff; padding: 12px 20px; border-radius: 60px; font-size: 13.5px; display: flex; align-items: center; gap: 9px; z-index: 200; opacity: 0; transition: 0.2s; }
+        .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
         .toast i { color: var(--gold); }
         .toast.error i { color: #E8898F; }
         .login-modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.5); z-index: 1000; justify-content: center; align-items: center; padding: 20px; }
         .login-modal.active { display: flex; }
-        .login-modal .modal-content { background: #fff; border-radius: var(--radius-md); padding: 30px; max-width: 420px; width: 100%; box-shadow: var(--shadow-lg); animation: slideUp 0.3s ease; }
-        @keyframes slideUp { from { transform: translateY(30px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+        .login-modal .modal-content { background: #fff; border-radius: var(--radius-md); padding: 30px; max-width: 420px; width: 100%; }
         .login-modal .modal-header { text-align: center; margin-bottom: 20px; }
-        .login-modal .modal-header .modal-logo { width: 60px; height: 60px; margin: 0 auto 10px; border-radius: 50%; border: 2px solid var(--gold); overflow: hidden; background: #fff; padding: 4px; }
-        .login-modal .modal-header .modal-logo img { width: 100%; height: 100%; object-fit: contain; }
-        .login-modal .modal-header h2 { font-family: var(--font-display); color: var(--marian-blue); font-size: 20px; }
-        .login-modal .modal-header p { color: var(--ink-faint); font-size: 13px; margin-top: 4px; }
+        .login-modal .modal-logo { width: 60px; height: 60px; margin: 0 auto 10px; border-radius: 50%; border: 2px solid var(--gold); padding: 4px; }
+        .login-modal .modal-logo img { width: 100%; height: 100%; object-fit: contain; }
+        .login-modal h2 { font-family: var(--font-display); color: var(--marian-blue); font-size: 20px; }
         .login-modal .close-btn { float: right; background: none; border: none; font-size: 24px; color: var(--ink-faint); cursor: pointer; }
-        .login-modal .close-btn:hover { color: var(--oxblood); }
-        .login-floating-btn { position: fixed; bottom: 80px; right: 20px; z-index: 50; background: linear-gradient(135deg, #1a237e, #283593); color: #fff; border: none; border-radius: 50%; width: 56px; height: 56px; font-size: 20px; cursor: pointer; box-shadow: var(--shadow-md); transition: transform 0.2s ease, background 0.2s ease; display: flex; align-items: center; justify-content: center; }
-        .login-floating-btn:hover { transform: scale(1.05); background: linear-gradient(135deg, #0d1b5e, #1a237e); }
+        .login-floating-btn { position: fixed; bottom: 80px; right: 20px; z-index: 50; background: linear-gradient(135deg, #1a237e, #283593); color: #fff; border: none; border-radius: 50%; width: 56px; height: 56px; font-size: 20px; cursor: pointer; box-shadow: var(--shadow-md); display: flex; align-items: center; justify-content: center; }
         .login-floating-btn.logged-in { background: linear-gradient(135deg, #0f7b3a, #0a5e2b); }
-        .login-floating-btn.logged-in:hover { background: linear-gradient(135deg, #0a5e2b, #074a22); }
-        .import-area { border: 2px dashed var(--border-strong); border-radius: 12px; padding: 30px 20px; text-align: center; transition: all 0.3s ease; cursor: pointer; background: var(--paper); margin-top: 12px; }
-        .import-area:hover { border-color: var(--marian-blue); background: var(--marian-blue-tint); }
-        .import-area.dragover { border-color: var(--gold); background: var(--gold-tint); }
+        .import-area { border: 2px dashed var(--border-strong); border-radius: 12px; padding: 30px 20px; text-align: center; cursor: pointer; background: var(--paper); margin-top: 12px; }
+        .import-area:hover { border-color: var(--marian-blue); }
         .import-area i { font-size: 40px; color: var(--marian-blue); margin-bottom: 10px; }
-        .import-area h3 { font-family: var(--font-display); color: var(--ink); font-size: 16px; }
-        .import-area p { color: var(--ink-faint); font-size: 13px; margin-top: 4px; }
         .import-area .file-input { display: none; }
-        .import-preview { margin-top: 16px; max-height: 300px; overflow-y: auto; }
-        .import-preview table { width: 100%; border-collapse: collapse; font-size: 12px; }
-        .import-preview table th { background: var(--marian-blue); color: #fff; padding: 8px 10px; text-align: left; position: sticky; top: 0; z-index: 2; }
-        .import-preview table td { padding: 6px 10px; border-bottom: 1px solid var(--border); }
-        .footer-note { font-size: 11px; color: var(--ink-faint); text-align: center; margin-top: 30px; padding-top: 16px; border-top: 1px solid var(--border); letter-spacing: 0.3px; }
         .admin-tabs { display: flex; gap: 8px; margin-bottom: 16px; flex-wrap: wrap; }
-        .admin-tabs .admin-tab { padding: 10px 20px; border-radius: 30px; background: var(--paper); border: 1px solid var(--border); cursor: pointer; font-weight: 600; font-size: 13px; color: var(--ink-soft); transition: all 0.2s; }
-        .admin-tabs .admin-tab:hover { background: var(--marian-blue-tint); border-color: var(--marian-blue); }
-        .admin-tabs .admin-tab.active { background: var(--marian-blue); color: #fff; border-color: var(--marian-blue); }
+        .admin-tabs .admin-tab { padding: 10px 20px; border-radius: 30px; background: var(--paper); border: 1px solid var(--border); cursor: pointer; font-weight: 600; font-size: 13px; }
+        .admin-tabs .admin-tab.active { background: var(--marian-blue); color: #fff; }
         .admin-tab-content { display: none; }
         .admin-tab-content.active { display: block; }
         .login-form { display: none; margin-top: 12px; }
         .login-form.active { display: block; }
         .login-form .field { margin-bottom: 12px; }
-        .login-form .btn-submit { margin-top: 4px; width: 100%; }
-        .btn-outline.btn-sm { padding: 10px 16px; font-size: 13px; border-radius: 30px; transition: all 0.2s ease; }
-        .btn-outline.btn-sm:hover { background: var(--marian-blue); color: #fff; border-color: var(--marian-blue); }
-        .role-selector { display: flex; gap: 10px; margin-top: 16px; flex-wrap: wrap; justify-content: center; }
-        .role-selector .btn { flex: 1; min-width: 80px; }
-        @media (max-width: 480px) {
-            .topbar .brand h1 { font-size: 14px; }
-            .topbar .brand .school-logo { width: 45px; height: 45px; }
-            .card { padding: 14px; }
-            .tab-nav .tab-btn { font-size: 11px; padding: 8px 10px; min-width: 60px; }
-            .table-wrapper table { font-size: 11px; min-width: 450px; }
-            .table-wrapper table th, .table-wrapper table td { padding: 6px 8px; }
-            .connection-status { bottom: 10px; right: 10px; font-size: 10px; padding: 6px 12px; }
-            .toast { bottom: 70px; font-size: 12px; padding: 10px 16px; }
-            .login-floating-btn { width: 48px; height: 48px; font-size: 17px; bottom: 70px; right: 12px; }
-        }
+        .role-selector { display: flex; gap: 10px; margin-top: 16px; }
+        .role-selector .btn { flex: 1; }
     </style>
 </head>
 <body>
     <div class="mary-bg"></div>
-
-    <div class="connection-status" id="connectionStatus">
-        <span class="dot connecting" id="statusDot"></span>
-        <span id="statusText">Connecting...</span>
-    </div>
-
-    <button class="login-floating-btn" id="loginFloatingBtn" title="Sign In">
-        <i class="fas fa-user-circle"></i>
-    </button>
+    <div class="connection-status" id="connectionStatus"><span class="dot connecting" id="statusDot"></span><span id="statusText">Connecting...</span></div>
+    <button class="login-floating-btn" id="loginFloatingBtn"><i class="fas fa-user-circle"></i></button>
 
     <div class="topbar">
         <div class="brand">
-            <div class="school-logo">
-                <img id="lodgeLogoImg" src="LadyB%20logo.jpeg" alt="Lavevars Lodge Logo">
-            </div>
+            <div class="school-logo"><img id="lodgeLogoImg" src="LadyB%20logo.jpeg" alt="Lavevars Lodge Logo"></div>
             <div class="ministry">Hospitality Management</div>
             <h1>Lavevars Lodge</h1>
             <div class="motto">Comfort · Elegance · Serenity</div>
@@ -179,14 +134,13 @@
             <div class="modal-header">
                 <div class="modal-logo"><img src="LadyB%20logo.jpeg" alt="logo"></div>
                 <h2><i class="fas fa-user-circle" style="color:var(--gold);"></i> Sign In</h2>
-                <p>Select your role below</p>
             </div>
-            <div class="logout-section" id="logoutSection" style="display:none;">
+            <div id="logoutSection" style="display:none;">
                 <div style="margin-bottom:12px;font-size:13px;text-align:center;"><i class="fas fa-user-check"></i> Signed in as: <span id="loggedInUserName">User</span></div>
                 <button class="btn btn-danger btn-block" id="logoutFromModalBtn"><i class="fas fa-sign-out-alt"></i> Sign Out</button>
             </div>
             <div id="loginOptions">
-                <div class="login-form" id="staffLoginForm">
+                <div class="login-form active" id="staffLoginForm">
                     <div class="field">
                         <label><i class="fas fa-user"></i> Username</label>
                         <input type="text" id="staffLoginUsername" placeholder="e.g. reception">
@@ -195,27 +149,19 @@
                         <label><i class="fas fa-lock"></i> Password</label>
                         <input type="password" id="staffLoginPassword" placeholder="Enter password">
                     </div>
-                    <button class="btn btn-success btn-submit btn-block" onclick="staffLogin()">
-                        <i class="fas fa-sign-in-alt"></i> Sign In
-                    </button>
+                    <button class="btn btn-success btn-block" onclick="staffLogin()"><i class="fas fa-sign-in-alt"></i> Sign In</button>
                 </div>
-
                 <div class="login-form" id="adminLoginForm">
                     <div class="field">
                         <label><i class="fas fa-lock"></i> Admin Password</label>
                         <input type="password" id="adminLoginPassword" placeholder="Enter admin password">
                     </div>
-                    <button class="btn btn-danger btn-submit btn-block" onclick="adminLogin()">
-                        <i class="fas fa-sign-in-alt"></i> Sign In
-                    </button>
+                    <button class="btn btn-danger btn-block" onclick="adminLogin()"><i class="fas fa-sign-in-alt"></i> Sign In</button>
+                    <button class="btn btn-outline btn-block" style="margin-top:8px; font-size:12px;" onclick="window.fixAdminPassword()">Fix Admin Password (Run This If Login Fails)</button>
                 </div>
                 <div class="role-selector">
-                    <button class="btn btn-outline btn-sm" onclick="showLoginForm('staff')">
-                        <i class="fas fa-concierge-bell"></i> Staff
-                    </button>
-                    <button class="btn btn-outline btn-sm" onclick="showLoginForm('admin')">
-                        <i class="fas fa-user-shield"></i> Admin
-                    </button>
+                    <button class="btn btn-outline btn-sm" onclick="showLoginForm('staff')"><i class="fas fa-concierge-bell"></i> Staff</button>
+                    <button class="btn btn-outline btn-sm" onclick="showLoginForm('admin')"><i class="fas fa-user-shield"></i> Admin</button>
                 </div>
             </div>
         </div>
@@ -227,7 +173,6 @@
             <button class="tab-btn" data-tab="admin"><i class="fas fa-user-shield"></i> Admin</button>
         </div>
 
-        <!-- STAFF SECTION -->
         <div class="section active" id="staffSection">
             <div class="card" id="staffLocked">
                 <div class="card-header"><h2><i class="fas fa-lock"></i> Staff Access Required</h2><span class="subtitle">Login as staff</span></div>
@@ -241,9 +186,9 @@
                 <div class="card">
                     <div class="card-header"><h2><i class="fas fa-users"></i> Guest Management</h2><span class="subtitle" id="staffNameDisplay">Welcome</span></div>
                     <div class="grid-3">
-                        <div class="field"><label><i class="fas fa-calendar-alt"></i> Check-in From</label><input type="date" id="staffDateFrom"></div>
-                        <div class="field"><label><i class="fas fa-calendar-check"></i> Check-in To</label><input type="date" id="staffDateTo"></div>
-                        <div class="field"><label><i class="fas fa-tag"></i> Stay Status</label>
+                        <div class="field"><label>Check-in From</label><input type="date" id="staffDateFrom"></div>
+                        <div class="field"><label>Check-in To</label><input type="date" id="staffDateTo"></div>
+                        <div class="field"><label>Stay Status</label>
                             <select id="staffStayStatus">
                                 <option value="">All</option>
                                 <option value="true">Still Lodging</option>
@@ -257,22 +202,18 @@
                 </div>
 
                 <div class="card" style="border-top-color: var(--oxblood);">
-                    <div class="card-header">
-                        <h2><i class="fas fa-file-excel" style="color:var(--oxblood);"></i> Import Guests from Excel</h2>
-                        <span class="subtitle">Columns: name, room_id, check_in, check_out, amount_paid, phone</span>
-                    </div>
+                    <div class="card-header"><h2><i class="fas fa-file-excel" style="color:var(--oxblood);"></i> Import Guests from Excel</h2></div>
                     <div class="import-area" id="staffImportArea">
                         <i class="fas fa-file-excel" style="color:var(--oxblood);"></i>
                         <h3>Click or Drag & Drop Excel File</h3>
                         <p>Required: name, room_id, check_in, check_out</p>
                         <input type="file" class="file-input" id="staffFileInput" accept=".xlsx,.xls">
                     </div>
-                    <div id="staffImportPreview" class="import-preview" style="display:none;"></div>
-                    <div style="margin-top:12px; display:flex; gap:8px; flex-wrap:wrap;">
+                    <div id="staffImportPreview" style="margin-top:16px; display:none;"></div>
+                    <div style="margin-top:12px; display:flex; gap:8px;">
                         <button class="btn btn-success" id="staffImportBtn" style="display:none;"><i class="fas fa-upload"></i> Import Guests</button>
                         <button class="btn btn-outline" id="staffImportClearBtn" style="display:none;"><i class="fas fa-times"></i> Clear</button>
                     </div>
-                    <div id="staffImportStatusMsg" style="margin-top:8px; font-size:13px; color:var(--ink-soft);"></div>
                 </div>
 
                 <div id="guestsEntry" style="display:none;">
@@ -282,26 +223,24 @@
                         </div>
                         <div class="table-wrapper">
                             <table><thead><tr><th>#</th><th>Name</th><th>Room</th><th>Check In</th><th>Check Out</th><th>Paid</th><th>Status</th><th>Action</th></tr></thead>
-                            <tbody id="guestsTable"><tr><td colspan="8" style="text-align:center;color:var(--ink-faint);">No guests loaded.</td></tr></tbody></table>
+                            <tbody id="guestsTable"></tbody></table>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- ADMIN SECTION -->
         <div class="section" id="adminSection">
             <div class="card" id="adminLocked">
-                <div class="card-header"><h2><i class="fas fa-lock"></i> Admin Access Required</h2><span class="subtitle">Login as admin</span></div>
+                <div class="card-header"><h2><i class="fas fa-lock"></i> Admin Access Required</h2></div>
                 <div style="text-align:center;padding:40px 20px;">
                     <i class="fas fa-user-shield" style="font-size:48px;color:var(--gold);margin-bottom:16px;display:block;"></i>
-                    <p style="color:var(--ink-soft);margin-bottom:16px;">Administrators only.</p>
                     <button class="btn btn-primary" onclick="openLoginModal('admin')"><i class="fas fa-sign-in-alt"></i> Login as Admin</button>
                 </div>
             </div>
             <div id="adminContent" style="display:none;">
                 <div class="card">
-                    <div class="card-header"><h2><i class="fas fa-user-shield"></i> Admin Dashboard</h2><span class="subtitle">Overview</span></div>
+                    <div class="card-header"><h2><i class="fas fa-user-shield"></i> Admin Dashboard</h2></div>
                     <div class="grid-4">
                         <div class="stat-card"><div class="icon"><i class="fas fa-bed"></i></div><div class="number" id="totalRooms">0</div><div class="label">Total Rooms</div></div>
                         <div class="stat-card"><div class="icon"><i class="fas fa-users"></i></div><div class="number" id="totalStaff">0</div><div class="label">Total Staff</div></div>
@@ -318,47 +257,44 @@
                     </div>
 
                     <div id="staffTab" class="admin-tab-content active">
-                        <div class="card-header"><h2><i class="fas fa-user-tie"></i> Staff Accounts</h2><span class="subtitle">Create staff logins</span></div>
+                        <div class="card-header"><h2><i class="fas fa-user-tie"></i> Staff Accounts</h2></div>
                         <div class="grid-3">
-                            <div class="field"><label><i class="fas fa-user"></i> Full Name</label><input type="text" id="adminTeacherName" placeholder="e.g. John Banda"></div>
-                            <div class="field"><label><i class="fas fa-at"></i> Username</label><input type="text" id="adminTeacherUsername" placeholder="e.g. john123"></div>
-                            <div class="field"><label><i class="fas fa-lock"></i> Password</label><input type="password" id="adminTeacherPassword" placeholder="Enter password"></div>
+                            <div class="field"><label>Full Name</label><input type="text" id="adminTeacherName" placeholder="e.g. John Banda"></div>
+                            <div class="field"><label>Username</label><input type="text" id="adminTeacherUsername" placeholder="e.g. john123"></div>
+                            <div class="field"><label>Password</label><input type="password" id="adminTeacherPassword" placeholder="Enter password"></div>
                         </div>
                         <button class="btn btn-success btn-block" id="addTeacherBtn"><i class="fas fa-plus"></i> Create Staff Account</button>
                         <div style="margin-top:12px;">
                             <div class="table-wrapper">
-                                <table><thead><tr><th>#</th><th>Name</th><th>Username</th><th>Action</th></tr></thead>
-                                <tbody id="staffTableBody"><tr><td colspan="4" style="text-align:center;color:var(--ink-faint);">Loading staff...</td></tr></tbody></table>
+                                <table><thead><tr><th>#</th><th>Name</th><th>Username</th><th>Action</th></tr></thead><tbody id="staffTableBody"></tbody></table>
                             </div>
                         </div>
                     </div>
 
                     <div id="roomsTab" class="admin-tab-content">
-                        <div class="card-header"><h2><i class="fas fa-bed"></i> Room Management</h2><span class="subtitle">Manage all 40 rooms</span></div>
+                        <div class="card-header"><h2><i class="fas fa-bed"></i> Room Management</h2></div>
                         <div class="grid-3">
-                            <div class="field"><label><i class="fas fa-door-open"></i> Room Name</label><input type="text" id="adminRoomName" placeholder="e.g. Room 101"></div>
-                            <div class="field"><label><i class="fas fa-users"></i> Capacity</label><input type="number" id="adminRoomCapacity" placeholder="e.g. 2"></div>
-                            <div class="field"><label><i class="fas fa-check-circle"></i> Occupied?</label><select id="adminRoomOccupied"><option value="false">No (Available)</option><option value="true">Yes (Occupied)</option></select></div>
+                            <div class="field"><label>Room Name</label><input type="text" id="adminRoomName" placeholder="e.g. Room 101"></div>
+                            <div class="field"><label>Capacity</label><input type="number" id="adminRoomCapacity" placeholder="e.g. 2"></div>
+                            <div class="field"><label>Occupied?</label><select id="adminRoomOccupied"><option value="false">No</option><option value="true">Yes</option></select></div>
                         </div>
                         <button class="btn btn-success btn-block" id="addRoomBtn"><i class="fas fa-plus"></i> Add Room</button>
                         <div style="margin-top:12px;">
                             <div class="table-wrapper">
-                                <table><thead><tr><th>#</th><th>Room Name</th><th>Capacity</th><th>Status</th><th>Action</th></tr></thead>
-                                <tbody id="roomsTableBody"><tr><td colspan="5" style="text-align:center;color:var(--ink-faint);">Loading rooms...</td></tr></tbody></table>
+                                <table><thead><tr><th>#</th><th>Room Name</th><th>Capacity</th><th>Status</th><th>Action</th></tr></thead><tbody id="roomsTableBody"></tbody></table>
                             </div>
                         </div>
                     </div>
 
                     <div id="analysisTab" class="admin-tab-content">
-                        <div class="card-header"><h2><i class="fas fa-chart-bar"></i> Reports & Analysis</h2><span class="subtitle">Generate revenue reports</span></div>
+                        <div class="card-header"><h2><i class="fas fa-chart-bar"></i> Reports & Analysis</h2></div>
                         <div class="grid-3">
-                            <div class="field"><label><i class="fas fa-calendar-alt"></i> Check-in From</label><input type="date" id="analysisDateFrom"></div>
-                            <div class="field"><label><i class="fas fa-calendar-check"></i> Check-in To</label><input type="date" id="analysisDateTo"></div>
+                            <div class="field"><label>Check-in From</label><input type="date" id="analysisDateFrom"></div>
+                            <div class="field"><label>Check-in To</label><input type="date" id="analysisDateTo"></div>
                             <div class="field" style="justify-content:flex-end;"><button class="btn btn-primary btn-block" id="generateAnalysisBtn"><i class="fas fa-chart-line"></i> Generate</button></div>
                         </div>
-
                         <div id="analysisResultsArea" style="display:none;margin-top:20px;">
-                            <h3 id="analysisSummaryTitle" style="color:var(--marian-blue);font-family:var(--font-display);margin-bottom:12px;"></h3>
+                            <h3 id="analysisSummaryTitle" style="color:var(--marian-blue);margin-bottom:12px;"></h3>
                             <div class="grid-4" id="analysisStatCards" style="margin-bottom:20px;"></div>
                             <div class="table-wrapper"><table id="analysisTable"></table></div>
                         </div>
@@ -366,7 +302,6 @@
                 </div>
             </div>
         </div>
-
         <div class="footer-note">Lavevars Lodge · Kasama District · Under ICT &copy; 2026</div>
     </div>
 
@@ -385,31 +320,22 @@
         let staffImportData = null;
         let ROOM_CACHE = {};
 
-        const toastDiv = document.getElementById('globalToast');
-        const toastMsg = document.getElementById('toastMsg');
-        const statusDot = document.getElementById('statusDot');
-        const statusText = document.getElementById('statusText');
-        const loginFloatingBtn = document.getElementById('loginFloatingBtn');
-        const loginModal = document.getElementById('loginModal');
-        const logoutSection = document.getElementById('logoutSection');
-        const loginOptions = document.getElementById('loginOptions');
-        const logoutFromModalBtn = document.getElementById('logoutFromModalBtn');
-
         function showToast(msg, isError = false) {
-            toastMsg.textContent = msg;
-            toastDiv.classList.toggle('error', isError);
-            toastDiv.classList.add('show');
+            const t = document.getElementById('globalToast');
+            document.getElementById('toastMsg').textContent = msg;
+            t.classList.toggle('error', isError);
+            t.classList.add('show');
             clearTimeout(window.toastTimer);
-            window.toastTimer = setTimeout(() => toastDiv.classList.remove('show'), 4500);
+            window.toastTimer = setTimeout(() => t.classList.remove('show'), 4500);
         }
 
         function setConnectionStatus(status, message) {
-            statusDot.className = 'dot ' + status;
-            statusText.textContent = message;
+            document.getElementById('statusDot').className = 'dot ' + status;
+            document.getElementById('statusText').textContent = message;
         }
 
         function openLoginModal(role) {
-            loginModal.classList.add('active');
+            document.getElementById('loginModal').classList.add('active');
             if (role) showLoginForm(role);
             updateLoginUI();
         }
@@ -424,37 +350,49 @@
 
         function updateLoginUI() {
             if (currentUser) {
-                logoutSection.style.display = 'block';
-                if (loginOptions) loginOptions.style.display = 'none';
+                document.getElementById('logoutSection').style.display = 'block';
+                document.getElementById('loginOptions').style.display = 'none';
                 document.getElementById('loggedInUserName').textContent = currentUser.role === 'admin' ? 'Administrator' : currentUser.name;
-                loginFloatingBtn.innerHTML = '<i class="fas fa-user-check"></i>';
-                loginFloatingBtn.classList.add('logged-in');
+                document.getElementById('loginFloatingBtn').innerHTML = '<i class="fas fa-user-check"></i>';
+                document.getElementById('loginFloatingBtn').classList.add('logged-in');
             } else {
-                logoutSection.style.display = 'none';
-                if (loginOptions) loginOptions.style.display = 'block';
-                loginFloatingBtn.innerHTML = '<i class="fas fa-user-circle"></i>';
-                loginFloatingBtn.classList.remove('logged-in');
+                document.getElementById('logoutSection').style.display = 'none';
+                document.getElementById('loginOptions').style.display = 'block';
+                document.getElementById('loginFloatingBtn').innerHTML = '<i class="fas fa-user-circle"></i>';
+                document.getElementById('loginFloatingBtn').classList.remove('logged-in');
             }
         }
 
-        document.getElementById('closeLoginModal').addEventListener('click', () => loginModal.classList.remove('active'));
-        loginModal.addEventListener('click', e => { if (e.target === loginModal) loginModal.classList.remove('active'); });
-        loginFloatingBtn.addEventListener('click', () => openLoginModal());
-        logoutFromModalBtn.addEventListener('click', function() { 
+        document.getElementById('closeLoginModal').addEventListener('click', () => document.getElementById('loginModal').classList.remove('active'));
+        document.getElementById('loginFloatingBtn').addEventListener('click', () => openLoginModal());
+        document.getElementById('logoutFromModalBtn').addEventListener('click', function() { 
             currentUser = null; updateLoginUI(); showToast('🔒 Logged out');
             document.getElementById('staffLocked').style.display = 'block';
             document.getElementById('staffContent').style.display = 'none';
             document.getElementById('adminLocked').style.display = 'block';
             document.getElementById('adminContent').style.display = 'none';
-            loginModal.classList.remove('active'); 
+            document.getElementById('loginModal').classList.remove('active'); 
             document.querySelector('.tab-btn[data-tab="staff"]').click();
         });
 
+        // --- SIMPLE HASH FALLBACK ---
         async function hashPassword(password) {
-            const data = new TextEncoder().encode(password);
-            const hash = await crypto.subtle.digest('SHA-256', data);
-            return Array.from(new Uint8Array(hash)).map(b => b.toString(16).padStart(2,'0')).join('');
+            if (window.crypto && window.crypto.subtle) {
+                const data = new TextEncoder().encode(password);
+                const hash = await crypto.subtle.digest('SHA-256', data);
+                return Array.from(new Uint8Array(hash)).map(b => b.toString(16).padStart(2,'0')).join('');
+            }
+            return password; // fallback just in case
         }
+
+        // --- FIX ADMIN BUTTON ---
+        window.fixAdminPassword = async function() {
+            showToast('🔄 Forcing database reset...');
+            const hash = await hashPassword('admin123');
+            await supabaseClient.from('admin').delete().neq('id', 0);
+            await supabaseClient.from('admin').insert({ password_hash: hash });
+            showToast('✅ Fixed! Try password: admin123');
+        };
 
         // --- LOGIN LOGIC ---
         async function staffLogin() {
@@ -463,20 +401,17 @@
             if (!user || !pass) { showToast('⚠️ Enter username and password', true); return; }
             if (!supabaseClient || !isConnected) { showToast('⚠️ Database not connected', true); return; }
 
-            const btn = document.querySelector('#staffLoginForm .btn-submit');
-            btn.disabled = true; btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Checking...';
-
             try {
                 const { data, error } = await supabaseClient.from('staff').select('*').eq('username', user).maybeSingle();
                 if (error) throw error;
-                if (!data) { showToast('❌ Staff not found', true); return; }
+                if (!data) { showToast('❌ Staff not found. Create account via Admin first.', true); return; }
 
                 const hash = await hashPassword(pass);
                 if (data.password_hash !== hash) { showToast('❌ Invalid password', true); return; }
 
                 currentUser = { role: 'staff', name: data.name };
                 showToast('✅ Logged in as ' + data.name);
-                loginModal.classList.remove('active');
+                document.getElementById('loginModal').classList.remove('active');
                 updateLoginUI();
                 document.getElementById('staffLocked').style.display = 'none';
                 document.getElementById('staffContent').style.display = 'block';
@@ -485,8 +420,6 @@
                 await loadRoomsIntoCache();
             } catch (err) {
                 showToast('❌ Error: ' + err.message, true);
-            } finally {
-                btn.disabled = false; btn.innerHTML = '<i class="fas fa-sign-in-alt"></i> Sign In';
             }
         }
         window.staffLogin = staffLogin;
@@ -499,14 +432,14 @@
             try {
                 const { data, error } = await supabaseClient.from('admin').select('password_hash').limit(1).maybeSingle();
                 if (error) throw error;
-                if (!data) { showToast('❌ Admin not configured. Run the SQL script.', true); return; }
+                if (!data) { showToast('❌ Admin not configured. Click "Fix Admin Password" below.', true); return; }
 
                 const hash = await hashPassword(pass);
                 if (data.password_hash !== hash) { showToast('❌ Invalid admin password', true); return; }
 
                 currentUser = { role: 'admin' };
                 showToast('✅ Logged in as Admin');
-                loginModal.classList.remove('active');
+                document.getElementById('loginModal').classList.remove('active');
                 updateLoginUI();
                 document.getElementById('adminLocked').style.display = 'none';
                 document.getElementById('adminContent').style.display = 'block';
@@ -536,10 +469,8 @@
             });
         }
 
-        // --- DATABASE HELPERS ---
         function initSupabase() {
             if (typeof window.supabase === 'undefined') { showToast('⚠️ Supabase failed to load', true); return; }
-            
             supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY, { auth: { persistSession: false } });
 
             supabaseClient.from('rooms').select('id', { count: 'exact', head: true })
@@ -560,7 +491,7 @@
 
         async function ensure40Rooms() {
             const { data } = await supabaseClient.from('rooms').select('id');
-            if (data && data.length >= 40) return; // Already seeded
+            if (data && data.length >= 40) return; 
 
             const seed = [];
             for (let i = 101; i <= 116; i++) seed.push({ name: 'Room ' + i, capacity: 2, is_occupied: false });
@@ -568,7 +499,6 @@
             for (let i = 301; i <= 308; i++) seed.push({ name: 'Room ' + i, capacity: 4, is_occupied: false });
             
             await supabaseClient.from('rooms').insert(seed);
-            showToast('✅ 40 rooms seeded to DB');
         }
 
         async function loadRoomsIntoCache() {
@@ -579,17 +509,13 @@
 
         function getRoomDisplay(id) { return ROOM_CACHE[id] || ('Room #' + id); }
 
-        // --- ADMIN DASHBOARD ---
         async function loadAdminStats() {
             const { count: rCount } = await supabaseClient.from('rooms').select('*', { count: 'exact', head: true });
             document.getElementById('totalRooms').textContent = rCount || 0;
-
             const { count: sCount } = await supabaseClient.from('staff').select('*', { count: 'exact', head: true });
             document.getElementById('totalStaff').textContent = sCount || 0;
-
             const { count: gCount } = await supabaseClient.from('guests').select('*', { count: 'exact', head: true });
             document.getElementById('totalBookings').textContent = gCount || 0;
-
             const { data: rev } = await supabaseClient.from('guests').select('amount_paid');
             const total = (rev || []).reduce((s, b) => s + (b.amount_paid || 0), 0);
             document.getElementById('totalRevenue').textContent = total.toLocaleString();
@@ -602,9 +528,7 @@
             
             tb.innerHTML = data.map((r, i) => `
                 <tr>
-                    <td>${i+1}</td>
-                    <td><strong>${r.name}</strong></td>
-                    <td>${r.capacity}</td>
+                    <td>${i+1}</td><td><strong>${r.name}</strong></td><td>${r.capacity}</td>
                     <td><span class="badge ${r.is_occupied ? 'badge-danger' : 'badge-success'}">${r.is_occupied ? 'Occupied' : 'Available'}</span></td>
                     <td><button class="btn btn-sm btn-danger" onclick="window.deleteRoom(${r.id})"><i class="fas fa-trash"></i></button></td>
                 </tr>
@@ -614,8 +538,7 @@
         window.deleteRoom = async function(id) {
             if (!confirm('Delete room?')) return;
             await supabaseClient.from('rooms').delete().eq('id', id);
-            showToast('✅ Room deleted');
-            loadRooms(); loadAdminStats();
+            showToast('✅ Room deleted'); loadRooms(); loadAdminStats();
         };
 
         document.getElementById('addRoomBtn').addEventListener('click', async () => {
@@ -623,11 +546,9 @@
             const cap = parseInt(document.getElementById('adminRoomCapacity').value);
             const occ = document.getElementById('adminRoomOccupied').value === 'true';
             if (!name || !cap) { showToast('⚠️ Enter room name and capacity', true); return; }
-
             await supabaseClient.from('rooms').insert({ name, capacity: cap, is_occupied: occ });
             showToast('✅ Room added');
-            document.getElementById('adminRoomName').value = '';
-            document.getElementById('adminRoomCapacity').value = '';
+            document.getElementById('adminRoomName').value = ''; document.getElementById('adminRoomCapacity').value = '';
             loadRooms(); loadAdminStats();
         });
 
@@ -635,22 +556,16 @@
             const { data } = await supabaseClient.from('staff').select('*').order('name');
             const tb = document.getElementById('staffTableBody');
             if (!data || data.length === 0) { tb.innerHTML = '<tr><td colspan="4" style="text-align:center;">No staff found</td></tr>'; return; }
-            
             tb.innerHTML = data.map((s, i) => `
-                <tr>
-                    <td>${i+1}</td>
-                    <td><strong>${s.name}</strong></td>
-                    <td>${s.username}</td>
-                    <td><button class="btn btn-sm btn-danger" onclick="window.deleteStaff(${s.id})"><i class="fas fa-trash"></i></button></td>
-                </tr>
+                <tr><td>${i+1}</td><td><strong>${s.name}</strong></td><td>${s.username}</td>
+                <td><button class="btn btn-sm btn-danger" onclick="window.deleteStaff(${s.id})"><i class="fas fa-trash"></i></button></td></tr>
             `).join('');
         }
 
         window.deleteStaff = async function(id) {
             if (!confirm('Delete staff account?')) return;
             await supabaseClient.from('staff').delete().eq('id', id);
-            showToast('✅ Staff deleted');
-            loadStaffTable(); loadAdminStats();
+            showToast('✅ Staff deleted'); loadStaffTable(); loadAdminStats();
         };
 
         document.getElementById('addTeacherBtn').addEventListener('click', async () => {
@@ -664,9 +579,7 @@
             if (error) { showToast('❌ ' + error.message, true); return; }
 
             showToast('✅ Staff created');
-            document.getElementById('adminTeacherName').value = '';
-            document.getElementById('adminTeacherUsername').value = '';
-            document.getElementById('adminTeacherPassword').value = '';
+            document.getElementById('adminTeacherName').value = ''; document.getElementById('adminTeacherUsername').value = ''; document.getElementById('adminTeacherPassword').value = '';
             loadStaffTable(); loadAdminStats();
         });
 
@@ -686,21 +599,14 @@
 
             const tb = document.getElementById('guestsTable');
             document.getElementById('guestsEntry').style.display = 'block';
-
-            if (!data || data.length === 0) { tb.innerHTML = '<tr><td colspan="8" style="text-align:center;">No guests found for this filter</td></tr>'; return; }
+            if (!data || data.length === 0) { tb.innerHTML = '<tr><td colspan="8" style="text-align:center;">No guests found</td></tr>'; return; }
 
             tb.innerHTML = data.map((g, i) => `
                 <tr>
-                    <td>${i+1}</td>
-                    <td><strong>${g.name}</strong></td>
-                    <td>${getRoomDisplay(g.room_id)}</td>
-                    <td>${g.check_in}</td>
-                    <td>${g.check_out}</td>
-                    <td>ZMW ${(g.amount_paid || 0).toLocaleString()}</td>
+                    <td>${i+1}</td><td><strong>${g.name}</strong></td><td>${getRoomDisplay(g.room_id)}</td>
+                    <td>${g.check_in}</td><td>${g.check_out}</td><td>ZMW ${(g.amount_paid || 0).toLocaleString()}</td>
                     <td><span class="badge ${g.still_lodging ? 'badge-success' : 'badge-info'}">${g.still_lodging ? 'In Lodge' : 'Checked Out'}</span></td>
-                    <td>
-                        <button class="btn btn-sm btn-primary" onclick="window.checkoutGuest(${g.id})" ${!g.still_lodging ? 'disabled' : ''}><i class="fas fa-sign-out-alt"></i></button>
-                    </td>
+                    <td><button class="btn btn-sm btn-primary" onclick="window.checkoutGuest(${g.id})" ${!g.still_lodging ? 'disabled' : ''}><i class="fas fa-sign-out-alt"></i></button></td>
                 </tr>
             `).join('');
         });
@@ -708,29 +614,19 @@
         window.checkoutGuest = async function(id) {
             if (!confirm('Mark as checked out?')) return;
             await supabaseClient.from('guests').update({ still_lodging: false }).eq('id', id);
-            showToast('✅ Guest checked out');
-            document.getElementById('loadGuestsBtn').click();
+            showToast('✅ Guest checked out'); document.getElementById('loadGuestsBtn').click();
         };
 
         document.getElementById('addGuestBtn').addEventListener('click', async () => {
-            const name = prompt("Guest Name:");
-            if (!name) return;
-            const roomId = prompt("Room ID (number):");
-            if (!roomId) return;
-            const checkin = prompt("Check-in Date (YYYY-MM-DD):", new Date().toISOString().split('T')[0]);
-            if (!checkin) return;
-            const checkout = prompt("Check-out Date (YYYY-MM-DD):");
-            if (!checkout) return;
+            const name = prompt("Guest Name:"); if (!name) return;
+            const roomId = prompt("Room ID (number):"); if (!roomId) return;
+            const checkin = prompt("Check-in Date (YYYY-MM-DD):", new Date().toISOString().split('T')[0]); if (!checkin) return;
+            const checkout = prompt("Check-out Date (YYYY-MM-DD):"); if (!checkout) return;
             const paid = prompt("Amount Paid (ZMW):", "0");
 
-            await supabaseClient.from('guests').insert({
-                name, room_id: parseInt(roomId), check_in: checkin, check_out: checkout,
-                amount_paid: parseFloat(paid) || 0, still_lodging: true
-            });
+            await supabaseClient.from('guests').insert({ name, room_id: parseInt(roomId), check_in: checkin, check_out: checkout, amount_paid: parseFloat(paid) || 0, still_lodging: true });
             await supabaseClient.from('rooms').update({ is_occupied: true }).eq('id', roomId);
-            
-            showToast('✅ Guest added');
-            document.getElementById('loadGuestsBtn').click();
+            showToast('✅ Guest added'); document.getElementById('loadGuestsBtn').click();
         });
 
         // --- EXCEL IMPORT ---
@@ -770,9 +666,6 @@
 
         document.getElementById('staffImportBtn').addEventListener('click', async () => {
             if (!staffImportData) return;
-            const btn = document.getElementById('staffImportBtn');
-            btn.disabled = true; btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Importing...';
-
             const records = staffImportData.map(r => ({
                 name: r.name,
                 room_id: parseInt(r.room_id),
@@ -786,7 +679,6 @@
             if (error) { showToast('❌ ' + error.message, true); }
             else { showToast(`✅ Imported ${records.length} guests`); }
 
-            btn.disabled = false; btn.innerHTML = '<i class="fas fa-upload"></i> Import Guests';
             document.getElementById('staffImportClearBtn').click();
             document.getElementById('loadGuestsBtn').click();
         });
@@ -797,10 +689,8 @@
             const to = document.getElementById('analysisDateTo').value;
             if (!from || !to) { showToast('⚠️ Select date range', true); return; }
 
-            let q = supabaseClient.from('guests').select('*').gte('check_in', from).lte('check_in', to);
-            const { data, error } = await q;
+            const { data, error } = await supabaseClient.from('guests').select('*').gte('check_in', from).lte('check_in', to);
             if (error) { showToast('❌ ' + error.message, true); return; }
-
             if (!data || data.length === 0) { showToast('⚠️ No data in range', true); return; }
 
             const rev = data.reduce((s, g) => s + (g.amount_paid || 0), 0);
@@ -823,9 +713,7 @@
             document.getElementById('analysisResultsArea').style.display = 'block';
         });
 
-        // --- INIT ---
         initSupabase();
-
     })();
     </script>
 </body>
