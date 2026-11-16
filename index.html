@@ -36,8 +36,6 @@
         .topbar .brand .ministry { font-size: 9px; letter-spacing: 2px; text-transform: uppercase; color: var(--gold); font-weight: 600; }
         .topbar .brand h1 { font-family: var(--font-display); font-weight: 650; font-size: 22px; color: #fff; letter-spacing: 1px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
         .topbar .brand .motto { font-size: 12px; color: var(--gold); font-style: italic; font-weight: 400; letter-spacing: 0.5px; }
-        .topbar .seal { width: 45px; height: 45px; flex-shrink: 0; border-radius: 50%; overflow: hidden; border: 3px solid var(--gold); background: #fff; display: flex; align-items: center; justify-content: center; padding: 3px; }
-        .topbar .seal img { width: 100%; height: 100%; object-fit: contain; border-radius: 50%; }
         .connection-status { position: fixed; bottom: 20px; right: 20px; z-index: 50; padding: 8px 16px; border-radius: 40px; font-size: 11px; font-weight: 600; background: rgba(255, 255, 255, 0.95); border: 1px solid var(--border); box-shadow: var(--shadow-sm); display: flex; align-items: center; gap: 8px; backdrop-filter: blur(10px); }
         .connection-status .dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; }
         .connection-status .dot.online { background: #2e7d32; }
@@ -70,7 +68,6 @@
         .btn-success:hover { background: linear-gradient(135deg, #0a5e2b, #074a22); }
         .btn-danger { background: linear-gradient(135deg, #8C2F2F, #6E2222); color: #fff; }
         .btn-danger:hover { background: linear-gradient(135deg, #6E2222, #5a1c1c); }
-        .btn-warning { background: linear-gradient(135deg, #d4a017, #b8860b); color: #fff; }
         .btn-outline { background: transparent; border: 1.5px solid #1a237e; color: #1a237e; box-shadow: none; }
         .btn-outline:hover { background: var(--marian-blue-tint); }
         .btn-sm { padding: 8px 16px; font-size: 12.5px; }
@@ -79,7 +76,6 @@
         .tab-nav .tab-btn { flex: 1; text-align: center; padding: 10px 14px; border-radius: 36px; font-weight: 600; font-size: 13px; color: var(--ink-soft); cursor: pointer; background: transparent; border: none; display: flex; align-items: center; justify-content: center; gap: 7px; transition: 0.16s ease; min-width: 80px; }
         .tab-nav .tab-btn.active { background: linear-gradient(135deg, #1a237e, #283593); color: #fff; box-shadow: var(--shadow-sm); }
         .tab-nav .tab-btn i { font-size: 14px; }
-        .tab-nav .tab-btn.hidden-tab { display: none; }
         .table-wrapper { overflow-x: auto; border: 1px solid var(--border); border-radius: 12px; }
         .table-wrapper table { width: 100%; border-collapse: collapse; font-size: 13px; min-width: 600px; }
         .table-wrapper table thead { background: linear-gradient(135deg, #1a237e, #283593); color: #fff; }
@@ -92,8 +88,6 @@
         .badge-warning { background: #fff3e0; color: #e65100; }
         .badge-danger { background: #ffebee; color: #c62828; }
         .badge-info { background: #e3f2fd; color: #0d47a1; }
-        .badge-purple { background: #f3e5f5; color: #6a1b9a; }
-        .badge-gold { background: var(--gold-tint); color: var(--gold-dark); }
         .stat-card { background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px); border: 1px solid var(--border); border-radius: 14px; padding: 16px; text-align: center; box-shadow: var(--shadow-sm); border-bottom: 3px solid var(--gold); }
         .stat-card .number { font-family: var(--font-mono); font-size: 28px; font-weight: 700; color: var(--marian-blue); }
         .stat-card .label { font-size: 11px; color: var(--ink-faint); text-transform: uppercase; letter-spacing: 0.5px; margin-top: 4px; }
@@ -129,57 +123,30 @@
         .import-preview table th { background: var(--marian-blue); color: #fff; padding: 8px 10px; text-align: left; position: sticky; top: 0; z-index: 2; }
         .import-preview table td { padding: 6px 10px; border-bottom: 1px solid var(--border); }
         .footer-note { font-size: 11px; color: var(--ink-faint); text-align: center; margin-top: 30px; padding-top: 16px; border-top: 1px solid var(--border); letter-spacing: 0.3px; }
-        .result-card { background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px); border: 1px solid var(--border); border-radius: var(--radius-md); padding: 20px; margin-bottom: 16px; box-shadow: var(--shadow-sm); border-left: 4px solid var(--gold); }
-        .score-input { width: 70px; padding: 6px 8px; border-radius: 8px; border: 1.5px solid var(--border); text-align: center; font-family: var(--font-body); font-size: 13px; }
-        .score-input:focus { border-color: var(--marian-blue); outline: none; box-shadow: 0 0 0 3px var(--marian-blue-tint); }
-        .grade-display { font-weight: 600; padding: 2px 8px; border-radius: 20px; font-size: 12px; text-align: center; min-width: 30px; display: inline-block; }
         .admin-tabs { display: flex; gap: 8px; margin-bottom: 16px; flex-wrap: wrap; }
         .admin-tabs .admin-tab { padding: 10px 20px; border-radius: 30px; background: var(--paper); border: 1px solid var(--border); cursor: pointer; font-weight: 600; font-size: 13px; color: var(--ink-soft); transition: all 0.2s; }
         .admin-tabs .admin-tab:hover { background: var(--marian-blue-tint); border-color: var(--marian-blue); }
         .admin-tabs .admin-tab.active { background: var(--marian-blue); color: #fff; border-color: var(--marian-blue); }
         .admin-tab-content { display: none; }
         .admin-tab-content.active { display: block; }
-        .teacher-welcome { font-size: 14px; color: var(--ink-soft); }
-        .assignment-row { transition: background 0.2s; }
-        .assignment-row:hover { background: var(--marian-blue-tint); }
         .login-form { display: none; margin-top: 12px; }
         .login-form.active { display: block; }
         .login-form .field { margin-bottom: 12px; }
         .login-form .btn-submit { margin-top: 4px; width: 100%; }
         .btn-outline.btn-sm { padding: 10px 16px; font-size: 13px; border-radius: 30px; transition: all 0.2s ease; }
         .btn-outline.btn-sm:hover { background: var(--marian-blue); color: #fff; border-color: var(--marian-blue); }
-        .btn-outline.btn-sm:active { transform: scale(0.97); }
         .role-selector { display: flex; gap: 10px; margin-top: 16px; flex-wrap: wrap; justify-content: center; }
         .role-selector .btn { flex: 1; min-width: 80px; }
-        .student-info-box { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; padding: 16px; background: var(--paper); border-radius: 12px; border: 1px solid var(--border); }
-        .student-info-box .info-item { display: flex; flex-direction: column; gap: 2px; }
-        .student-info-box .info-item .label { font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; color: var(--ink-faint); font-weight: 600; }
-        .student-info-box .info-item .value { font-size: 15px; color: var(--ink); font-weight: 600; }
-        .student-info-box .info-item .value.class-badge { display: inline-block; background: var(--marian-blue-tint); color: var(--marian-blue); padding: 4px 12px; border-radius: 20px; font-size: 13px; font-weight: 700; width: fit-content; }
         @media (max-width: 480px) {
             .topbar .brand h1 { font-size: 14px; }
             .topbar .brand .school-logo { width: 45px; height: 45px; }
-            .topbar .seal { width: 35px; height: 35px; }
             .card { padding: 14px; }
             .tab-nav .tab-btn { font-size: 11px; padding: 8px 10px; min-width: 60px; }
             .table-wrapper table { font-size: 11px; min-width: 450px; }
             .table-wrapper table th, .table-wrapper table td { padding: 6px 8px; }
-            .topbar .brand .motto { font-size: 10px; }
             .connection-status { bottom: 10px; right: 10px; font-size: 10px; padding: 6px 12px; }
             .toast { bottom: 70px; font-size: 12px; padding: 10px 16px; }
             .login-floating-btn { width: 48px; height: 48px; font-size: 17px; bottom: 70px; right: 12px; }
-            .score-input { width: 55px; font-size: 11px; padding: 4px 6px; }
-            .admin-tabs .admin-tab { font-size: 12px; padding: 8px 14px; }
-            .student-info-box { grid-template-columns: 1fr; }
-        }
-        @media print {
-            .topbar, .tab-nav, .no-print, .mary-bg, .connection-status, .login-modal, .login-floating-btn, .admin-tabs { display: none !important; }
-            .section { display: block !important; }
-            .card { box-shadow: none !important; border: 1px solid #ddd !important; break-inside: avoid; background: #fff !important; backdrop-filter: none !important; }
-            .table-wrapper { border: 1px solid #ddd !important; }
-            .table-wrapper table th { background: #333 !important; color: #fff !important; }
-            body { background: #fff !important; padding: 0 !important; margin: 0 !important; }
-            @page { size: A4 landscape; margin: 8mm 10mm; }
         }
     </style>
 </head>
@@ -198,11 +165,11 @@
     <div class="topbar">
         <div class="brand">
             <div class="school-logo">
-                <img id="lodgeLogoImg" src="LadyB%20logo.jpeg" alt="Lavevars Lodge Logo" onerror="console.warn('Logo LadyB logo.jpeg not found'); this.style.opacity=0.3;">
+                <img id="lodgeLogoImg" src="LadyB%20logo.jpeg" alt="Lavevars Lodge Logo">
             </div>
             <div class="ministry">Hospitality Management</div>
-            <h1 id="lodgeNameHeader">Lavevars Lodge</h1>
-            <div class="motto" id="lodgeMottoHeader">Comfort · Elegance · Serenity</div>
+            <h1>Lavevars Lodge</h1>
+            <div class="motto">Comfort · Elegance · Serenity</div>
         </div>
     </div>
 
@@ -210,23 +177,23 @@
         <div class="modal-content">
             <button class="close-btn" id="closeLoginModal">&times;</button>
             <div class="modal-header">
-                <div class="modal-logo"><img src="LadyB%20logo.jpeg" alt="Lavevars Lodge Logo" onerror="console.warn('Logo LadyB logo.jpeg not found'); this.style.opacity=0.3;"></div>
+                <div class="modal-logo"><img src="LadyB%20logo.jpeg" alt="logo"></div>
                 <h2><i class="fas fa-user-circle" style="color:var(--gold);"></i> Sign In</h2>
                 <p>Select your role below</p>
             </div>
             <div class="logout-section" id="logoutSection" style="display:none;">
-                <div class="user-info"><i class="fas fa-user-check"></i> Signed in as: <span id="loggedInUserName">User</span></div>
+                <div style="margin-bottom:12px;font-size:13px;text-align:center;"><i class="fas fa-user-check"></i> Signed in as: <span id="loggedInUserName">User</span></div>
                 <button class="btn btn-danger btn-block" id="logoutFromModalBtn"><i class="fas fa-sign-out-alt"></i> Sign Out</button>
             </div>
             <div id="loginOptions">
                 <div class="login-form" id="staffLoginForm">
                     <div class="field">
                         <label><i class="fas fa-user"></i> Username</label>
-                        <input type="text" id="staffLoginUsername" placeholder="Enter your username">
+                        <input type="text" id="staffLoginUsername" placeholder="e.g. reception">
                     </div>
                     <div class="field">
                         <label><i class="fas fa-lock"></i> Password</label>
-                        <input type="password" id="staffLoginPassword" placeholder="Enter your password">
+                        <input type="password" id="staffLoginPassword" placeholder="Enter password">
                     </div>
                     <button class="btn btn-success btn-submit btn-block" onclick="staffLogin()">
                         <i class="fas fa-sign-in-alt"></i> Sign In
@@ -256,8 +223,8 @@
 
     <div class="shell" id="app">
         <div class="tab-nav" id="tabNav">
-            <button class="tab-btn active" data-tab="staff" id="staffTabBtn"><i class="fas fa-concierge-bell"></i> Staff</button>
-            <button class="tab-btn" data-tab="admin" id="adminTabBtn"><i class="fas fa-user-shield"></i> Admin</button>
+            <button class="tab-btn active" data-tab="staff"><i class="fas fa-concierge-bell"></i> Staff</button>
+            <button class="tab-btn" data-tab="admin"><i class="fas fa-user-shield"></i> Admin</button>
         </div>
 
         <!-- STAFF SECTION -->
@@ -272,50 +239,50 @@
             </div>
             <div id="staffContent" style="display:none;">
                 <div class="card">
-                    <div class="card-header"><h2><i class="fas fa-concierge-bell"></i> Staff Dashboard</h2><span class="subtitle teacher-welcome" id="staffNameDisplay">Welcome, Staff</span></div>
+                    <div class="card-header"><h2><i class="fas fa-users"></i> Guest Management</h2><span class="subtitle" id="staffNameDisplay">Welcome</span></div>
                     <div class="grid-3">
-                        <div class="field"><label><i class="fas fa-door-open"></i> Room Type</label><select id="staffRoomType"><option value="">Select Room Type</option><option value="Standard">Standard</option><option value="Deluxe">Deluxe</option><option value="Executive">Executive</option><option value="Suite">Suite</option><option value="Presidential">Presidential</option></select></div>
-                        <div class="field"><label><i class="fas fa-calendar-alt"></i> Month</label><select id="staffMonth"><option value="">Select</option><option value="1">January</option><option value="2">February</option><option value="3">March</option><option value="4">April</option><option value="5">May</option><option value="6">June</option><option value="7">July</option><option value="8">August</option><option value="9">September</option><option value="10">October</option><option value="11">November</option><option value="12">December</option></select></div>
-                        <div class="field"><label><i class="fas fa-calendar-year"></i> Year</label><select id="staffYear"><option value="">Select</option><option value="2024">2024</option><option value="2025">2025</option><option value="2026">2026</option><option value="2027">2027</option></select></div>
+                        <div class="field"><label><i class="fas fa-calendar-alt"></i> Check-in From</label><input type="date" id="staffDateFrom"></div>
+                        <div class="field"><label><i class="fas fa-calendar-check"></i> Check-in To</label><input type="date" id="staffDateTo"></div>
+                        <div class="field"><label><i class="fas fa-tag"></i> Stay Status</label>
+                            <select id="staffStayStatus">
+                                <option value="">All</option>
+                                <option value="true">Still Lodging</option>
+                                <option value="false">Checked Out</option>
+                            </select>
+                        </div>
                     </div>
                     <div class="grid-3">
-                        <div class="field"><label><i class="fas fa-tag"></i> Status</label><select id="staffBookingStatus"><option value="">Select</option><option value="confirmed">Confirmed</option><option value="checked_in">Checked In</option><option value="checked_out">Checked Out</option><option value="cancelled">Cancelled</option></select></div>
-                        <div class="field" style="justify-content:flex-end;"><button class="btn btn-primary" id="loadBookingsBtn"><i class="fas fa-search"></i> Load Bookings</button></div>
+                        <div class="field" style="justify-content:flex-end;"><button class="btn btn-primary" id="loadGuestsBtn"><i class="fas fa-search"></i> Load Guests</button></div>
                     </div>
                 </div>
+
                 <div class="card" style="border-top-color: var(--oxblood);">
                     <div class="card-header">
-                        <h2><i class="fas fa-file-excel" style="color:var(--oxblood);"></i> Import Bookings from Excel</h2>
-                        <span class="subtitle">Upload .xlsx / .xls with booking references and guest names</span>
-                    </div>
-                    <div class="grid-3" style="margin-bottom:12px;">
-                        <div class="field"><label><i class="fas fa-door-open"></i> Room Type</label><select id="staffImportRoomType"><option value="">Select Room Type</option><option value="Standard">Standard</option><option value="Deluxe">Deluxe</option><option value="Executive">Executive</option><option value="Suite">Suite</option><option value="Presidential">Presidential</option></select></div>
-                        <div class="field"><label><i class="fas fa-calendar-alt"></i> Month</label><select id="staffImportMonth"><option value="">Select</option><option value="1">January</option><option value="2">February</option><option value="3">March</option><option value="4">April</option><option value="5">May</option><option value="6">June</option><option value="7">July</option><option value="8">August</option><option value="9">September</option><option value="10">October</option><option value="11">November</option><option value="12">December</option></select></div>
-                        <div class="field"><label><i class="fas fa-calendar-year"></i> Year</label><select id="staffImportYear"><option value="">Select</option><option value="2024">2024</option><option value="2025">2025</option><option value="2026">2026</option><option value="2027">2027</option></select></div>
-                    </div>
-                    <div class="grid-3">
-                        <div class="field"><label><i class="fas fa-tag"></i> Status</label><select id="staffImportStatus"><option value="">Select</option><option value="confirmed">Confirmed</option><option value="checked_in">Checked In</option><option value="checked_out">Checked Out</option><option value="cancelled">Cancelled</option></select></div>
-                        <div class="field" style="justify-content:flex-end;"><button class="btn btn-primary" id="staffImportLoadBtn"><i class="fas fa-sync"></i> Load & Preview</button></div>
+                        <h2><i class="fas fa-file-excel" style="color:var(--oxblood);"></i> Import Guests from Excel</h2>
+                        <span class="subtitle">Columns: name, room_id, check_in, check_out, amount_paid, phone</span>
                     </div>
                     <div class="import-area" id="staffImportArea">
                         <i class="fas fa-file-excel" style="color:var(--oxblood);"></i>
                         <h3>Click or Drag & Drop Excel File</h3>
-                        <p>Required columns: <strong>Booking Reference</strong>, <strong>Guest Name</strong>, <strong>Room Number</strong></p>
+                        <p>Required: name, room_id, check_in, check_out</p>
                         <input type="file" class="file-input" id="staffFileInput" accept=".xlsx,.xls">
                     </div>
                     <div id="staffImportPreview" class="import-preview" style="display:none;"></div>
                     <div style="margin-top:12px; display:flex; gap:8px; flex-wrap:wrap;">
-                        <button class="btn btn-success" id="staffImportBtn" style="display:none;"><i class="fas fa-upload"></i> Import Bookings</button>
+                        <button class="btn btn-success" id="staffImportBtn" style="display:none;"><i class="fas fa-upload"></i> Import Guests</button>
                         <button class="btn btn-outline" id="staffImportClearBtn" style="display:none;"><i class="fas fa-times"></i> Clear</button>
                     </div>
                     <div id="staffImportStatusMsg" style="margin-top:8px; font-size:13px; color:var(--ink-soft);"></div>
                 </div>
-                <div id="bookingsEntry" style="display:none;">
+
+                <div id="guestsEntry" style="display:none;">
                     <div class="card">
-                        <div class="card-header"><h2><i class="fas fa-edit"></i> Manage Bookings</h2><button class="btn btn-sm btn-success" id="saveBookingsBtn"><i class="fas fa-save"></i> Save All</button></div>
+                        <div class="card-header"><h2><i class="fas fa-list"></i> Guest Records</h2>
+                            <button class="btn btn-sm btn-success" id="addGuestBtn"><i class="fas fa-plus"></i> Add Guest</button>
+                        </div>
                         <div class="table-wrapper">
-                            <table><thead><tr><th>#</th><th>Booking Ref</th><th>Room</th><th>Check In</th><th>Check Out</th><th>Status</th></tr></thead>
-                            <tbody id="bookingsTableBody"><tr><td colspan="6" style="text-align:center;color:var(--ink-faint);">No bookings loaded.</td></tr></tbody></table>
+                            <table><thead><tr><th>#</th><th>Name</th><th>Room</th><th>Check In</th><th>Check Out</th><th>Paid</th><th>Status</th><th>Action</th></tr></thead>
+                            <tbody id="guestsTable"><tr><td colspan="8" style="text-align:center;color:var(--ink-faint);">No guests loaded.</td></tr></tbody></table>
                         </div>
                     </div>
                 </div>
@@ -337,86 +304,64 @@
                     <div class="card-header"><h2><i class="fas fa-user-shield"></i> Admin Dashboard</h2><span class="subtitle">Overview</span></div>
                     <div class="grid-4">
                         <div class="stat-card"><div class="icon"><i class="fas fa-bed"></i></div><div class="number" id="totalRooms">0</div><div class="label">Total Rooms</div></div>
-                        <div class="stat-card"><div class="icon"><i class="fas fa-user-tie"></i></div><div class="number" id="totalStaff">0</div><div class="label">Total Staff</div></div>
-                        <div class="stat-card"><div class="icon"><i class="fas fa-book"></i></div><div class="number" id="totalBookings">0</div><div class="label">Total Bookings</div></div>
+                        <div class="stat-card"><div class="icon"><i class="fas fa-users"></i></div><div class="number" id="totalStaff">0</div><div class="label">Total Staff</div></div>
+                        <div class="stat-card"><div class="icon"><i class="fas fa-book"></i></div><div class="number" id="totalBookings">0</div><div class="label">Total Guests</div></div>
                         <div class="stat-card"><div class="icon"><i class="fas fa-dollar-sign"></i></div><div class="number" id="totalRevenue">0</div><div class="label">Revenue (ZMW)</div></div>
                     </div>
                 </div>
 
                 <div class="card">
                     <div class="admin-tabs" id="adminTabs2">
-                        <button class="admin-tab active" data-admintab="assignmentsTab2"><i class="fas fa-tasks"></i> Staff Assignments</button>
-                        <button class="admin-tab" data-admintab="roomsTab2"><i class="fas fa-bed"></i> Rooms</button>
-                        <button class="admin-tab" data-admintab="analysisTab2"><i class="fas fa-chart-bar"></i> Reports & Analysis</button>
+                        <button class="admin-tab active" data-admintab="staffTab"><i class="fas fa-user-tie"></i> Manage Staff</button>
+                        <button class="admin-tab" data-admintab="roomsTab"><i class="fas fa-bed"></i> Manage Rooms</button>
+                        <button class="admin-tab" data-admintab="analysisTab"><i class="fas fa-chart-bar"></i> Reports</button>
                     </div>
 
-                    <div id="assignmentsTab2" class="admin-tab-content active">
-                        <div class="card-header"><h2><i class="fas fa-tasks"></i> Staff Assignments</h2><span class="subtitle">Assign staff to departments and roles</span></div>
+                    <div id="staffTab" class="admin-tab-content active">
+                        <div class="card-header"><h2><i class="fas fa-user-tie"></i> Staff Accounts</h2><span class="subtitle">Create staff logins</span></div>
                         <div class="grid-3">
-                            <div class="field"><label><i class="fas fa-user-tie"></i> Staff</label><select id="assignTeacherSelect2"><option value="">Select Staff</option></select></div>
-                            <div class="field"><label><i class="fas fa-building"></i> Department</label><select id="assignClassSelect2"><option value="">Select Department</option><option value="Front Desk">Front Desk</option><option value="Housekeeping">Housekeeping</option><option value="Food & Beverage">Food & Beverage</option><option value="Maintenance">Maintenance</option><option value="Management">Management</option><option value="Security">Security</option><option value="Concierge">Concierge</option><option value="Kitchen">Kitchen</option></select></div>
-                            <div class="field"><label><i class="fas fa-briefcase"></i> Role</label><select id="assignSubjectSelect2"><option value="">Select Role</option>
-                                <option value="Receptionist">Receptionist</option><option value="Housekeeper">Housekeeper</option><option value="Chef">Chef</option><option value="Waiter/Waitress">Waiter/Waitress</option><option value="Manager">Manager</option><option value="Security Guard">Security Guard</option><option value="Concierge">Concierge</option><option value="Maintenance Worker">Maintenance Worker</option>
-                            </select></div>
+                            <div class="field"><label><i class="fas fa-user"></i> Full Name</label><input type="text" id="adminTeacherName" placeholder="e.g. John Banda"></div>
+                            <div class="field"><label><i class="fas fa-at"></i> Username</label><input type="text" id="adminTeacherUsername" placeholder="e.g. john123"></div>
+                            <div class="field"><label><i class="fas fa-lock"></i> Password</label><input type="password" id="adminTeacherPassword" placeholder="Enter password"></div>
                         </div>
-                        <div class="grid-3">
-                            <div class="field" style="justify-content:flex-end;"><button class="btn btn-success" id="assignTeacherBtn2"><i class="fas fa-plus"></i> Assign Staff</button></div>
-                        </div>
+                        <button class="btn btn-success btn-block" id="addTeacherBtn"><i class="fas fa-plus"></i> Create Staff Account</button>
                         <div style="margin-top:12px;">
                             <div class="table-wrapper">
-                                <table><thead><tr><th>#</th><th>Department</th><th>Role</th><th>Assigned Staff</th><th>Action</th></tr></thead>
-                                <tbody id="assignmentsTableBody2"><tr><td colspan="5" style="text-align:center;color:var(--ink-faint);">Loading assignments...</td></tr></tbody></table>
+                                <table><thead><tr><th>#</th><th>Name</th><th>Username</th><th>Action</th></tr></thead>
+                                <tbody id="staffTableBody"><tr><td colspan="4" style="text-align:center;color:var(--ink-faint);">Loading staff...</td></tr></tbody></table>
                             </div>
                         </div>
                     </div>
 
-                    <div id="roomsTab2" class="admin-tab-content">
-                        <div class="card-header"><h2><i class="fas fa-bed"></i> Room Management</h2><span class="subtitle">Manage 40 rooms across 5 room types</span></div>
+                    <div id="roomsTab" class="admin-tab-content">
+                        <div class="card-header"><h2><i class="fas fa-bed"></i> Room Management</h2><span class="subtitle">Manage all 40 rooms</span></div>
                         <div class="grid-3">
-                            <div class="field"><label><i class="fas fa-door-open"></i> Room Type</label><select id="adminRoomType"><option value="">Select Room Type</option><option value="Standard">Standard</option><option value="Deluxe">Deluxe</option><option value="Executive">Executive</option><option value="Suite">Suite</option><option value="Presidential">Presidential</option></select></div>
-                            <div class="field"><label><i class="fas fa-hashtag"></i> Room Number</label><input type="text" id="adminRoomNumber" placeholder="e.g. 101"></div>
-                            <div class="field"><label><i class="fas fa-dollar-sign"></i> Rate (ZMW)</label><input type="number" id="adminRoomRate" placeholder="e.g. 500"></div>
+                            <div class="field"><label><i class="fas fa-door-open"></i> Room Name</label><input type="text" id="adminRoomName" placeholder="e.g. Room 101"></div>
+                            <div class="field"><label><i class="fas fa-users"></i> Capacity</label><input type="number" id="adminRoomCapacity" placeholder="e.g. 2"></div>
+                            <div class="field"><label><i class="fas fa-check-circle"></i> Occupied?</label><select id="adminRoomOccupied"><option value="false">No (Available)</option><option value="true">Yes (Occupied)</option></select></div>
                         </div>
                         <button class="btn btn-success btn-block" id="addRoomBtn"><i class="fas fa-plus"></i> Add Room</button>
                         <div style="margin-top:12px;">
                             <div class="table-wrapper">
-                                <table><thead><tr><th>#</th><th>Room Number</th><th>Type</th><th>Status</th><th>Rate (ZMW)</th><th>Action</th></tr></thead>
-                                <tbody id="roomsTableBody"><tr><td colspan="6" style="text-align:center;color:var(--ink-faint);">Loading rooms...</td></tr></tbody></table>
+                                <table><thead><tr><th>#</th><th>Room Name</th><th>Capacity</th><th>Status</th><th>Action</th></tr></thead>
+                                <tbody id="roomsTableBody"><tr><td colspan="5" style="text-align:center;color:var(--ink-faint);">Loading rooms...</td></tr></tbody></table>
                             </div>
                         </div>
                     </div>
 
-                    <div id="analysisTab2" class="admin-tab-content">
-                        <div class="card-header"><h2><i class="fas fa-chart-bar"></i> Reports & Analysis</h2><span class="subtitle">Generate occupancy and revenue reports</span></div>
+                    <div id="analysisTab" class="admin-tab-content">
+                        <div class="card-header"><h2><i class="fas fa-chart-bar"></i> Reports & Analysis</h2><span class="subtitle">Generate revenue reports</span></div>
                         <div class="grid-3">
-                            <div class="field"><label><i class="fas fa-door-open"></i> Room Type</label><select id="analysisClassSelect"><option value="">All Room Types</option><option value="Standard">Standard</option><option value="Deluxe">Deluxe</option><option value="Executive">Executive</option><option value="Suite">Suite</option><option value="Presidential">Presidential</option></select></div>
-                            <div class="field"><label><i class="fas fa-tag"></i> Status</label><select id="analysisSubjectSelect"><option value="">All Statuses</option><option value="confirmed">Confirmed</option><option value="checked_in">Checked In</option><option value="checked_out">Checked Out</option><option value="cancelled">Cancelled</option></select></div>
-                            <div class="field"><label><i class="fas fa-calendar-alt"></i> Month</label><select id="analysisTermSelect"><option value="">Select</option><option value="1">January</option><option value="2">February</option><option value="3">March</option><option value="4">April</option><option value="5">May</option><option value="6">June</option><option value="7">July</option><option value="8">August</option><option value="9">September</option><option value="10">October</option><option value="11">November</option><option value="12">December</option></select></div>
-                        </div>
-                        <div class="grid-3">
-                            <div class="field"><label><i class="fas fa-calendar-year"></i> Year</label><select id="analysisYearSelect"><option value="">Select</option><option value="2024">2024</option><option value="2025">2025</option><option value="2026">2026</option><option value="2027">2027</option></select></div>
-                            <div class="field" style="justify-content:flex-end;"><button class="btn btn-primary btn-block" id="generateAnalysisBtn"><i class="fas fa-chart-line"></i> Generate Analysis</button></div>
+                            <div class="field"><label><i class="fas fa-calendar-alt"></i> Check-in From</label><input type="date" id="analysisDateFrom"></div>
+                            <div class="field"><label><i class="fas fa-calendar-check"></i> Check-in To</label><input type="date" id="analysisDateTo"></div>
+                            <div class="field" style="justify-content:flex-end;"><button class="btn btn-primary btn-block" id="generateAnalysisBtn"><i class="fas fa-chart-line"></i> Generate</button></div>
                         </div>
 
                         <div id="analysisResultsArea" style="display:none;margin-top:20px;">
                             <h3 id="analysisSummaryTitle" style="color:var(--marian-blue);font-family:var(--font-display);margin-bottom:12px;"></h3>
                             <div class="grid-4" id="analysisStatCards" style="margin-bottom:20px;"></div>
-                            <div class="card" style="border-top-color: var(--gold);">
-                                <div class="card-header"><h2><i class="fas fa-chart-pie"></i> Booking Status Distribution</h2></div>
-                                <div id="analysisGradeDistribution"></div>
-                            </div>
                             <div class="table-wrapper"><table id="analysisTable"></table></div>
                         </div>
-                    </div>
-                </div>
-
-                <div class="grid-2">
-                    <div class="card">
-                        <div class="card-header"><h2><i class="fas fa-user-plus"></i> Add Staff</h2></div>
-                        <div class="field"><label>Name</label><input type="text" id="adminTeacherName" placeholder="e.g. Mary Phiri"></div>
-                        <div class="field"><label>Username</label><input type="text" id="adminTeacherUsername" placeholder="******"></div>
-                        <div class="field"><label>Password</label><input type="password" id="adminTeacherPassword" placeholder="Enter password"></div>
-                        <button class="btn btn-success btn-block" id="addTeacherBtn"><i class="fas fa-plus"></i> Add Staff</button>
                     </div>
                 </div>
             </div>
@@ -434,27 +379,11 @@
         const SUPABASE_URL = 'https://injvpbahfqltozrsqcmc.supabase.co';
         const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImluanZwYmFoZnFsdG96cnNxY21jIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODc5MDM0MzIsImV4cCI6MjEwMzQ3OTQzMn0.JoGibO2fqrw7sbmBbQ55EUKONQl94cqPTmkqxNoiXXk';
 
-        /* 40 rooms across 5 types */
-        const ROOM_TYPES = [
-            { id: 'Standard', display: 'Standard Room', rate: 500 },
-            { id: 'Deluxe', display: 'Deluxe Room', rate: 850 },
-            { id: 'Executive', display: 'Executive Room', rate: 1200 },
-            { id: 'Suite', display: 'Suite', rate: 1800 },
-            { id: 'Presidential', display: 'Presidential Suite', rate: 3500 }
-        ];
-
-        const DEPARTMENTS = ['Front Desk', 'Housekeeping', 'Food & Beverage', 'Maintenance', 'Management', 'Security', 'Concierge', 'Kitchen'];
-        const ROLES = ['Receptionist', 'Housekeeper', 'Chef', 'Waiter/Waitress', 'Manager', 'Security Guard', 'Concierge', 'Maintenance Worker'];
-
         let supabaseClient = null;
         let currentUser = null;
         let isConnected = false;
-        let bulkData = null;
         let staffImportData = null;
-        let currentLodgeCode = 'LV';
-        let currentAnalysisData = null;
         let ROOM_CACHE = {};
-        let ROOM_LIST = [];
 
         const toastDiv = document.getElementById('globalToast');
         const toastMsg = document.getElementById('toastMsg');
@@ -462,105 +391,9 @@
         const statusText = document.getElementById('statusText');
         const loginFloatingBtn = document.getElementById('loginFloatingBtn');
         const loginModal = document.getElementById('loginModal');
-        const closeLoginModal = document.getElementById('closeLoginModal');
         const logoutSection = document.getElementById('logoutSection');
         const loginOptions = document.getElementById('loginOptions');
-        const loggedInUserName = document.getElementById('loggedInUserName');
         const logoutFromModalBtn = document.getElementById('logoutFromModalBtn');
-
-        const staffRoomType = document.getElementById('staffRoomType');
-        const staffMonth = document.getElementById('staffMonth');
-        const staffYear = document.getElementById('staffYear');
-        const staffBookingStatus = document.getElementById('staffBookingStatus');
-        const loadBookingsBtn = document.getElementById('loadBookingsBtn');
-        const bookingsEntry = document.getElementById('bookingsEntry');
-        const bookingsTableBody = document.getElementById('bookingsTableBody');
-        const saveBookingsBtn = document.getElementById('saveBookingsBtn');
-        const staffLocked = document.getElementById('staffLocked');
-        const staffContent = document.getElementById('staffContent');
-        const staffNameDisplay = document.getElementById('staffNameDisplay');
-
-        const staffImportRoomType = document.getElementById('staffImportRoomType');
-        const staffImportMonth = document.getElementById('staffImportMonth');
-        const staffImportYear = document.getElementById('staffImportYear');
-        const staffImportStatus = document.getElementById('staffImportStatus');
-        const staffImportLoadBtn = document.getElementById('staffImportLoadBtn');
-        const staffImportArea = document.getElementById('staffImportArea');
-        const staffFileInput = document.getElementById('staffFileInput');
-        const staffImportPreview = document.getElementById('staffImportPreview');
-        const staffImportBtn = document.getElementById('staffImportBtn');
-        const staffImportClearBtn = document.getElementById('staffImportClearBtn');
-        const staffImportStatusMsg = document.getElementById('staffImportStatusMsg');
-
-        const assignTeacherSelect2 = document.getElementById('assignTeacherSelect2');
-        const assignClassSelect2 = document.getElementById('assignClassSelect2');
-        const assignSubjectSelect2 = document.getElementById('assignSubjectSelect2');
-        const assignTeacherBtn2 = document.getElementById('assignTeacherBtn2');
-        const assignmentsTableBody2 = document.getElementById('assignmentsTableBody2');
-        const adminRoomType = document.getElementById('adminRoomType');
-        const adminRoomNumber = document.getElementById('adminRoomNumber');
-        const adminRoomRate = document.getElementById('adminRoomRate');
-        const addRoomBtn = document.getElementById('addRoomBtn');
-        const roomsTableBody = document.getElementById('roomsTableBody');
-
-        const adminTeacherName = document.getElementById('adminTeacherName');
-        const adminTeacherUsername = document.getElementById('adminTeacherUsername');
-        const adminTeacherPassword = document.getElementById('adminTeacherPassword');
-        const addTeacherBtn = document.getElementById('addTeacherBtn');
-        const totalRooms = document.getElementById('totalRooms');
-        const totalStaff = document.getElementById('totalStaff');
-        const totalBookings = document.getElementById('totalBookings');
-        const totalRevenue = document.getElementById('totalRevenue');
-        const adminLocked = document.getElementById('adminLocked');
-        const adminContent = document.getElementById('adminContent');
-
-        const analysisClassSelect = document.getElementById('analysisClassSelect');
-        const analysisSubjectSelect = document.getElementById('analysisSubjectSelect');
-        const analysisTermSelect = document.getElementById('analysisTermSelect');
-        const analysisYearSelect = document.getElementById('analysisYearSelect');
-        const generateAnalysisBtn = document.getElementById('generateAnalysisBtn');
-        const analysisResultsArea = document.getElementById('analysisResultsArea');
-        const analysisSummaryTitle = document.getElementById('analysisSummaryTitle');
-        const analysisStatCards = document.getElementById('analysisStatCards');
-        const analysisGradeDistribution = document.getElementById('analysisGradeDistribution');
-        const analysisTable = document.getElementById('analysisTable');
-
-        const LODGE_CONFIG = {
-            lodges: {
-                'LV': { code:'LV', name:'Lavevars Lodge', motto:'Comfort · Elegance · Serenity', logo:'LadyB%20logo.jpeg', theme:{primary:'#1a237e',secondary:'#B8862E'}, location:'Kasama District' }
-            }
-        };
-
-        function getCurrentLodge() { return LODGE_CONFIG.lodges[currentLodgeCode] || LODGE_CONFIG.lodges['LV']; }
-
-        function applyLodgeBranding() {
-            const lodge = getCurrentLodge();
-            if (!lodge) return;
-            document.getElementById('lodgeNameHeader').textContent = lodge.name;
-            document.getElementById('lodgeMottoHeader').textContent = lodge.motto;
-            document.getElementById('lodgeLogoImg').src = lodge.logo;
-            document.documentElement.style.setProperty('--marian-blue', lodge.theme.primary);
-            document.documentElement.style.setProperty('--gold', lodge.theme.secondary);
-            const footer = document.querySelector('.footer-note');
-            if (footer) footer.textContent = `${lodge.name} · ${lodge.location} · Under ICT © 2026`;
-            document.title = lodge.name;
-        }
-
-        function setupAdminTabs() {
-            const tabs = document.querySelectorAll('#adminTabs2 .admin-tab');
-            const contents = ['assignmentsTab2','roomsTab2','analysisTab2'];
-            tabs.forEach(tab => {
-                if (tab.dataset.bound === 'true') return;
-                tab.dataset.bound = 'true';
-                tab.addEventListener('click', function() {
-                    const target = this.dataset.admintab;
-                    tabs.forEach(t => t.classList.remove('active'));
-                    this.classList.add('active');
-                    contents.forEach(id => { const el = document.getElementById(id); if (el) el.classList.remove('active'); });
-                    const targetEl = document.getElementById(target); if (targetEl) targetEl.classList.add('active');
-                });
-            });
-        }
 
         function showToast(msg, isError = false) {
             toastMsg.textContent = msg;
@@ -593,10 +426,7 @@
             if (currentUser) {
                 logoutSection.style.display = 'block';
                 if (loginOptions) loginOptions.style.display = 'none';
-                let displayName = 'User';
-                if (currentUser.role === 'staff') displayName = 'Staff: ' + (currentUser.name || currentUser.id);
-                else if (currentUser.role === 'admin') displayName = 'Administrator';
-                loggedInUserName.textContent = displayName;
+                document.getElementById('loggedInUserName').textContent = currentUser.role === 'admin' ? 'Administrator' : currentUser.name;
                 loginFloatingBtn.innerHTML = '<i class="fas fa-user-check"></i>';
                 loginFloatingBtn.classList.add('logged-in');
             } else {
@@ -607,763 +437,395 @@
             }
         }
 
-        closeLoginModal.addEventListener('click', () => loginModal.classList.remove('active'));
+        document.getElementById('closeLoginModal').addEventListener('click', () => loginModal.classList.remove('active'));
         loginModal.addEventListener('click', e => { if (e.target === loginModal) loginModal.classList.remove('active'); });
         loginFloatingBtn.addEventListener('click', () => openLoginModal());
-        logoutFromModalBtn.addEventListener('click', function() { performLogout(); loginModal.classList.remove('active'); });
-
-        function performLogout() {
-            currentUser = null;
-            updateLoginUI();
-            showToast('🔒 Logged out');
-            bookingsEntry.style.display = 'none';
-            staffLocked.style.display = 'block';
-            staffContent.style.display = 'none';
-            adminLocked.style.display = 'block';
-            adminContent.style.display = 'none';
+        logoutFromModalBtn.addEventListener('click', function() { 
+            currentUser = null; updateLoginUI(); showToast('🔒 Logged out');
+            document.getElementById('staffLocked').style.display = 'block';
+            document.getElementById('staffContent').style.display = 'none';
+            document.getElementById('adminLocked').style.display = 'block';
+            document.getElementById('adminContent').style.display = 'none';
+            loginModal.classList.remove('active'); 
             document.querySelector('.tab-btn[data-tab="staff"]').click();
+        });
+
+        async function hashPassword(password) {
+            const data = new TextEncoder().encode(password);
+            const hash = await crypto.subtle.digest('SHA-256', data);
+            return Array.from(new Uint8Array(hash)).map(b => b.toString(16).padStart(2,'0')).join('');
         }
 
+        // --- LOGIN LOGIC ---
         async function staffLogin() {
-            const username = document.getElementById('staffLoginUsername').value.trim();
-            const password = document.getElementById('staffLoginPassword').value.trim();
-
-            if (!username) { showToast('⚠️ Please enter your username', true); return; }
-            if (!password) { showToast('⚠️ Please enter your password', true); return; }
+            const user = document.getElementById('staffLoginUsername').value.trim();
+            const pass = document.getElementById('staffLoginPassword').value.trim();
+            if (!user || !pass) { showToast('⚠️ Enter username and password', true); return; }
             if (!supabaseClient || !isConnected) { showToast('⚠️ Database not connected', true); return; }
 
-            const loginBtn = document.querySelector('#staffLoginForm .btn-submit');
-            loginBtn.disabled = true;
-            loginBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Checking...';
+            const btn = document.querySelector('#staffLoginForm .btn-submit');
+            btn.disabled = true; btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Checking...';
 
             try {
-                const { data: staff, error } = await supabaseClient.from('staff').select('*').eq('username', username).maybeSingle();
+                const { data, error } = await supabaseClient.from('staff').select('*').eq('username', user).maybeSingle();
                 if (error) throw error;
+                if (!data) { showToast('❌ Staff not found', true); return; }
 
-                if (!staff) {
-                    showToast('❌ Staff not found', true);
-                    return;
-                }
+                const hash = await hashPassword(pass);
+                if (data.password_hash !== hash) { showToast('❌ Invalid password', true); return; }
 
-                const hashedInput = await hashPassword(password);
-                let passwordOk = false;
-
-                if (staff.password_hash) {
-                    passwordOk = (staff.password_hash === hashedInput);
-                } else if (staff.password) {
-                    passwordOk = (staff.password === password);
-                    if (passwordOk) {
-                        supabaseClient.from('staff').update({ password_hash: hashedInput }).eq('id', staff.id)
-                            .then(() => {}).catch(() => {});
-                    }
-                }
-
-                if (!passwordOk) { showToast('❌ Invalid password. Please try again.', true); return; }
-
-                currentUser = { role: 'staff', id: staff.id, name: staff.name };
-                showToast('✅ Logged in as staff: ' + staff.name);
+                currentUser = { role: 'staff', name: data.name };
+                showToast('✅ Logged in as ' + data.name);
                 loginModal.classList.remove('active');
                 updateLoginUI();
-                staffLocked.style.display = 'none';
-                staffContent.style.display = 'block';
-
-                await loadRoomsIntoCache();
-                populateRoomDropdowns();
-
+                document.getElementById('staffLocked').style.display = 'none';
+                document.getElementById('staffContent').style.display = 'block';
+                document.getElementById('staffNameDisplay').textContent = 'Welcome, ' + data.name;
                 document.querySelector('.tab-btn[data-tab="staff"]').click();
-                staffNameDisplay.textContent = 'Welcome, ' + staff.name;
+                await loadRoomsIntoCache();
             } catch (err) {
-                console.error('❌ Login error:', err);
                 showToast('❌ Error: ' + err.message, true);
             } finally {
-                loginBtn.disabled = false;
-                loginBtn.innerHTML = '<i class="fas fa-sign-in-alt"></i> Sign In';
+                btn.disabled = false; btn.innerHTML = '<i class="fas fa-sign-in-alt"></i> Sign In';
             }
         }
         window.staffLogin = staffLogin;
 
-        function sha256Fallback(ascii) {
-            function rr(v, a) { return (v >>> a) | (v << (32 - a)); }
-            const mp = Math.pow;
-            const maxWord = mp(2, 32);
-            let result = '';
-            const words = [];
-            const asciiBitLength = ascii.length * 8;
-
-            const hash = sha256Fallback.h = sha256Fallback.h || [];
-            const k    = sha256Fallback.k = sha256Fallback.k || [];
-            let primeCounter = k.length;
-
-            const isComposite = {};
-            for (let candidate = 2; primeCounter < 64; candidate++) {
-                if (!isComposite[candidate]) {
-                    for (let i = 0; i < 313; i += candidate) isComposite[i] = candidate;
-                    hash[primeCounter] = (mp(candidate, 0.5) * maxWord) | 0;
-                    k[primeCounter++] = (mp(candidate, 1/3) * maxWord) | 0;
-                }
-            }
-
-            ascii += '\x80';
-            while (ascii.length % 64 - 56) ascii += '\x00';
-            for (let i = 0; i < ascii.length; i++) {
-                const j = ascii.charCodeAt(i);
-                if (j >> 8) return '';
-                words[i >> 2] |= j << ((3 - i) % 4) * 8;
-            }
-            words[words.length] = (asciiBitLength / maxWord) | 0;
-            words[words.length] = asciiBitLength;
-
-            for (let j = 0; j < words.length;) {
-                const w = words.slice(j, j += 16);
-                const oldHash = hash.slice(0);
-                hash.length = 8;
-                for (let i = 0; i < 64; i++) {
-                    const w15 = w[i - 15], w2 = w[i - 2];
-                    const a = hash[0], e = hash[4];
-                    const temp1 = hash[7]
-                        + (rr(e,6) ^ rr(e,11) ^ rr(e,25))
-                        + ((e & hash[5]) ^ ((~e) & hash[6]))
-                        + k[i]
-                        + (w[i] = (i < 16) ? w[i] : (
-                            w[i-16]
-                            + (rr(w15,7) ^ rr(w15,18) ^ (w15 >>> 3))
-                            + w[i-7]
-                            + (rr(w2,17) ^ rr(w2,19) ^ (w2 >>> 10))
-                        ) | 0);
-                    const temp2 = (rr(a,2) ^ rr(a,13) ^ rr(a,22))
-                        + ((a & hash[1]) ^ (a & hash[2]) ^ (hash[1] & hash[2]));
-                    hash.unshift((temp1 + temp2) | 0);
-                    hash[4] = (hash[4] + temp1) | 0;
-                    hash.length = 8;
-                }
-                for (let i = 0; i < 8; i++) hash[i] = (hash[i] + oldHash[i]) | 0;
-            }
-
-            for (let i = 0; i < 8; i++) {
-                for (let j = 3; j + 1; j--) {
-                    const b = (hash[i] >> (j * 8)) & 255;
-                    result += ((b < 16) ? 0 : '') + b.toString(16);
-                }
-            }
-            return result;
-        }
-
-        async function hashPassword(password) {
-            if (window.crypto && window.crypto.subtle && window.isSecureContext) {
-                try {
-                    const data = new TextEncoder().encode(password);
-                    const hash = await crypto.subtle.digest('SHA-256', data);
-                    return Array.from(new Uint8Array(hash)).map(b => b.toString(16).padStart(2,'0')).join('');
-                } catch (e) {
-                    console.warn('crypto.subtle failed, using JS fallback', e);
-                }
-            }
-            return sha256Fallback(password);
-        }
-
         async function adminLogin() {
             const pass = document.getElementById('adminLoginPassword').value.trim();
-            if (!pass) { showToast('⚠️ Please enter admin password', true); return; }
+            if (!pass) { showToast('⚠️ Enter admin password', true); return; }
             if (!supabaseClient || !isConnected) { showToast('⚠️ Database not connected', true); return; }
 
             try {
                 const { data, error } = await supabaseClient.from('admin').select('password_hash').limit(1).maybeSingle();
-                if (error) { showToast('❌ Database error: ' + error.message, true); return; }
-                if (!data || !data.password_hash) { showToast('❌ Admin account not configured.', true); return; }
+                if (error) throw error;
+                if (!data) { showToast('❌ Admin not configured. Run the SQL script.', true); return; }
 
-                const hashedInput = await hashPassword(pass);
-                if (data.password_hash !== hashedInput) { showToast('❌ Invalid admin password', true); return; }
+                const hash = await hashPassword(pass);
+                if (data.password_hash !== hash) { showToast('❌ Invalid admin password', true); return; }
 
                 currentUser = { role: 'admin' };
                 showToast('✅ Logged in as Admin');
                 loginModal.classList.remove('active');
                 updateLoginUI();
-                adminLocked.style.display = 'none';
-                adminContent.style.display = 'block';
+                document.getElementById('adminLocked').style.display = 'none';
+                document.getElementById('adminContent').style.display = 'block';
                 document.querySelector('.tab-btn[data-tab="admin"]').click();
+                
                 await loadRoomsIntoCache();
-                loadAdminStats();
-                loadRooms();
-                populateAdminDropdowns();
-                populateAnalysisRoomDropdown();
-                loadAssignments();
+                await loadAdminStats();
+                await loadRooms();
+                await loadStaffTable();
                 setupAdminTabs();
             } catch (err) {
                 showToast('❌ Error: ' + err.message, true);
-                console.error('Admin login error:', err);
             }
         }
         window.adminLogin = adminLogin;
 
-        function applyRoomData(data) {
-            ROOM_CACHE = {};
-            ROOM_LIST = [];
-            (data || []).forEach(c => {
-                const display = c.display_name || ((c.room_type || '') + ' ' + (c.room_number || '')).trim();
-                ROOM_CACHE[String(c.id)] = display;
-                ROOM_LIST.push({ id: c.id, room_type: c.room_type, room_number: c.room_number, display, rate: c.rate });
+        function setupAdminTabs() {
+            document.querySelectorAll('#adminTabs2 .admin-tab').forEach(tab => {
+                if (tab.dataset.bound) return;
+                tab.dataset.bound = 'true';
+                tab.addEventListener('click', function() {
+                    document.querySelectorAll('#adminTabs2 .admin-tab').forEach(t => t.classList.remove('active'));
+                    document.querySelectorAll('.admin-tab-content').forEach(c => c.classList.remove('active'));
+                    this.classList.add('active');
+                    document.getElementById(this.dataset.admintab).classList.add('active');
+                });
             });
         }
 
-        /* Seed all 40 rooms if missing */
-        async function ensureRoomsExist() {
-            if (!supabaseClient || !isConnected) return;
-            try {
-                const { data: existing, error } = await supabaseClient
-                    .from('rooms').select('room_number');
-                if (error) { console.warn('Cannot read rooms:', error.message); return; }
+        // --- DATABASE HELPERS ---
+        function initSupabase() {
+            if (typeof window.supabase === 'undefined') { showToast('⚠️ Supabase failed to load', true); return; }
+            
+            supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY, { auth: { persistSession: false } });
 
-                const existingNums = new Set((existing || []).map(r => String(r.room_number).trim()));
-                const seedRooms = [];
+            supabaseClient.from('rooms').select('id', { count: 'exact', head: true })
+                .then(({ error }) => {
+                    if (error) {
+                        setConnectionStatus('offline', 'Error');
+                        showToast('❌ DB Error: ' + error.message, true);
+                    } else {
+                        isConnected = true;
+                        setConnectionStatus('online', 'Connected');
+                        ensure40Rooms();
+                    }
+                }).catch(err => {
+                    setConnectionStatus('offline', 'Error');
+                    showToast('❌ Connection failed', true);
+                });
+        }
 
-                for (let i = 101; i <= 108; i++) seedRooms.push({ room_type:'Standard', room_number:String(i), display_name:'Standard '+i, rate:500, status:'Available' });
-                for (let i = 109; i <= 116; i++) seedRooms.push({ room_type:'Deluxe', room_number:String(i), display_name:'Deluxe '+i, rate:850, status:'Available' });
-                for (let i = 201; i <= 208; i++) seedRooms.push({ room_type:'Executive', room_number:String(i), display_name:'Executive '+i, rate:1200, status:'Available' });
-                for (let i = 209; i <= 214; i++) seedRooms.push({ room_type:'Suite', room_number:String(i), display_name:'Suite '+i, rate:1800, status:'Available' });
-                for (let i = 301; i <= 310; i++) seedRooms.push({ room_type:'Presidential', room_number:String(i), display_name:'Presidential '+i, rate:3500, status:'Available' });
+        async function ensure40Rooms() {
+            const { data } = await supabaseClient.from('rooms').select('id');
+            if (data && data.length >= 40) return; // Already seeded
 
-                const toInsert = seedRooms.filter(r => !existingNums.has(r.room_number));
-                if (toInsert.length === 0) { console.log('✅ All 40 rooms already present'); return; }
-
-                const { error: insErr } = await supabaseClient.from('rooms').insert(toInsert);
-                if (insErr) console.warn('Could not insert rooms:', insErr.message);
-                else console.log(`✅ Inserted ${toInsert.length} room(s)`);
-            } catch (e) { console.error('ensureRoomsExist error:', e); }
+            const seed = [];
+            for (let i = 101; i <= 116; i++) seed.push({ name: 'Room ' + i, capacity: 2, is_occupied: false });
+            for (let i = 201; i <= 216; i++) seed.push({ name: 'Room ' + i, capacity: 3, is_occupied: false });
+            for (let i = 301; i <= 308; i++) seed.push({ name: 'Room ' + i, capacity: 4, is_occupied: false });
+            
+            await supabaseClient.from('rooms').insert(seed);
+            showToast('✅ 40 rooms seeded to DB');
         }
 
         async function loadRoomsIntoCache() {
-            if (!supabaseClient || !isConnected) return;
-            try {
-                const { data, error } = await supabaseClient
-                    .from('rooms')
-                    .select('id, room_type, room_number, display_name, rate, status')
-                    .order('room_number', { ascending: true });
-                if (error) throw error;
-                applyRoomData(data);
-            } catch (e) {
-                console.error('Error loading room cache:', e);
-                applyRoomData(null);
-            }
+            const { data } = await supabaseClient.from('rooms').select('id, name');
+            ROOM_CACHE = {};
+            (data || []).forEach(r => ROOM_CACHE[r.id] = r.name);
         }
 
-        function getRoomDisplay(roomId) {
-            if (roomId === null || roomId === undefined || roomId === '') return 'N/A';
-            const key = String(roomId);
-            if (ROOM_CACHE[key]) return ROOM_CACHE[key];
-            return key;
-        }
+        function getRoomDisplay(id) { return ROOM_CACHE[id] || ('Room #' + id); }
 
-        function fillRoomDropdown(drop, firstOption) {
-            if (!drop) return;
-            const currentValue = drop.value;
-            drop.innerHTML = `<option value="">${firstOption || 'Select Room'}</option>`;
-            ROOM_LIST.forEach(c => {
-                const o = document.createElement('option');
-                o.value = String(c.id);
-                o.textContent = c.display;
-                drop.appendChild(o);
-            });
-            if (currentValue) {
-                const exists = [...drop.options].some(o => o.value === currentValue);
-                if (exists) drop.value = currentValue;
-            }
-        }
-
-        function populateRoomDropdowns() { fillRoomDropdown(staffRoomType, 'Select Room Type'); }
-        function populateAnalysisRoomDropdown() {
-            if (!analysisClassSelect) return;
-            analysisClassSelect.innerHTML = '<option value="">All Room Types</option>';
-            ROOM_TYPES.forEach(c => {
-                const o = document.createElement('option');
-                o.value = c.id; o.textContent = c.display;
-                analysisClassSelect.appendChild(o);
-            });
-        }
-        function populateAdminDropdowns() {
-            if (!supabaseClient || !isConnected) {
-                if (assignTeacherSelect2) assignTeacherSelect2.innerHTML = '<option value="">Select Staff</option>';
-                return;
-            }
-            supabaseClient.from('staff').select('id, name').order('name')
-                .then(({ data, error }) => {
-                    if (error) throw error;
-                    if (assignTeacherSelect2) {
-                        assignTeacherSelect2.innerHTML = '<option value="">Select Staff</option>';
-                        (data || []).forEach(t => {
-                            const o = document.createElement('option');
-                            o.value = t.id; o.textContent = t.name;
-                            assignTeacherSelect2.appendChild(o);
-                        });
-                    }
-                })
-                .catch(err => console.error('Error loading staff:', err));
-        }
-
-        function initSupabase() {
-            try {
-                applyLodgeBranding();
-
-                if (typeof window.supabase === 'undefined' || !window.supabase.createClient) {
-                    setConnectionStatus('offline', 'Error');
-                    showToast('⚠️ Supabase library not loaded. Please refresh.', true);
-                    return;
-                }
-
-                supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY, {
-                    auth: { persistSession:false, autoRefreshToken:false, detectSessionInUrl:false }
-                });
-
-                supabaseClient.from('rooms').select('id', { count:'exact', head:true })
-                    .then(({ data, error }) => {
-                        if (error) {
-                            setConnectionStatus('offline', 'Error');
-                            showToast('❌ Database connection failed: ' + error.message, true);
-                            console.error('Connection error:', error);
-                            return;
-                        }
-                        isConnected = true;
-                        setConnectionStatus('online', 'Connected');
-                        showToast('✅ Database connected');
-                        ensureRoomsExist().finally(() => loadAllData());
-                    })
-                    .catch(err => {
-                        setConnectionStatus('offline', 'Error');
-                        showToast('❌ Cannot connect to database: ' + err.message, true);
-                        console.error('Connection error:', err);
-                    });
-            } catch (e) {
-                setConnectionStatus('offline', 'Error');
-                showToast('❌ Initialization error: ' + e.message, true);
-                console.error('Init error:', e);
-            }
-        }
-
-        async function loadAllData() {
-            await loadRoomsIntoCache();
-            loadAdminStats();
-            loadRooms();
-            populateRoomDropdowns();
-            populateAdminDropdowns();
-            populateAnalysisRoomDropdown();
-            loadAssignments();
-            updateLoginUI();
-            setupAdminTabs();
-        }
-
+        // --- ADMIN DASHBOARD ---
         async function loadAdminStats() {
-            if (!supabaseClient || !isConnected) {
-                totalRooms.textContent = '?'; totalStaff.textContent = '?';
-                totalBookings.textContent = '?'; totalRevenue.textContent = '?';
-                return;
-            }
-            try {
-                const { count: rc } = await supabaseClient.from('rooms').select('*', { count:'exact', head:true });
-                totalRooms.textContent = rc || 0;
-                const { count: sc } = await supabaseClient.from('staff').select('*', { count:'exact', head:true });
-                totalStaff.textContent = sc || 0;
-                const { count: bc } = await supabaseClient.from('bookings').select('*', { count:'exact', head:true });
-                totalBookings.textContent = bc || 0;
-                const { data: revData } = await supabaseClient.from('bookings').select('total_amount').eq('status', 'checked_out');
-                const revenue = (revData || []).reduce((sum, b) => sum + (b.total_amount || 0), 0);
-                totalRevenue.textContent = revenue.toLocaleString();
-            } catch (e) { console.error('Error loading stats:', e); }
+            const { count: rCount } = await supabaseClient.from('rooms').select('*', { count: 'exact', head: true });
+            document.getElementById('totalRooms').textContent = rCount || 0;
+
+            const { count: sCount } = await supabaseClient.from('staff').select('*', { count: 'exact', head: true });
+            document.getElementById('totalStaff').textContent = sCount || 0;
+
+            const { count: gCount } = await supabaseClient.from('guests').select('*', { count: 'exact', head: true });
+            document.getElementById('totalBookings').textContent = gCount || 0;
+
+            const { data: rev } = await supabaseClient.from('guests').select('amount_paid');
+            const total = (rev || []).reduce((s, b) => s + (b.amount_paid || 0), 0);
+            document.getElementById('totalRevenue').textContent = total.toLocaleString();
         }
 
         async function loadRooms() {
-            if (!supabaseClient || !isConnected) {
-                roomsTableBody.innerHTML = `<tr><td colspan="6" style="text-align:center;color:var(--ink-faint);">Database not connected</td></tr>`;
-                return;
-            }
-            try {
-                const { data, error } = await supabaseClient.from('rooms').select('*').order('room_number', { ascending:true });
-                if (error) throw error;
-
-                applyRoomData(data);
-                populateRoomDropdowns();
-
-                if (!data || data.length === 0) {
-                    roomsTableBody.innerHTML = `<tr><td colspan="6" style="text-align:center;color:var(--ink-faint);">No rooms yet — add one above.</td></tr>`;
-                    return;
-                }
-
-                let html = '';
-                data.forEach((c, i) => {
-                    const statusClass = c.status === 'Occupied' ? 'badge-danger' : c.status === 'Maintenance' ? 'badge-warning' : 'badge-success';
-                    html += `<tr>
-                        <td>${i+1}</td>
-                        <td><strong>${c.room_number || ''}</strong></td>
-                        <td>${c.room_type || ''}</td>
-                        <td><span class="badge ${statusClass}">${c.status || 'Available'}</span></td>
-                        <td>ZMW ${(c.rate || 0).toLocaleString()}</td>
-                        <td><button class="btn btn-sm btn-danger" onclick="window.deleteRoom('${c.id}')"><i class="fas fa-trash"></i></button></td>
-                    </tr>`;
-                });
-                roomsTableBody.innerHTML = html;
-            } catch (e) {
-                console.error('Error loading rooms:', e);
-                roomsTableBody.innerHTML = `<tr><td colspan="6" style="text-align:center;color:var(--ink-faint);">Error loading rooms</td></tr>`;
-            }
-        }
-
-        window.deleteRoom = function(id) {
-            if (!currentUser || currentUser.role !== 'admin') { showToast('🔒 Admin only', true); return; }
-            if (!confirm('Delete room?')) return;
-            if (!supabaseClient || !isConnected) { showToast('⚠️ Not connected to database', true); return; }
-            supabaseClient.from('rooms').delete().eq('id', id).then(() => {
-                showToast('✅ Deleted');
-                loadRooms();
-            }).catch(err => showToast('❌ ' + err.message, true));
-        };
-
-        addRoomBtn.addEventListener('click', async function() {
-            if (!currentUser || currentUser.role !== 'admin') { showToast('🔒 Admin login required', true); return; }
-            const roomType = adminRoomType.value;
-            const roomNumber = adminRoomNumber.value.trim();
-            const rate = parseInt(adminRoomRate.value);
-
-            if (!roomType) { showToast('⚠️ Please select room type', true); return; }
-            if (!roomNumber) { showToast('⚠️ Please enter room number', true); return; }
-            if (!rate || rate <= 0) { showToast('⚠️ Please enter valid rate', true); return; }
-            if (!supabaseClient || !isConnected) { showToast('⚠️ Database not connected', true); return; }
-
-            try {
-                const displayName = roomType + ' ' + roomNumber;
-                const { error } = await supabaseClient.from('rooms')
-                    .insert({ room_type: roomType, room_number: roomNumber, display_name: displayName, status: 'Available', rate });
-                if (error) {
-                    if (/duplicate/i.test(error.message)) { showToast('❌ Room number already exists', true); }
-                    else throw error;
-                    return;
-                }
-                showToast('✅ Room added!');
-                adminRoomType.value = ''; adminRoomNumber.value = ''; adminRoomRate.value = '';
-                await loadRooms(); loadAdminStats();
-            } catch (err) { showToast('❌ Error: ' + err.message, true); console.error(err); }
-        });
-
-        async function loadAssignments() {
-            if (!supabaseClient || !isConnected) {
-                if (assignmentsTableBody2) assignmentsTableBody2.innerHTML = `<tr><td colspan="5" style="text-align:center;color:var(--ink-faint);">Database not connected</td></tr>`;
-                return;
-            }
-            try {
-                const { data, error } = await supabaseClient
-                    .from('staff_assignments')
-                    .select('*, staff(name)')
-                    .order('department');
-                if (error) throw error;
-
-                if (!data || data.length === 0) {
-                    assignmentsTableBody2.innerHTML = `<tr><td colspan="5" style="text-align:center;color:var(--ink-faint);">No assignments found.</td></tr>`;
-                    return;
-                }
-
-                let html = '';
-                data.forEach((a, i) => {
-                    const staffName = a.staff ? a.staff.name : 'Unknown';
-                    html += `<tr class="assignment-row">
-                        <td>${i+1}</td>
-                        <td><strong>${a.department}</strong></td>
-                        <td><span class="badge badge-purple">${a.role}</span></td>
-                        <td>${staffName}</td>
-                        <td><button class="btn btn-sm btn-danger" onclick="window.removeAssignment('${a.id}')"><i class="fas fa-times"></i> Remove</button></td>
-                    </tr>`;
-                });
-                assignmentsTableBody2.innerHTML = html;
-            } catch (err) {
-                console.error('Error loading assignments:', err);
-                assignmentsTableBody2.innerHTML = `<tr><td colspan="5" style="text-align:center;color:var(--ink-faint);">Error loading assignments</td></tr>`;
-            }
-        }
-
-        window.removeAssignment = async function(id) {
-            if (!currentUser || currentUser.role !== 'admin') { showToast('🔒 Admin only', true); return; }
-            if (!confirm('Remove this assignment?')) return;
-            if (!supabaseClient || !isConnected) { showToast('⚠️ Not connected to database', true); return; }
-            try {
-                await supabaseClient.from('staff_assignments').delete().eq('id', id);
-                showToast('✅ Assignment removed');
-                loadAssignments();
-            } catch (err) { showToast('❌ Error: ' + err.message, true); console.error(err); }
-        };
-
-        assignTeacherBtn2.addEventListener('click', async function() {
-            if (!currentUser || currentUser.role !== 'admin') { showToast('🔒 Admin login required', true); return; }
-            const staffId = assignTeacherSelect2.value;
-            const department = assignClassSelect2.value;
-            const role = assignSubjectSelect2.value;
-
-            if (!staffId) { showToast('⚠️ Please select a staff member', true); return; }
-            if (!department) { showToast('⚠️ Please select a department', true); return; }
-            if (!role) { showToast('⚠️ Please select a role', true); return; }
-            if (!supabaseClient || !isConnected) { showToast('⚠️ Database not connected', true); return; }
-
-            try {
-                const { error } = await supabaseClient.from('staff_assignments')
-                    .insert({ staff_id: staffId, department, role });
-                if (error) throw error;
-
-                const { data: staff } = await supabaseClient.from('staff').select('name').eq('id', staffId).maybeSingle();
-                showToast(`✅ ${staff ? staff.name : 'Staff'} assigned!`);
-                loadAssignments();
-            } catch (err) { showToast('❌ Error: ' + err.message, true); console.error(err); }
-        });
-
-        addTeacherBtn.addEventListener('click', async function() {
-            if (!currentUser || currentUser.role !== 'admin') { showToast('🔒 Admin login required', true); return; }
-            const name     = adminTeacherName.value.trim();
-            const username = adminTeacherUsername.value.trim();
-            const password = adminTeacherPassword.value.trim();
-
-            if (!name)     { showToast('⚠️ Please enter staff name', true); return; }
-            if (!username) { showToast('⚠️ Please enter username', true); return; }
-            if (!password) { showToast('⚠️ Please enter password', true); return; }
-            if (!supabaseClient || !isConnected) { showToast('⚠️ Database not connected', true); return; }
-
-            try {
-                const password_hash = await hashPassword(password);
-                let { error } = await supabaseClient.from('staff').insert({ name, username, password_hash });
-
-                if (error && /column .*password_hash.* does not exist/i.test(error.message)) {
-                    ({ error } = await supabaseClient.from('staff').insert({ name, username, password }));
-                }
-                if (error) throw error;
-
-                showToast('✅ Staff added successfully!');
-                adminTeacherName.value = '';
-                adminTeacherUsername.value = '';
-                adminTeacherPassword.value = '';
-                loadAdminStats();
-                populateAdminDropdowns();
-            } catch (err) { showToast('❌ Error: ' + err.message, true); console.error(err); }
-        });
-
-        loadBookingsBtn.addEventListener('click', async function() {
-            if (!currentUser || currentUser.role !== 'staff') {
-                showToast('🔒 Staff login required', true);
-                return;
-            }
-
-            const month = staffMonth.value;
-            const year = staffYear.value;
-            const status = staffBookingStatus.value;
-
-            if (!month || !year || !status) {
-                showToast('⚠️ Please select month, year and status', true);
-                return;
-            }
-            if (!supabaseClient || !isConnected) {
-                showToast('⚠️ Database not connected', true);
-                return;
-            }
-
-            try {
-                showToast('🔄 Loading bookings...');
-                const { data: bookings, error } = await supabaseClient
-                    .from('bookings')
-                    .select('id, booking_ref, room_id, check_in, check_out, status, total_amount')
-                    .eq('month', month)
-                    .eq('year', year)
-                    .eq('status', status)
-                    .order('check_in');
-
-                if (error) throw error;
-
-                if (!bookings || bookings.length === 0) {
-                    showToast('⚠️ No bookings found for this selection', true);
-                    bookingsTableBody.innerHTML = `<tr><td colspan="6" style="text-align:center;color:var(--ink-faint);">No bookings found.</td></tr>`;
-                    bookingsEntry.style.display = 'block';
-                    return;
-                }
-
-                let html = '';
-                bookings.forEach((b, i) => {
-                    const roomDisplay = getRoomDisplay(b.room_id);
-                    const statusClass = b.status === 'checked_in' ? 'badge-success' : b.status === 'checked_out' ? 'badge-info' : b.status === 'cancelled' ? 'badge-danger' : 'badge-warning';
-                    html += `<tr data-booking-id="${b.id}">
-                        <td>${i+1}</td>
-                        <td><strong>${escapeHtml(b.booking_ref)}</strong></td>
-                        <td>${escapeHtml(roomDisplay)}</td>
-                        <td>${b.check_in || ''}</td>
-                        <td>${b.check_out || ''}</td>
-                        <td><span class="badge ${statusClass}">${b.status}</span></td>
-                    </tr>`;
-                });
-                bookingsTableBody.innerHTML = html;
-                bookingsEntry.style.display = 'block';
-                showToast(`✅ ${bookings.length} bookings loaded`);
-            } catch (err) {
-                showToast('❌ Error: ' + err.message, true);
-                console.error(err);
-            }
-        });
-
-        function escapeHtml(str) {
-            return String(str ?? '').replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
-        }
-
-        generateAnalysisBtn.addEventListener('click', async function() {
-            if (!currentUser || currentUser.role !== 'admin') { showToast('🔒 Admin login required', true); return; }
-
-            const roomType = analysisClassSelect.value;
-            const status = analysisSubjectSelect.value;
-            const month = analysisTermSelect.value;
-            const year = analysisYearSelect.value;
-
-            if (!month || !year) { showToast('⚠️ Please select month and year', true); return; }
-            if (!supabaseClient || !isConnected) { showToast('⚠️ Database not connected', true); return; }
-
-            try {
-                showToast('🔄 Generating analysis...');
-
-                let bQ = supabaseClient.from('bookings')
-                    .select('id, booking_ref, room_id, check_in, check_out, status, total_amount')
-                    .eq('month', month).eq('year', year);
-                if (status) bQ = bQ.eq('status', status);
-
-                const { data: bookings, error: bErr } = await bQ;
-                if (bErr) throw bErr;
-
-                if (!bookings || bookings.length === 0) {
-                    showToast('⚠️ No bookings found for this selection', true);
-                    analysisResultsArea.style.display = 'none';
-                    return;
-                }
-
-                const rows = bookings.map(b => ({
-                    id: b.id,
-                    ref: b.booking_ref,
-                    room: getRoomDisplay(b.room_id),
-                    checkIn: b.check_in,
-                    checkOut: b.check_out,
-                    status: b.status,
-                    amount: b.total_amount || 0
-                }));
-
-                const totalAmount = rows.reduce((s, r) => s + r.amount, 0);
-                const avgAmount = Math.round(totalAmount / rows.length);
-                const confirmed = rows.filter(r => r.status === 'confirmed').length;
-                const checkedIn = rows.filter(r => r.status === 'checked_in').length;
-                const checkedOut = rows.filter(r => r.status === 'checked_out').length;
-                const cancelled = rows.filter(r => r.status === 'cancelled').length;
-
-                currentAnalysisData = { rows, totalAmount, avgAmount, confirmed, checkedIn, checkedOut, cancelled, roomType, status, month, year };
-                renderAnalysisReport(currentAnalysisData);
-                showToast(`✅ Analysis generated for ${rows.length} bookings`);
-            } catch (err) { showToast('❌ Error: ' + err.message, true); console.error(err); }
-        });
-
-        function renderAnalysisReport(data) {
-            const { rows, totalAmount, avgAmount, confirmed, checkedIn, checkedOut, cancelled, roomType, month, year } = data;
-            const monthNames = ['','January','February','March','April','May','June','July','August','September','October','November','December'];
-            const monthLabel = monthNames[parseInt(month)] || month;
-
-            analysisSummaryTitle.textContent = `Bookings · ${monthLabel} ${year}`;
-
-            analysisStatCards.innerHTML = `
-                <div class="stat-card"><div class="icon"><i class="fas fa-book"></i></div><div class="number">${rows.length}</div><div class="label">Total Bookings</div></div>
-                <div class="stat-card"><div class="icon"><i class="fas fa-dollar-sign"></i></div><div class="number">ZMW ${totalAmount.toLocaleString()}</div><div class="label">Total Revenue</div></div>
-                <div class="stat-card"><div class="icon"><i class="fas fa-chart-line"></i></div><div class="number">ZMW ${avgAmount.toLocaleString()}</div><div class="label">Avg per Booking</div></div>
-                <div class="stat-card"><div class="icon"><i class="fas fa-check-circle"></i></div><div class="number">${checkedOut}</div><div class="label">Completed Stays</div></div>`;
-
-            const statusColors = { confirmed:'#e65100', checked_in:'#2e7d32', checked_out:'#0d47a1', cancelled:'#c62828' };
-            const statusLabels = { confirmed:'Confirmed', checked_in:'Checked In', checked_out:'Checked Out', cancelled:'Cancelled' };
-            let barsHtml = '';
-            [['confirmed', confirmed], ['checked_in', checkedIn], ['checked_out', checkedOut], ['cancelled', cancelled]].forEach(([key, count]) => {
-                const pct = rows.length ? Math.round((count / rows.length) * 100) : 0;
-                barsHtml += `<div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;">
-                    <div style="width:100px;font-weight:600;color:${statusColors[key]};font-size:12px;">${statusLabels[key]}</div>
-                    <div style="flex:1;background:var(--paper);border-radius:8px;overflow:hidden;height:20px;">
-                        <div style="width:${pct}%;background:${statusColors[key]};height:100%;"></div></div>
-                    <div style="width:70px;text-align:right;font-size:12.5px;color:var(--ink-soft);">${count} (${pct}%)</div></div>`;
-            });
-            analysisGradeDistribution.innerHTML = barsHtml;
-
-            let theadHtml = `<tr><th>#</th><th>Booking Ref</th><th>Room</th><th>Check In</th><th>Check Out</th><th>Status</th><th>Amount (ZMW)</th></tr>`;
-            let tbodyHtml = '';
-            rows.forEach((r, i) => {
-                const statusClass = r.status === 'checked_in' ? 'badge-success' : r.status === 'checked_out' ? 'badge-info' : r.status === 'cancelled' ? 'badge-danger' : 'badge-warning';
-                tbodyHtml += `<tr>
+            const { data } = await supabaseClient.from('rooms').select('*').order('name');
+            const tb = document.getElementById('roomsTableBody');
+            if (!data || data.length === 0) { tb.innerHTML = '<tr><td colspan="5" style="text-align:center;">No rooms found</td></tr>'; return; }
+            
+            tb.innerHTML = data.map((r, i) => `
+                <tr>
                     <td>${i+1}</td>
-                    <td><strong>${escapeHtml(r.ref)}</strong></td>
-                    <td>${escapeHtml(r.room)}</td>
-                    <td>${escapeHtml(r.checkIn)}</td>
-                    <td>${escapeHtml(r.checkOut)}</td>
-                    <td><span class="badge ${statusClass}">${statusLabels[r.status] || r.status}</span></td>
-                    <td style="text-align:right;font-weight:600;">${r.amount.toLocaleString()}</td>
-                </tr>`;
-            });
-            analysisTable.innerHTML = theadHtml + tbodyHtml;
-            analysisResultsArea.style.display = 'block';
+                    <td><strong>${r.name}</strong></td>
+                    <td>${r.capacity}</td>
+                    <td><span class="badge ${r.is_occupied ? 'badge-danger' : 'badge-success'}">${r.is_occupied ? 'Occupied' : 'Available'}</span></td>
+                    <td><button class="btn btn-sm btn-danger" onclick="window.deleteRoom(${r.id})"><i class="fas fa-trash"></i></button></td>
+                </tr>
+            `).join('');
         }
 
-        // Tab switching
-        document.querySelectorAll('.tab-btn').forEach(btn => {
-            btn.addEventListener('click', function() {
-                document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-                document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
-                this.classList.add('active');
-                const tab = this.dataset.tab;
-                document.getElementById(tab + 'Section').classList.add('active');
+        window.deleteRoom = async function(id) {
+            if (!confirm('Delete room?')) return;
+            await supabaseClient.from('rooms').delete().eq('id', id);
+            showToast('✅ Room deleted');
+            loadRooms(); loadAdminStats();
+        };
+
+        document.getElementById('addRoomBtn').addEventListener('click', async () => {
+            const name = document.getElementById('adminRoomName').value.trim();
+            const cap = parseInt(document.getElementById('adminRoomCapacity').value);
+            const occ = document.getElementById('adminRoomOccupied').value === 'true';
+            if (!name || !cap) { showToast('⚠️ Enter room name and capacity', true); return; }
+
+            await supabaseClient.from('rooms').insert({ name, capacity: cap, is_occupied: occ });
+            showToast('✅ Room added');
+            document.getElementById('adminRoomName').value = '';
+            document.getElementById('adminRoomCapacity').value = '';
+            loadRooms(); loadAdminStats();
+        });
+
+        async function loadStaffTable() {
+            const { data } = await supabaseClient.from('staff').select('*').order('name');
+            const tb = document.getElementById('staffTableBody');
+            if (!data || data.length === 0) { tb.innerHTML = '<tr><td colspan="4" style="text-align:center;">No staff found</td></tr>'; return; }
+            
+            tb.innerHTML = data.map((s, i) => `
+                <tr>
+                    <td>${i+1}</td>
+                    <td><strong>${s.name}</strong></td>
+                    <td>${s.username}</td>
+                    <td><button class="btn btn-sm btn-danger" onclick="window.deleteStaff(${s.id})"><i class="fas fa-trash"></i></button></td>
+                </tr>
+            `).join('');
+        }
+
+        window.deleteStaff = async function(id) {
+            if (!confirm('Delete staff account?')) return;
+            await supabaseClient.from('staff').delete().eq('id', id);
+            showToast('✅ Staff deleted');
+            loadStaffTable(); loadAdminStats();
+        };
+
+        document.getElementById('addTeacherBtn').addEventListener('click', async () => {
+            const name = document.getElementById('adminTeacherName').value.trim();
+            const user = document.getElementById('adminTeacherUsername').value.trim();
+            const pass = document.getElementById('adminTeacherPassword').value.trim();
+            if (!name || !user || !pass) { showToast('⚠️ Fill all fields', true); return; }
+
+            const hash = await hashPassword(pass);
+            const { error } = await supabaseClient.from('staff').insert({ name, username: user, password_hash: hash });
+            if (error) { showToast('❌ ' + error.message, true); return; }
+
+            showToast('✅ Staff created');
+            document.getElementById('adminTeacherName').value = '';
+            document.getElementById('adminTeacherUsername').value = '';
+            document.getElementById('adminTeacherPassword').value = '';
+            loadStaffTable(); loadAdminStats();
+        });
+
+        // --- STAFF DASHBOARD ---
+        document.getElementById('loadGuestsBtn').addEventListener('click', async () => {
+            const from = document.getElementById('staffDateFrom').value;
+            const to = document.getElementById('staffDateTo').value;
+            const stay = document.getElementById('staffStayStatus').value;
+
+            let q = supabaseClient.from('guests').select('*').order('check_in', { ascending: false });
+            if (from) q = q.gte('check_in', from);
+            if (to) q = q.lte('check_in', to);
+            if (stay) q = q.eq('still_lodging', stay === 'true');
+
+            const { data, error } = await q;
+            if (error) { showToast('❌ ' + error.message, true); return; }
+
+            const tb = document.getElementById('guestsTable');
+            document.getElementById('guestsEntry').style.display = 'block';
+
+            if (!data || data.length === 0) { tb.innerHTML = '<tr><td colspan="8" style="text-align:center;">No guests found for this filter</td></tr>'; return; }
+
+            tb.innerHTML = data.map((g, i) => `
+                <tr>
+                    <td>${i+1}</td>
+                    <td><strong>${g.name}</strong></td>
+                    <td>${getRoomDisplay(g.room_id)}</td>
+                    <td>${g.check_in}</td>
+                    <td>${g.check_out}</td>
+                    <td>ZMW ${(g.amount_paid || 0).toLocaleString()}</td>
+                    <td><span class="badge ${g.still_lodging ? 'badge-success' : 'badge-info'}">${g.still_lodging ? 'In Lodge' : 'Checked Out'}</span></td>
+                    <td>
+                        <button class="btn btn-sm btn-primary" onclick="window.checkoutGuest(${g.id})" ${!g.still_lodging ? 'disabled' : ''}><i class="fas fa-sign-out-alt"></i></button>
+                    </td>
+                </tr>
+            `).join('');
+        });
+
+        window.checkoutGuest = async function(id) {
+            if (!confirm('Mark as checked out?')) return;
+            await supabaseClient.from('guests').update({ still_lodging: false }).eq('id', id);
+            showToast('✅ Guest checked out');
+            document.getElementById('loadGuestsBtn').click();
+        };
+
+        document.getElementById('addGuestBtn').addEventListener('click', async () => {
+            const name = prompt("Guest Name:");
+            if (!name) return;
+            const roomId = prompt("Room ID (number):");
+            if (!roomId) return;
+            const checkin = prompt("Check-in Date (YYYY-MM-DD):", new Date().toISOString().split('T')[0]);
+            if (!checkin) return;
+            const checkout = prompt("Check-out Date (YYYY-MM-DD):");
+            if (!checkout) return;
+            const paid = prompt("Amount Paid (ZMW):", "0");
+
+            await supabaseClient.from('guests').insert({
+                name, room_id: parseInt(roomId), check_in: checkin, check_out: checkout,
+                amount_paid: parseFloat(paid) || 0, still_lodging: true
             });
+            await supabaseClient.from('rooms').update({ is_occupied: true }).eq('id', roomId);
+            
+            showToast('✅ Guest added');
+            document.getElementById('loadGuestsBtn').click();
         });
 
-        // Excel import for staff
-        staffImportArea.addEventListener('click', () => staffFileInput.click());
-        staffImportArea.addEventListener('dragover', e => { e.preventDefault(); staffImportArea.classList.add('dragover'); });
-        staffImportArea.addEventListener('dragleave', () => staffImportArea.classList.remove('dragover'));
-        staffImportArea.addEventListener('drop', e => {
-            e.preventDefault(); staffImportArea.classList.remove('dragover');
-            if (e.dataTransfer.files.length) handleStaffExcel(e.dataTransfer.files[0]);
-        });
-        staffFileInput.addEventListener('change', e => { if (e.target.files.length) handleStaffExcel(e.target.files[0]); });
-
-        function handleStaffExcel(file) {
+        // --- EXCEL IMPORT ---
+        const importArea = document.getElementById('staffImportArea');
+        const fileInput = document.getElementById('staffFileInput');
+        importArea.addEventListener('click', () => fileInput.click());
+        fileInput.addEventListener('change', e => {
+            if (!e.target.files.length) return;
             const reader = new FileReader();
-            reader.onload = function(e) {
-                try {
-                    const data = new Uint8Array(e.target.result);
-                    const workbook = XLSX.read(data, { type: 'array' });
-                    const sheet = workbook.Sheets[workbook.SheetNames[0]];
-                    const json = XLSX.utils.sheet_to_json(sheet);
-                    if (json.length === 0) { showToast('⚠️ No data in file', true); return; }
-
-                    staffImportData = json;
-                    let html = '<table><thead><tr>';
-                    const cols = Object.keys(json[0]);
-                    cols.forEach(c => html += `<th>${escapeHtml(c)}</th>`);
-                    html += '</tr></thead><tbody>';
-                    json.slice(0, 10).forEach(row => {
-                        html += '<tr>';
-                        cols.forEach(c => html += `<td>${escapeHtml(String(row[c] ?? ''))}</td>`);
-                        html += '</tr>';
-                    });
-                    html += '</tbody></table>';
-                    if (json.length > 10) html += `<p style="padding:8px;font-size:12px;color:var(--ink-faint);">...and ${json.length - 10} more rows</p>`;
-                    staffImportPreview.innerHTML = html;
-                    staffImportPreview.style.display = 'block';
-                    staffImportBtn.style.display = 'inline-flex';
-                    staffImportClearBtn.style.display = 'inline-flex';
-                    staffImportStatusMsg.textContent = `✅ Loaded ${json.length} rows`;
-                } catch (err) {
-                    showToast('❌ Error reading file: ' + err.message, true);
-                }
+            reader.onload = ev => {
+                const wb = XLSX.read(new Uint8Array(ev.target.result), { type: 'array' });
+                const json = XLSX.utils.sheet_to_json(wb.Sheets[wb.SheetNames[0]]);
+                staffImportData = json;
+                
+                let html = '<table><thead><tr><th>Name</th><th>Room ID</th><th>Check In</th><th>Check Out</th></tr></thead><tbody>';
+                json.slice(0, 5).forEach(r => {
+                    html += `<tr><td>${r.name || '-'}</td><td>${r.room_id || '-'}</td><td>${r.check_in || '-'}</td><td>${r.check_out || '-'}</td></tr>`;
+                });
+                html += '</tbody></table>';
+                if (json.length > 5) html += `<p style="padding:8px;font-size:12px;">...and ${json.length-5} more rows</p>`;
+                
+                document.getElementById('staffImportPreview').innerHTML = html;
+                document.getElementById('staffImportPreview').style.display = 'block';
+                document.getElementById('staffImportBtn').style.display = 'inline-flex';
+                document.getElementById('staffImportClearBtn').style.display = 'inline-flex';
             };
-            reader.readAsArrayBuffer(file);
-        }
-
-        staffImportClearBtn.addEventListener('click', () => {
-            staffImportData = null;
-            staffImportPreview.innerHTML = '';
-            staffImportPreview.style.display = 'none';
-            staffImportBtn.style.display = 'none';
-            staffImportClearBtn.style.display = 'none';
-            staffImportStatusMsg.textContent = '';
-            staffFileInput.value = '';
+            reader.readAsArrayBuffer(e.target.files[0]);
         });
 
-        // Init
+        document.getElementById('staffImportClearBtn').addEventListener('click', () => {
+            staffImportData = null;
+            document.getElementById('staffImportPreview').style.display = 'none';
+            document.getElementById('staffImportBtn').style.display = 'none';
+            document.getElementById('staffImportClearBtn').style.display = 'none';
+            fileInput.value = '';
+        });
+
+        document.getElementById('staffImportBtn').addEventListener('click', async () => {
+            if (!staffImportData) return;
+            const btn = document.getElementById('staffImportBtn');
+            btn.disabled = true; btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Importing...';
+
+            const records = staffImportData.map(r => ({
+                name: r.name,
+                room_id: parseInt(r.room_id),
+                check_in: r.check_in,
+                check_out: r.check_out,
+                amount_paid: parseFloat(r.amount_paid) || 0,
+                still_lodging: true
+            })).filter(r => r.name && r.room_id && r.check_in);
+
+            const { error } = await supabaseClient.from('guests').insert(records);
+            if (error) { showToast('❌ ' + error.message, true); }
+            else { showToast(`✅ Imported ${records.length} guests`); }
+
+            btn.disabled = false; btn.innerHTML = '<i class="fas fa-upload"></i> Import Guests';
+            document.getElementById('staffImportClearBtn').click();
+            document.getElementById('loadGuestsBtn').click();
+        });
+
+        // --- ANALYSIS ---
+        document.getElementById('generateAnalysisBtn').addEventListener('click', async () => {
+            const from = document.getElementById('analysisDateFrom').value;
+            const to = document.getElementById('analysisDateTo').value;
+            if (!from || !to) { showToast('⚠️ Select date range', true); return; }
+
+            let q = supabaseClient.from('guests').select('*').gte('check_in', from).lte('check_in', to);
+            const { data, error } = await q;
+            if (error) { showToast('❌ ' + error.message, true); return; }
+
+            if (!data || data.length === 0) { showToast('⚠️ No data in range', true); return; }
+
+            const rev = data.reduce((s, g) => s + (g.amount_paid || 0), 0);
+            const inLodge = data.filter(g => g.still_lodging).length;
+
+            document.getElementById('analysisSummaryTitle').textContent = `Report: ${from} to ${to}`;
+            document.getElementById('analysisStatCards').innerHTML = `
+                <div class="stat-card"><div class="icon"><i class="fas fa-users"></i></div><div class="number">${data.length}</div><div class="label">Total Guests</div></div>
+                <div class="stat-card"><div class="icon"><i class="fas fa-dollar-sign"></i></div><div class="number">ZMW ${rev.toLocaleString()}</div><div class="label">Total Revenue</div></div>
+                <div class="stat-card"><div class="icon"><i class="fas fa-bed"></i></div><div class="number">${inLodge}</div><div class="label">Still Lodging</div></div>
+                <div class="stat-card"><div class="icon"><i class="fas fa-sign-out-alt"></i></div><div class="number">${data.length - inLodge}</div><div class="label">Checked Out</div></div>
+            `;
+
+            let tableHtml = `<thead><tr><th>Date</th><th>Guest</th><th>Room</th><th>Paid</th></tr></thead><tbody>`;
+            data.slice(0, 10).forEach(g => {
+                tableHtml += `<tr><td>${g.check_in}</td><td>${g.name}</td><td>${getRoomDisplay(g.room_id)}</td><td>ZMW ${g.amount_paid || 0}</td></tr>`;
+            });
+            tableHtml += `</tbody>`;
+            document.getElementById('analysisTable').innerHTML = tableHtml;
+            document.getElementById('analysisResultsArea').style.display = 'block';
+        });
+
+        // --- INIT ---
         initSupabase();
+
     })();
     </script>
 </body>
