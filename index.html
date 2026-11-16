@@ -375,6 +375,17 @@
             document.querySelector('.tab-btn[data-tab="staff"]').click();
         });
 
+        // --- TAB SWITCHING LOGIC ---
+        document.querySelectorAll('.tab-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+                document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+                this.classList.add('active');
+                const tab = this.dataset.tab;
+                document.getElementById(tab + 'Section').classList.add('active');
+            });
+        });
+
         // --- SIMPLE HASH FALLBACK ---
         async function hashPassword(password) {
             if (window.crypto && window.crypto.subtle) {
@@ -382,7 +393,7 @@
                 const hash = await crypto.subtle.digest('SHA-256', data);
                 return Array.from(new Uint8Array(hash)).map(b => b.toString(16).padStart(2,'0')).join('');
             }
-            return password; // fallback just in case
+            return password; 
         }
 
         // --- FIX ADMIN BUTTON ---
