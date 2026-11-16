@@ -2,741 +2,1237 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
-    <title>Lavevars Lodge</title>
-    <meta name="theme-color" content="#1a237e">
-    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
-    <meta http-equiv="Pragma" content="no-cache">
-    <meta http-equiv="Expires" content="0">
-
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,450;9..144,560;9..144,650&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lavevars Lodge · Kasama</title>
+    <link rel="icon" type="image/jpeg" href="LadyB%20logo.jpeg">
+    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <!-- Supabase -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.39.0/dist/umd/supabase.min.js"></script>
-    <script src="https://cdn.sheetjs.com/xlsx-0.20.2/package/dist/xlsx.full.min.js"></script>
+    
     <style>
         :root {
-            --paper: #F4F5F1; --surface: #FFFFFF; --ink: #15201A; --ink-soft: #4B5A50; --ink-faint: #8A968C;
-            --border: #DCE3DB; --border-strong: #C3CDC1;
-            --gold: #B8862E; --gold-dark: #8C6A22; --gold-tint: #F6EDD9;
-            --marian-blue: #1a237e; --marian-blue-light: #283593; --marian-blue-tint: #E8EAF6;
-            --oxblood: #8C2F2F; --oxblood-dark: #6E2222;
-            --font-display: 'Fraunces', serif; --font-body: 'IBM Plex Sans', -apple-system, BlinkMacSystemFont, sans-serif;
-            --font-mono: 'IBM Plex Mono', monospace;
-            --radius-md: 16px;
-            --shadow-sm: 0 1px 2px rgba(21, 32, 26, 0.06); --shadow-md: 0 8px 24px rgba(21, 32, 26, 0.09); --shadow-lg: 0 24px 60px rgba(21, 32, 26, 0.18);
+            /* Sky Blue Theme Colors */
+            --bg-body: #E0F2FE; 
+            --sidebar-bg: #111827;
+            --sidebar-hover: #1F2937;
+            --sidebar-text: #9CA3AF;
+            --sidebar-active: #4F46E5;
+            --sidebar-active-bg: #4F46E5;
+            
+            --surface: #FFFFFF;
+            --text-main: #0F172A; 
+            --text-muted: #475569;
+            --border: #BAE6FD; 
+            
+            --primary: #4F46E5;
+            --success: #10B981;
+            --success-light: #ECFDF5;
+            --warning: #F59E0B;
+            --warning-light: #FFFBEB;
+            --danger: #EF4444;
+            --danger-light: #FEF2F2;
+            --whatsapp: #25D366;
+            
+            --shadow-sm: 0 1px 3px rgba(0,0,0,0.05);
+            --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.05);
+            --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.05);
         }
+
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: var(--font-body); background: var(--paper); color: var(--ink); min-height: 100vh; line-height: 1.5; }
-        .mary-bg { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; background: linear-gradient(135deg, #E8EAF6 0%, #C5CAE9 50%, #E8EAF6 100%); opacity: 0.3; }
-        .topbar { position: sticky; top: 0; z-index: 40; background: linear-gradient(135deg, #1a237e, #283593); border-bottom: 3px solid var(--gold); padding: 10px 18px; display: flex; align-items: center; justify-content: center; gap: 14px; box-shadow: var(--shadow-md); }
-        .topbar .brand { flex: 1; min-width: 0; text-align: center; }
-        .topbar .brand .school-logo { width: 65px; height: 65px; margin: 0 auto 2px; display: block; }
-        .topbar .brand .school-logo img { width: 100%; height: 100%; object-fit: contain; }
-        .topbar .brand .ministry { font-size: 9px; letter-spacing: 2px; text-transform: uppercase; color: var(--gold); font-weight: 600; }
-        .topbar .brand h1 { font-family: var(--font-display); font-weight: 650; font-size: 22px; color: #fff; letter-spacing: 1px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-        .topbar .brand .motto { font-size: 12px; color: var(--gold); font-style: italic; font-weight: 400; letter-spacing: 0.5px; }
-        .connection-status { position: fixed; bottom: 20px; right: 20px; z-index: 50; padding: 8px 16px; border-radius: 40px; font-size: 11px; font-weight: 600; background: rgba(255, 255, 255, 0.95); border: 1px solid var(--border); box-shadow: var(--shadow-sm); display: flex; align-items: center; gap: 8px; }
-        .connection-status .dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; }
-        .connection-status .dot.online { background: #2e7d32; }
-        .connection-status .dot.offline { background: #c62828; }
-        .connection-status .dot.connecting { background: #e65100; animation: pulse 1s infinite; }
-        @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
-        .shell { max-width: 1100px; margin: 0 auto; padding: 20px 16px 60px; }
-        .section { display: none; }
-        .section.active { display: block; }
-        .card { background: rgba(255, 255, 255, 0.95); border: 1px solid var(--border); border-radius: var(--radius-md); padding: 20px; margin-bottom: 18px; box-shadow: var(--shadow-md); border-top: 4px solid var(--gold); }
-        .card-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; padding-bottom: 12px; border-bottom: 2px solid var(--gold-tint); }
-        .card-header h2 { font-family: var(--font-display); font-weight: 560; font-size: 18px; color: var(--marian-blue); }
-        .card-header h2 i { color: var(--gold); margin-right: 8px; }
-        .card-header .subtitle { font-size: 13px; color: var(--ink-faint); }
-        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-        .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; }
-        .grid-4 { display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 16px; }
-        @media (max-width: 768px) { .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; } }
-        .field { display: flex; flex-direction: column; gap: 4px; width: 100%; }
-        .field label { font-size: 12.5px; font-weight: 600; color: var(--ink-soft); display: flex; align-items: center; gap: 6px; }
-        .field label i { color: var(--marian-blue); width: 16px; font-size: 13px; }
-        .field input, .field select { background: var(--paper); border: 1.5px solid var(--border); border-radius: 12px; padding: 10px 13px; font-size: 14px; outline: none; width: 100%; color: var(--ink); font-family: var(--font-body); }
-        .field input:focus, .field select:focus { border-color: var(--marian-blue); background: var(--surface); box-shadow: 0 0 0 3px var(--marian-blue-tint); }
-        .btn { background: linear-gradient(135deg, #1a237e, #283593); border: none; padding: 12px 20px; border-radius: 60px; color: #fff; font-weight: 700; font-size: 14px; display: inline-flex; align-items: center; justify-content: center; gap: 8px; cursor: pointer; transition: transform 0.1s ease; font-family: var(--font-body); box-shadow: 0 4px 12px rgba(26, 35, 126, 0.25); }
-        .btn:active { transform: scale(0.97); }
-        .btn:disabled { opacity: 0.5; cursor: not-allowed; }
-        .btn-primary { background: linear-gradient(135deg, #1a237e, #283593); color: #fff; }
-        .btn-success { background: linear-gradient(135deg, #0f7b3a, #0a5e2b); color: #fff; }
-        .btn-danger { background: linear-gradient(135deg, #8C2F2F, #6E2222); color: #fff; }
-        .btn-outline { background: transparent; border: 1.5px solid #1a237e; color: #1a237e; box-shadow: none; }
-        .btn-sm { padding: 8px 16px; font-size: 12.5px; }
-        .btn-block { width: 100%; }
-        .tab-nav { display: flex; background: rgba(255, 255, 255, 0.9); border-radius: 40px; padding: 5px; margin-bottom: 20px; border: 1px solid var(--border); gap: 4px; box-shadow: var(--shadow-sm); }
-        .tab-nav .tab-btn { flex: 1; text-align: center; padding: 10px 14px; border-radius: 36px; font-weight: 600; font-size: 13px; color: var(--ink-soft); cursor: pointer; background: transparent; border: none; display: flex; align-items: center; justify-content: center; gap: 7px; }
-        .tab-nav .tab-btn.active { background: linear-gradient(135deg, #1a237e, #283593); color: #fff; box-shadow: var(--shadow-sm); }
-        .table-wrapper { overflow-x: auto; border: 1px solid var(--border); border-radius: 12px; }
-        .table-wrapper table { width: 100%; border-collapse: collapse; font-size: 13px; min-width: 600px; }
-        .table-wrapper table thead { background: linear-gradient(135deg, #1a237e, #283593); color: #fff; }
-        .table-wrapper table th { padding: 10px 12px; text-align: left; font-weight: 600; font-size: 11px; text-transform: uppercase; }
-        .table-wrapper table td { padding: 8px 12px; border-bottom: 1px solid var(--border); }
-        .table-wrapper table tbody tr:nth-child(even) { background: var(--paper); }
-        .badge { display: inline-block; padding: 3px 10px; border-radius: 40px; font-size: 11px; font-weight: 600; }
-        .badge-success { background: #e8f5e9; color: #2e7d32; }
-        .badge-danger { background: #ffebee; color: #c62828; }
-        .badge-info { background: #e3f2fd; color: #0d47a1; }
-        .stat-card { background: #fff; border: 1px solid var(--border); border-radius: 14px; padding: 16px; text-align: center; border-bottom: 3px solid var(--gold); }
-        .stat-card .number { font-family: var(--font-mono); font-size: 28px; font-weight: 700; color: var(--marian-blue); }
-        .stat-card .label { font-size: 11px; color: var(--ink-faint); text-transform: uppercase; margin-top: 4px; }
-        .stat-card .icon { font-size: 24px; color: var(--gold); margin-bottom: 6px; }
-        .toast { position: fixed; left: 50%; bottom: 80px; transform: translateX(-50%); background: var(--ink); color: #fff; padding: 12px 20px; border-radius: 60px; font-size: 13.5px; display: flex; align-items: center; gap: 9px; z-index: 200; opacity: 0; transition: 0.2s; }
-        .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
-        .toast i { color: var(--gold); }
-        .toast.error i { color: #E8898F; }
-        .login-modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.5); z-index: 1000; justify-content: center; align-items: center; padding: 20px; }
-        .login-modal.active { display: flex; }
-        .login-modal .modal-content { background: #fff; border-radius: var(--radius-md); padding: 30px; max-width: 420px; width: 100%; }
-        .login-modal .modal-header { text-align: center; margin-bottom: 20px; }
-        .login-modal .modal-logo { width: 60px; height: 60px; margin: 0 auto 10px; border-radius: 50%; border: 2px solid var(--gold); padding: 4px; }
-        .login-modal .modal-logo img { width: 100%; height: 100%; object-fit: contain; }
-        .login-modal h2 { font-family: var(--font-display); color: var(--marian-blue); font-size: 20px; }
-        .login-modal .close-btn { float: right; background: none; border: none; font-size: 24px; color: var(--ink-faint); cursor: pointer; }
-        .login-floating-btn { position: fixed; bottom: 80px; right: 20px; z-index: 50; background: linear-gradient(135deg, #1a237e, #283593); color: #fff; border: none; border-radius: 50%; width: 56px; height: 56px; font-size: 20px; cursor: pointer; box-shadow: var(--shadow-md); display: flex; align-items: center; justify-content: center; }
-        .login-floating-btn.logged-in { background: linear-gradient(135deg, #0f7b3a, #0a5e2b); }
-        .import-area { border: 2px dashed var(--border-strong); border-radius: 12px; padding: 30px 20px; text-align: center; cursor: pointer; background: var(--paper); margin-top: 12px; }
-        .import-area:hover { border-color: var(--marian-blue); }
-        .import-area i { font-size: 40px; color: var(--marian-blue); margin-bottom: 10px; }
-        .import-area .file-input { display: none; }
-        .admin-tabs { display: flex; gap: 8px; margin-bottom: 16px; flex-wrap: wrap; }
-        .admin-tabs .admin-tab { padding: 10px 20px; border-radius: 30px; background: var(--paper); border: 1px solid var(--border); cursor: pointer; font-weight: 600; font-size: 13px; }
-        .admin-tabs .admin-tab.active { background: var(--marian-blue); color: #fff; }
-        .admin-tab-content { display: none; }
-        .admin-tab-content.active { display: block; }
-        .login-form { display: none; margin-top: 12px; }
-        .login-form.active { display: block; }
-        .login-form .field { margin-bottom: 12px; }
-        .role-selector { display: flex; gap: 10px; margin-top: 16px; }
-        .role-selector .btn { flex: 1; }
-        /* Diagnostic box */
-        #diagBox { display:none; background:#ffebee; color:#c62828; padding:10px; border-radius:8px; margin-top:10px; font-size:12px; word-break:break-all; }
+        
+        body {
+            font-family: 'Arial Narrow', Arial, sans-serif;
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* --- LOGIN SCREEN --- */
+        .login-screen {
+            position: fixed; inset: 0; background: var(--bg-body);
+            display: flex; align-items: center; justify-content: center;
+            z-index: 1000;
+        }
+        .login-box {
+            background: white; padding: 40px; border-radius: 20px;
+            box-shadow: var(--shadow-lg); width: 100%; max-width: 420px;
+            text-align: center; border: 1px solid var(--border);
+        }
+        .login-box img { width: 90px; height: 90px; border-radius: 50%; border: 3px solid var(--primary); padding: 4px; margin-bottom: 20px; object-fit: contain; }
+        .login-box h2 { font-size: 28px; color: var(--text-main); margin-bottom: 8px; }
+        .login-box p { font-size: 16px; color: var(--text-muted); margin-bottom: 24px; }
+        .login-form-group { margin-bottom: 16px; text-align: left; }
+        .login-form-group label { font-size: 14px; font-weight: 700; color: var(--text-main); display: block; margin-bottom: 6px; }
+        .login-form-group input {
+            width: 100%; padding: 12px 16px; border-radius: 10px;
+            border: 1px solid var(--border); background: var(--bg-body);
+            font-family: inherit; font-size: 16px; outline: none;
+        }
+        .login-form-group input:focus { border-color: var(--primary); background: white; }
+        .login-btn {
+            width: 100%; padding: 14px; background: var(--primary); color: white;
+            border: none; border-radius: 10px; font-size: 18px; font-weight: 800;
+            cursor: pointer; transition: 0.2s; margin-top: 10px;
+        }
+        .login-btn:hover { background: #4338CA; }
+
+        /* --- SIDEBAR --- */
+        .sidebar {
+            width: 260px; background-color: var(--sidebar-bg);
+            padding: 24px; display: flex; flex-direction: column;
+            position: fixed; height: 100vh; left: 0; top: 0; z-index: 100;
+        }
+        .brand { display: flex; align-items: center; gap: 12px; margin-bottom: 40px; color: white; }
+        .brand-logo { width: 42px; height: 42px; border-radius: 12px; background: white; display: flex; align-items: center; justify-content: center; overflow: hidden; }
+        .brand-logo img { width: 100%; height: 100%; object-fit: contain; }
+        .brand-text h1 { font-size: 22px; letter-spacing: -0.5px; }
+        .brand-text p { font-size: 14px; color: var(--sidebar-text); font-weight: 500; margin-top: 2px;}
+
+        .nav-menu { display: flex; flex-direction: column; gap: 8px; }
+        .nav-item {
+            display: flex; align-items: center; gap: 14px;
+            padding: 14px 16px; border-radius: 12px;
+            color: var(--sidebar-text); text-decoration: none;
+            font-size: 16px; transition: all 0.2s ease;
+            cursor: pointer; border: none; background: transparent; width: 100%; text-align: left;
+        }
+        .nav-item i { font-size: 18px; width: 20px; text-align: center; }
+        .nav-item:hover { background: var(--sidebar-hover); color: white; }
+        .nav-item.active { background: var(--sidebar-active); color: white; box-shadow: 0 4px 12px rgba(79, 70, 229, 0.3); }
+
+        /* --- MAIN CONTENT --- */
+        .main-content { flex: 1; margin-left: 260px; display: flex; flex-direction: column; }
+
+        /* TOP BAR */
+        .topbar {
+            background: var(--surface); padding: 20px 40px;
+            display: flex; justify-content: space-between; align-items: center;
+            border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 50;
+        }
+        .topbar h2 { font-size: 24px; color: var(--text-main); letter-spacing: -0.5px; }
+        .topbar-actions { display: flex; align-items: center; gap: 24px; }
+        .user-profile { display: flex; align-items: center; gap: 12px; }
+        .user-info h4 { font-size: 16px; color: var(--text-main); }
+        .user-info p { font-size: 14px; color: var(--text-muted); font-weight: 600; }
+        .avatar-profile { width: 42px; height: 42px; border-radius: 50%; background: var(--primary); color: white; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 18px; }
+
+        /* DASHBOARD CONTENT */
+        .dashboard-content { padding: 32px 40px; }
+
+        /* VIEW SWITCHING */
+        .view { display: none; animation: fadeIn 0.3s ease; }
+        .view.active { display: block; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* STATS GRID */
+        .stats-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-bottom: 24px; }
+        .stat-card {
+            background: var(--surface); border-radius: 16px; padding: 24px;
+            border: 1px solid var(--border); box-shadow: var(--shadow-sm); display: flex; flex-direction: column;
+        }
+        .stat-value { font-size: 34px; color: var(--text-main); letter-spacing: -1px; margin-bottom: 12px; font-weight: 800; }
+        .stat-meta { display: flex; align-items: center; gap: 12px; }
+        .stat-label { font-size: 16px; font-weight: 600; color: var(--text-muted); }
+        .stat-trend { font-size: 13px; font-weight: 700; padding: 4px 10px; border-radius: 20px; display: flex; align-items: center; gap: 4px; }
+        .trend-up { background: var(--success-light); color: var(--success); }
+        .trend-down { background: var(--danger-light); color: var(--danger); }
+
+        /* LAYOUT GRID */
+        .layout-grid { display: grid; grid-template-columns: 2fr 1fr; gap: 24px; }
+
+        .card {
+            background: var(--surface); border-radius: 16px;
+            padding: 24px; border: 1px solid var(--border);
+            box-shadow: var(--shadow-sm); margin-bottom: 24px;
+        }
+        .card-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+        .card-title { font-size: 20px; color: var(--text-main); font-weight: 800; }
+        
+        .chip {
+            background: var(--bg-body); border: 1px solid var(--border);
+            padding: 6px 14px; border-radius: 20px; font-size: 14px; font-weight: 700; color: var(--text-main);
+            display: flex; align-items: center; gap: 6px;
+        }
+
+        /* TABLES */
+        .table-wrap { overflow-x: auto; }
+        .guest-table { width: 100%; border-collapse: collapse; }
+        .guest-table th {
+            text-align: left; padding: 12px 16px; font-size: 14px; font-weight: 700;
+            color: var(--text-muted); border-bottom: 1px solid var(--border); text-transform: uppercase; letter-spacing: 0.5px;
+        }
+        .guest-table th:first-child { padding-left: 0; }
+        .guest-table td {
+            padding: 16px; border-bottom: 1px solid var(--border);
+            font-size: 16px; font-weight: 600; color: var(--text-main);
+        }
+        .guest-table td:first-child { padding-left: 0; }
+        .guest-table tr:last-child td { border-bottom: none; }
+        
+        .guest-cell { display: flex; align-items: center; gap: 12px; }
+        .avatar {
+            width: 36px; height: 36px; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 14px; font-weight: 800; color: white;
+        }
+        .avatar.a0 { background: #6366F1; } .avatar.a1 { background: #10B981; }
+        .avatar.a2 { background: #F59E0B; } .avatar.a3 { background: #EC4899; }
+        .avatar.a4 { background: #06B6D4; } .avatar.a5 { background: #8B5CF6; }
+
+        .status-badge {
+            font-size: 13px; font-weight: 700; padding: 6px 12px; border-radius: 20px;
+            display: inline-flex; align-items: center; gap: 6px;
+        }
+        .status-active { background: var(--success-light); color: var(--success); }
+        .status-inactive { background: var(--bg-body); color: var(--text-muted); }
+
+        .btn-icon {
+            background: transparent; border: none; color: var(--text-muted);
+            width: 32px; height: 32px; border-radius: 8px; cursor: pointer;
+            display: flex; align-items: center; justify-content: center; transition: 0.2s;
+        }
+        .btn-icon:hover { background: var(--danger-light); color: var(--danger); }
+
+        /* ROOMS GRID */
+        .rooms-grid {
+            display: grid; grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+            gap: 12px; max-height: 480px; overflow-y: auto; padding-right: 4px;
+        }
+        .rooms-grid::-webkit-scrollbar { width: 4px; }
+        .rooms-grid::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
+        
+        .room-item {
+            background: var(--surface); border: 1px solid var(--border);
+            border-radius: 12px; padding: 14px 12px; display: flex; flex-direction: column; gap: 8px;
+            transition: 0.2s;
+        }
+        .room-item.vacant { border-left: 4px solid var(--success); }
+        .room-item.occupied { border-left: 4px solid var(--warning); }
+        .room-top { display: flex; justify-content: space-between; align-items: center; }
+        .room-num { font-size: 16px; font-weight: 800; color: var(--text-main); }
+        .room-dot { width: 8px; height: 8px; border-radius: 50%; }
+        .vacant .room-dot { background: var(--success); }
+        .occupied .room-dot { background: var(--warning); }
+        .room-guest { font-size: 14px; font-weight: 600; color: var(--text-muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .room-status { font-size: 13px; font-weight: 700; text-align: center; padding: 6px; border-radius: 6px; }
+        .vacant .room-status { background: var(--success-light); color: var(--success); }
+        .occupied .room-status { background: var(--warning-light); color: var(--warning); }
+
+        /* FORMS - DROP DOWNS */
+        .add-guest-form { display: flex; flex-direction: column; gap: 16px; }
+        .form-row { display: flex; gap: 16px; }
+        .form-group { flex: 1; }
+        .form-group label { font-size: 15px; font-weight: 700; color: var(--text-main); margin-bottom: 8px; display: block; }
+        .input-wrap { position: relative; }
+        .input-wrap i { position: absolute; left: 16px; top: 50%; transform: translateY(-50%); color: var(--text-muted); font-size: 15px; }
+        .form-group input, .form-group select {
+            width: 100%; padding: 14px 16px 14px 44px; border-radius: 10px;
+            border: 1px solid var(--border); background: var(--bg-body);
+            font-family: inherit; font-size: 16px; font-weight: 600; color: var(--text-main);
+            outline: none; transition: 0.2s; appearance: none;
+        }
+        .form-group input:focus, .form-group select:focus { border-color: var(--primary); background: white; }
+        
+        .btn-add {
+            background: var(--primary); color: white; border: none;
+            padding: 16px; border-radius: 10px; font-family: inherit;
+            font-size: 18px; font-weight: 800; cursor: pointer;
+            display: flex; align-items: center; justify-content: center; gap: 8px; transition: 0.2s;
+        }
+        .btn-add:hover { background: #4338CA; }
+
+        /* ACTION BUTTONS */
+        .action-btn {
+            display: flex; align-items: center; gap: 14px; width: 100%;
+            background: var(--bg-body); border: 1px solid var(--border);
+            padding: 16px; border-radius: 12px; cursor: pointer; transition: 0.2s;
+            text-align: left; font-family: inherit; margin-bottom: 12px;
+        }
+        .action-btn:hover { border-color: var(--primary); background: white; }
+        .action-icon {
+            width: 40px; height: 40px; border-radius: 10px;
+            display: flex; align-items: center; justify-content: center; color: white; font-size: 16px;
+        }
+        .bg-red { background: var(--danger); }
+        .bg-blue { background: var(--primary); }
+        .action-text { font-size: 16px; font-weight: 800; color: var(--text-main); }
+        .action-text small { display: block; font-size: 14px; font-weight: 600; color: var(--text-muted); margin-top: 2px; }
+
+        /* BUTTONS */
+        .btn-print, .btn-print-wa {
+            border: 1px solid var(--border); color: var(--text-main);
+            padding: 10px 16px; border-radius: 8px; font-family: inherit;
+            font-size: 14px; font-weight: 700; cursor: pointer;
+            display: inline-flex; align-items: center; gap: 8px; transition: 0.2s;
+        }
+        .btn-print { background: var(--bg-body); }
+        .btn-print:hover { background: white; border-color: var(--primary); color: var(--primary); }
+        .btn-print-wa { background: var(--whatsapp); border-color: var(--whatsapp); color: white; }
+        .btn-print-wa:hover { background: #128C7E; }
+        
+        /* Receipt Buttons */
+        .btn-receipt {
+            border: none; padding: 6px 10px; border-radius: 6px;
+            font-family: inherit; font-size: 13px; font-weight: 700;
+            cursor: pointer; transition: 0.2s; display: inline-flex; align-items: center; gap: 5px;
+        }
+        .btn-receipt-wa { background: #25D366; color: white; }
+        .btn-receipt-email { background: var(--primary); color: white; }
+
+        /* TOAST & UTILS */
+        #toast {
+            position: fixed; bottom: 30px; right: 30px; background: var(--text-main); color: white;
+            padding: 16px 24px; border-radius: 12px; font-size: 16px; font-weight: 700;
+            box-shadow: var(--shadow-lg); transform: translateY(200%); transition: 0.3s;
+            z-index: 999; display: flex; align-items: center; gap: 10px;
+        }
+        #toast.show { transform: translateY(0); }
+        #toast.error { background: var(--danger); }
+        #toast.success { background: var(--success); }
+
+        .loading-overlay {
+            position: fixed; inset: 0; background: rgba(224, 242, 254, 0.8);
+            backdrop-filter: blur(4px); display: flex; align-items: center; justify-content: center;
+            z-index: 998; font-size: 32px; color: var(--primary);
+        }
+        .hidden { display: none !important; }
+
+        @media (max-width: 1024px) {
+            .layout-grid { grid-template-columns: 1fr; }
+            .stats-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+        @media (max-width: 768px) {
+            .sidebar { display: none; }
+            .main-content { margin-left: 0; }
+            .topbar { padding: 16px 20px; }
+            .dashboard-content { padding: 20px; }
+            .stats-grid { grid-template-columns: 1fr; }
+            .form-row { flex-direction: column; gap: 12px; }
+        }
     </style>
 </head>
 <body>
-    <div class="mary-bg"></div>
-    <div class="connection-status" id="connectionStatus"><span class="dot connecting" id="statusDot"></span><span id="statusText">Connecting...</span></div>
-    <button class="login-floating-btn" id="loginFloatingBtn"><i class="fas fa-user-circle"></i></button>
 
+<!-- LOGIN SCREEN -->
+<div class="login-screen" id="loginScreen">
+    <div class="login-box">
+        <img src="LadyB%20logo.jpeg" alt="Logo">
+        <h2>Lavevars Lodge</h2>
+        <p>Staff Portal Login</p>
+        
+        <div class="login-form-group">
+            <label>Username</label>
+            <input type="text" id="loginUser" placeholder="Enter username">
+        </div>
+        <div class="login-form-group">
+            <label>Password</label>
+            <input type="password" id="loginPass" placeholder="Enter password">
+        </div>
+        <button class="login-btn" onclick="doLogin()">Sign In</button>
+        <div id="loginError" style="color:red; margin-top:10px; font-weight:bold;"></div>
+    </div>
+</div>
+
+<!-- SIDEBAR -->
+<div class="sidebar">
+    <div class="brand">
+        <div class="brand-logo">
+            <img src="LadyB%20logo.jpeg" alt="Logo">
+        </div>
+        <div class="brand-text">
+            <h1>Lavevars</h1>
+            <p>Kasama Lodge</p>
+        </div>
+    </div>
+    
+    <div class="nav-menu">
+        <button class="nav-item active" onclick="switchView('dashboard', this)">
+            <i class="fas fa-border-all"></i> Dashboard
+        </button>
+        <button class="nav-item" onclick="switchView('rooms', this)">
+            <i class="fas fa-bed"></i> All Rooms
+        </button>
+        <button class="nav-item" onclick="switchView('guests', this)">
+            <i class="fas fa-users"></i> Guests History
+        </button>
+        <button class="nav-item" onclick="switchView('billing', this)">
+            <i class="fas fa-file-invoice-dollar"></i> Billing
+        </button>
+        <button class="nav-item" onclick="doLogout()" style="margin-top: 20px; color: #ef4444;">
+            <i class="fas fa-sign-out-alt"></i> Logout
+        </button>
+    </div>
+</div>
+
+<!-- MAIN CONTENT -->
+<div class="main-content">
     <div class="topbar">
-        <div class="brand">
-            <div class="school-logo"><img id="lodgeLogoImg" src="LadyB%20logo.jpeg" alt="Lavevars Lodge Logo"></div>
-            <div class="ministry">Hospitality Management</div>
-            <h1>Lavevars Lodge</h1>
-            <div class="motto">Comfort · Elegance · Serenity</div>
-        </div>
-    </div>
-
-    <div class="login-modal" id="loginModal">
-        <div class="modal-content">
-            <button class="close-btn" id="closeLoginModal">&times;</button>
-            <div class="modal-header">
-                <div class="modal-logo"><img src="LadyB%20logo.jpeg" alt="logo"></div>
-                <h2><i class="fas fa-user-circle" style="color:var(--gold);"></i> Sign In</h2>
-            </div>
-            <div id="logoutSection" style="display:none;">
-                <div style="margin-bottom:12px;font-size:13px;text-align:center;"><i class="fas fa-user-check"></i> Signed in as: <span id="loggedInUserName">User</span></div>
-                <button class="btn btn-danger btn-block" id="logoutFromModalBtn"><i class="fas fa-sign-out-alt"></i> Sign Out</button>
-            </div>
-            <div id="loginOptions">
-                <div class="login-form active" id="staffLoginForm">
-                    <div class="field">
-                        <label><i class="fas fa-user"></i> Username</label>
-                        <input type="text" id="staffLoginUsername" placeholder="e.g. reception">
-                    </div>
-                    <div class="field">
-                        <label><i class="fas fa-lock"></i> Password</label>
-                        <input type="password" id="staffLoginPassword" placeholder="Enter password">
-                    </div>
-                    <button class="btn btn-success btn-block" onclick="staffLogin()"><i class="fas fa-sign-in-alt"></i> Sign In</button>
+        <h2 id="pageTitle">Dashboard Overview</h2>
+        <div class="topbar-actions">
+            <div class="user-profile">
+                <div class="user-info" style="text-align: right;">
+                    <h4 id="currentUserName">Receptionist</h4>
+                    <p>Staff</p>
                 </div>
-                <div class="login-form" id="adminLoginForm">
-                    <div class="field">
-                        <label><i class="fas fa-lock"></i> Admin Password</label>
-                        <input type="password" id="adminLoginPassword" placeholder="Enter admin password">
-                    </div>
-                    <button class="btn btn-danger btn-block" onclick="adminLogin()"><i class="fas fa-sign-in-alt"></i> Sign In</button>
-                    <button class="btn btn-outline btn-block" style="margin-top:8px; font-size:12px;" onclick="window.forceCreateAdmin()">🛠 FORCE SETUP ADMIN ACCOUNT</button>
-                    <div id="diagBox"></div>
-                </div>
-                <div class="role-selector">
-                    <button class="btn btn-outline btn-sm" onclick="showLoginForm('staff')"><i class="fas fa-concierge-bell"></i> Staff</button>
-                    <button class="btn btn-outline btn-sm" onclick="showLoginForm('admin')"><i class="fas fa-user-shield"></i> Admin</button>
-                </div>
+                <div class="avatar-profile" id="currentUserInitials">S</div>
             </div>
         </div>
     </div>
 
-    <div class="shell" id="app">
-        <div class="tab-nav" id="tabNav">
-            <button class="tab-btn active" data-tab="staff"><i class="fas fa-concierge-bell"></i> Staff</button>
-            <button class="tab-btn" data-tab="admin"><i class="fas fa-user-shield"></i> Admin</button>
-        </div>
+    <div class="dashboard-content">
+        
+        <!-- VIEW 1: DASHBOARD -->
+        <div id="view-dashboard" class="view active">
+            <div class="stats-grid" id="statsGrid"></div>
 
-        <div class="section active" id="staffSection">
-            <div class="card" id="staffLocked">
-                <div class="card-header"><h2><i class="fas fa-lock"></i> Staff Access Required</h2><span class="subtitle">Login as staff</span></div>
-                <div style="text-align:center;padding:40px 20px;">
-                    <i class="fas fa-concierge-bell" style="font-size:48px;color:var(--gold);margin-bottom:16px;display:block;"></i>
-                    <p style="color:var(--ink-soft);margin-bottom:16px;">Restricted to registered staff members.</p>
-                    <button class="btn btn-primary" onclick="openLoginModal('staff')"><i class="fas fa-sign-in-alt"></i> Login as Staff</button>
-                </div>
-            </div>
-            <div id="staffContent" style="display:none;">
-                <div class="card">
-                    <div class="card-header"><h2><i class="fas fa-users"></i> Guest Management</h2><span class="subtitle" id="staffNameDisplay">Welcome</span></div>
-                    <div class="grid-3">
-                        <div class="field"><label>Check-in From</label><input type="date" id="staffDateFrom"></div>
-                        <div class="field"><label>Check-in To</label><input type="date" id="staffDateTo"></div>
-                        <div class="field"><label>Stay Status</label>
-                            <select id="staffStayStatus">
-                                <option value="">All</option>
-                                <option value="true">Still Lodging</option>
-                                <option value="false">Checked Out</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="grid-3">
-                        <div class="field" style="justify-content:flex-end;"><button class="btn btn-primary" id="loadGuestsBtn"><i class="fas fa-search"></i> Load Guests</button></div>
-                    </div>
-                </div>
-
-                <div class="card" style="border-top-color: var(--oxblood);">
-                    <div class="card-header"><h2><i class="fas fa-file-excel" style="color:var(--oxblood);"></i> Import Guests from Excel</h2></div>
-                    <div class="import-area" id="staffImportArea">
-                        <i class="fas fa-file-excel" style="color:var(--oxblood);"></i>
-                        <h3>Click or Drag & Drop Excel File</h3>
-                        <p>Required: name, room_id, check_in, check_out</p>
-                        <input type="file" class="file-input" id="staffFileInput" accept=".xlsx,.xls">
-                    </div>
-                    <div id="staffImportPreview" style="margin-top:16px; display:none;"></div>
-                    <div style="margin-top:12px; display:flex; gap:8px;">
-                        <button class="btn btn-success" id="staffImportBtn" style="display:none;"><i class="fas fa-upload"></i> Import Guests</button>
-                        <button class="btn btn-outline" id="staffImportClearBtn" style="display:none;"><i class="fas fa-times"></i> Clear</button>
-                    </div>
-                </div>
-
-                <div id="guestsEntry" style="display:none;">
+            <div class="layout-grid">
+                <!-- LEFT COLUMN -->
+                <div class="left-col">
                     <div class="card">
-                        <div class="card-header"><h2><i class="fas fa-list"></i> Guest Records</h2>
-                            <button class="btn btn-sm btn-success" id="addGuestBtn"><i class="fas fa-plus"></i> Add Guest</button>
+                        <div class="card-header">
+                            <div class="card-title">Active Guests</div>
+                            <div class="chip" id="guestCountBadge">0 Active</div>
                         </div>
-                        <div class="table-wrapper">
-                            <table><thead><tr><th>#</th><th>Name</th><th>Room</th><th>Check In</th><th>Check Out</th><th>Paid</th><th>Status</th><th>Action</th></tr></thead>
-                            <tbody id="guestsTable"></tbody></table>
+                        <div class="table-wrap">
+                            <table class="guest-table">
+                                <thead>
+                                    <tr>
+                                        <th>Guest</th>
+                                        <th>Room</th>
+                                        <th>Lodge In</th>
+                                        <th>Status</th>
+                                        <th>Amount</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody id="guestTableBody"></tbody>
+                            </table>
                         </div>
+                    </div>
+
+                    <!-- NEW CHECK IN (WITH DROPDOWNS) -->
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-title">New Check-In</div>
+                        </div>
+                        <div class="add-guest-form">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>Guest Name</label>
+                                    <div class="input-wrap">
+                                        <i class="fas fa-user"></i>
+                                        <input type="text" id="guestNameInput" placeholder="e.g. Chanda Mwila">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label>Phone Number (WhatsApp)</label>
+                                    <div class="input-wrap">
+                                        <i class="fas fa-phone"></i>
+                                        <input type="tel" id="guestPhoneInput" placeholder="e.g. 0977123456">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label>Email Address</label>
+                                    <div class="input-wrap">
+                                        <i class="fas fa-envelope"></i>
+                                        <input type="email" id="guestEmailInput" placeholder="e.g. guest@gmail.com">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>Coming From (Origin)</label>
+                                    <div class="input-wrap">
+                                        <i class="fas fa-map-marker-alt"></i>
+                                        <input type="text" id="guestOriginInput" placeholder="e.g. Lusaka">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label>Assign Room (Dropdown)</label>
+                                    <div class="input-wrap">
+                                        <i class="fas fa-door-closed"></i>
+                                        <select id="roomSelect"></select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>Check-In Date (Picker)</label>
+                                    <div class="input-wrap">
+                                        <i class="fas fa-calendar"></i>
+                                        <input type="date" id="checkInDate">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label>Number of Days</label>
+                                    <div class="input-wrap">
+                                        <i class="fas fa-clock"></i>
+                                        <input type="number" id="daysInput" min="1" value="1" oninput="calculateTotal()">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>Rate per Night (ZMW)</label>
+                                    <div class="input-wrap">
+                                        <i class="fas fa-tag"></i>
+                                        <input type="number" id="rateInput" min="0" step="10" value="500" oninput="calculateTotal()">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label>Total Amount Paid</label>
+                                    <div class="input-wrap">
+                                        <i class="fas fa-money-bill-wave"></i>
+                                        <input type="number" id="totalAmountInput" readonly style="background: #E2E8F0; cursor: not-allowed;" value="500">
+                                    </div>
+                                </div>
+                            </div>
+                            <button class="btn-add" id="addGuestBtn">
+                                <i class="fas fa-check-circle"></i> Confirm Check-In
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- RIGHT COLUMN -->
+                <div class="right-col">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-title">Room Status</div>
+                            <div class="chip" id="roomSummaryBadge">0 Vacant</div>
+                        </div>
+                        <div class="rooms-grid" id="roomsGrid"></div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-title">Quick Actions</div>
+                        </div>
+                        <button class="action-btn" onclick="markAllCheckedOut()">
+                            <span class="action-icon bg-red"><i class="fas fa-right-from-bracket"></i></span>
+                            <span class="action-text">
+                                Check-out all guests
+                                <small>Instantly free all occupied rooms</small>
+                            </span>
+                        </button>
+                        <button class="action-btn" onclick="loadAll()">
+                            <span class="action-icon bg-blue"><i class="fas fa-arrows-rotate"></i></span>
+                            <span class="action-text">
+                                Sync Database
+                                <small>Fetch latest records</small>
+                            </span>
+                        </button>
                     </div>
                 </div>
             </div>
         </div>
 
-        <div class="section" id="adminSection">
-            <div class="card" id="adminLocked">
-                <div class="card-header"><h2><i class="fas fa-lock"></i> Admin Access Required</h2></div>
-                <div style="text-align:center;padding:40px 20px;">
-                    <i class="fas fa-user-shield" style="font-size:48px;color:var(--gold);margin-bottom:16px;display:block;"></i>
-                    <button class="btn btn-primary" onclick="openLoginModal('admin')"><i class="fas fa-sign-in-alt"></i> Login as Admin</button>
+        <!-- VIEW 2: ROOMS -->
+        <div id="view-rooms" class="view">
+            <div class="card" style="padding: 32px;">
+                <div class="card-header">
+                    <div class="card-title" style="font-size: 26px;">All Lodge Rooms</div>
+                    <div class="chip" id="allRoomsSummaryBadge">0 Vacant / 0 Total</div>
                 </div>
+                <div class="rooms-grid" id="allRoomsGrid" style="grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); max-height: none;"></div>
             </div>
-            <div id="adminContent" style="display:none;">
-                <div class="card">
-                    <div class="card-header"><h2><i class="fas fa-user-shield"></i> Admin Dashboard</h2></div>
-                    <div class="grid-4">
-                        <div class="stat-card"><div class="icon"><i class="fas fa-bed"></i></div><div class="number" id="totalRooms">0</div><div class="label">Total Rooms</div></div>
-                        <div class="stat-card"><div class="icon"><i class="fas fa-users"></i></div><div class="number" id="totalStaff">0</div><div class="label">Total Staff</div></div>
-                        <div class="stat-card"><div class="icon"><i class="fas fa-book"></i></div><div class="number" id="totalBookings">0</div><div class="label">Total Guests</div></div>
-                        <div class="stat-card"><div class="icon"><i class="fas fa-dollar-sign"></i></div><div class="number" id="totalRevenue">0</div><div class="label">Revenue (ZMW)</div></div>
-                    </div>
+        </div>
+
+        <!-- VIEW 3: GUESTS HISTORY -->
+        <div id="view-guests" class="view">
+            <div class="card" style="padding: 32px;">
+                <div class="card-header">
+                    <div class="card-title" style="font-size: 26px;">Guest History</div>
+                    <div class="chip">All Records</div>
                 </div>
-
-                <div class="card">
-                    <div class="admin-tabs" id="adminTabs2">
-                        <button class="admin-tab active" data-admintab="staffTab"><i class="fas fa-user-tie"></i> Manage Staff</button>
-                        <button class="admin-tab" data-admintab="roomsTab"><i class="fas fa-bed"></i> Manage Rooms</button>
-                        <button class="admin-tab" data-admintab="analysisTab"><i class="fas fa-chart-bar"></i> Reports</button>
-                    </div>
-
-                    <div id="staffTab" class="admin-tab-content active">
-                        <div class="card-header"><h2><i class="fas fa-user-tie"></i> Staff Accounts</h2></div>
-                        <div class="grid-3">
-                            <div class="field"><label>Full Name</label><input type="text" id="adminTeacherName" placeholder="e.g. John Banda"></div>
-                            <div class="field"><label>Username</label><input type="text" id="adminTeacherUsername" placeholder="e.g. john123"></div>
-                            <div class="field"><label>Password</label><input type="password" id="adminTeacherPassword" placeholder="Enter password"></div>
-                        </div>
-                        <button class="btn btn-success btn-block" id="addTeacherBtn"><i class="fas fa-plus"></i> Create Staff Account</button>
-                        <div style="margin-top:12px;">
-                            <div class="table-wrapper">
-                                <table><thead><tr><th>#</th><th>Name</th><th>Username</th><th>Action</th></tr></thead><tbody id="staffTableBody"></tbody></table>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div id="roomsTab" class="admin-tab-content">
-                        <div class="card-header"><h2><i class="fas fa-bed"></i> Room Management</h2></div>
-                        <div class="grid-3">
-                            <div class="field"><label>Room Name</label><input type="text" id="adminRoomName" placeholder="e.g. Room 101"></div>
-                            <div class="field"><label>Capacity</label><input type="number" id="adminRoomCapacity" placeholder="e.g. 2"></div>
-                            <div class="field"><label>Occupied?</label><select id="adminRoomOccupied"><option value="false">No</option><option value="true">Yes</option></select></div>
-                        </div>
-                        <button class="btn btn-success btn-block" id="addRoomBtn"><i class="fas fa-plus"></i> Add Room</button>
-                        <div style="margin-top:12px;">
-                            <div class="table-wrapper">
-                                <table><thead><tr><th>#</th><th>Room Name</th><th>Capacity</th><th>Status</th><th>Action</th></tr></thead><tbody id="roomsTableBody"></tbody></table>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div id="analysisTab" class="admin-tab-content">
-                        <div class="card-header"><h2><i class="fas fa-chart-bar"></i> Reports & Analysis</h2></div>
-                        <div class="grid-3">
-                            <div class="field"><label>Check-in From</label><input type="date" id="analysisDateFrom"></div>
-                            <div class="field"><label>Check-in To</label><input type="date" id="analysisDateTo"></div>
-                            <div class="field" style="justify-content:flex-end;"><button class="btn btn-primary btn-block" id="generateAnalysisBtn"><i class="fas fa-chart-line"></i> Generate</button></div>
-                        </div>
-                        <div id="analysisResultsArea" style="display:none;margin-top:20px;">
-                            <h3 id="analysisSummaryTitle" style="color:var(--marian-blue);margin-bottom:12px;"></h3>
-                            <div class="grid-4" id="analysisStatCards" style="margin-bottom:20px;"></div>
-                            <div class="table-wrapper"><table id="analysisTable"></table></div>
-                        </div>
-                    </div>
+                <div class="table-wrap">
+                    <table class="guest-table">
+                        <thead>
+                            <tr>
+                                <th>Guest</th>
+                                <th>Coming From</th>
+                                <th>Room</th>
+                                <th>Lodge In</th>
+                                <th>Days</th>
+                                <th>Lodge Out</th>
+                                <th>Status</th>
+                                <th>Amount</th>
+                            </tr>
+                        </thead>
+                        <tbody id="allGuestsTableBody"></tbody>
+                    </table>
                 </div>
             </div>
         </div>
-        <div class="footer-note">Lavevars Lodge · Kasama District · Under ICT &copy; 2026</div>
+
+        <!-- VIEW 4: BILLING -->
+        <div id="view-billing" class="view">
+            <div style="display: flex; gap: 16px; margin-bottom: 24px;">
+                <button type="button" class="btn-print" onclick="printReport()"><i class="fas fa-print"></i> Print Report (Boss)</button>
+                <button type="button" class="btn-print-wa" onclick="shareToWhatsApp()"><i class="fab fa-whatsapp"></i> Send Report to WhatsApp</button>
+            </div>
+
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-value" id="billTotalRevenue" style="color: var(--primary);">ZMW 0</div>
+                    <div class="stat-meta">
+                        <span class="stat-label">Total Revenue (All Time)</span>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value" id="billTodayRevenue" style="color: var(--success);">ZMW 0</div>
+                    <div class="stat-meta">
+                        <span class="stat-label">Collected Today</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-title">Recent Transactions</div>
+                    <div class="chip">Latest 20 Records</div>
+                </div>
+                <div class="table-wrap">
+                    <table class="guest-table">
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>Guest</th>
+                                <th>Origin</th>
+                                <th>Room</th>
+                                <th>Days</th>
+                                <th>Status</th>
+                                <th>Amount</th>
+                                <th>Send Receipt</th>
+                            </tr>
+                        </thead>
+                        <tbody id="billingTableBody"></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
     </div>
+</div>
 
-    <div class="toast" id="globalToast"><i class="fas fa-check-circle"></i> <span id="toastMsg">Saved</span></div>
+<div id="toast"></div>
+<div id="loading" class="loading-overlay hidden"><i class="fas fa-spinner fa-spin"></i></div>
 
-    <script>
-    (function() {
-        "use strict";
-        const SUPABASE_URL = 'https://vokfonpslvruqrrrzjzh.supabase.co';
-        const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZva2ZvbnBzbHZydXFycnJ6anpoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTAzNTI3MTEsImV4cCI6MjEwNTkyODcxMX0.aoXjKuUYPzduqxoj54fvUANF7yZ1zqS9wq1eKtXnRVw';
-        let supabaseClient = null;
-        let currentUser = null;
-        let isConnected = false;
-        let staffImportData = null;
-        let ROOM_CACHE = {};
+<script>
+    // YOUR NEW SUPABASE CREDENTIALS
+    const SUPABASE_URL = 'https://vokfonpslvruqrrrzjzh.supabase.co';
+    const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZva2ZvbnBzbHZydXFycnJ6anpoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTAzNTI3MTEsImV4cCI6MjEwNTkyODcxMX0.aoXjKuUYPzduqxoj54fvUANF7yZ1zqS9wq1eKtXnRVw';
 
-        function showToast(msg, isError = false) {
-            const t = document.getElementById('globalToast');
-            document.getElementById('toastMsg').textContent = msg;
-            t.classList.toggle('error', isError);
-            t.classList.add('show');
-            clearTimeout(window.toastTimer);
-            window.toastTimer = setTimeout(() => t.classList.remove('show'), 4500);
-        }
+    let supabase = null;
+    let rooms = [];
+    let guests = [];
+    let currentUser = null;
 
-        function setConnectionStatus(status, message) {
-            document.getElementById('statusDot').className = 'dot ' + status;
-            document.getElementById('statusText').textContent = message;
-        }
+    function initSupabase() {
+        supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+    }
 
-        function openLoginModal(role) {
-            document.getElementById('loginModal').classList.add('active');
-            if (role) showLoginForm(role);
-            updateLoginUI();
-        }
-        window.openLoginModal = openLoginModal;
+    function showToast(msg, type = 'success', duration = 3000) {
+        const el = document.getElementById('toast');
+        el.innerHTML = (type === 'success' ? '<i class="fas fa-check-circle"></i> ' : '<i class="fas fa-circle-exclamation"></i> ') + msg;
+        el.className = 'show ' + (type === 'error' ? 'error' : 'success');
+        setTimeout(() => { el.className = ''; }, duration);
+    }
 
-        function showLoginForm(role) {
-            document.querySelectorAll('.login-form').forEach(f => f.classList.remove('active'));
-            const form = document.getElementById(role + 'LoginForm');
-            if (form) form.classList.add('active');
-        }
-        window.showLoginForm = showLoginForm;
+    function setLoading(on) {
+        document.getElementById('loading').classList.toggle('hidden', !on);
+    }
 
-        function updateLoginUI() {
-            if (currentUser) {
-                document.getElementById('logoutSection').style.display = 'block';
-                document.getElementById('loginOptions').style.display = 'none';
-                document.getElementById('loggedInUserName').textContent = currentUser.role === 'admin' ? 'Administrator' : currentUser.name;
-                document.getElementById('loginFloatingBtn').innerHTML = '<i class="fas fa-user-check"></i>';
-                document.getElementById('loginFloatingBtn').classList.add('logged-in');
+    function formatDate(date) {
+        if (!date) return '';
+        const d = new Date(date);
+        const y = d.getFullYear();
+        const m = String(d.getMonth() + 1).padStart(2, '0');
+        const day = String(d.getDate()).padStart(2, '0');
+        return `${y}-${m}-${day}`;
+    }
+    function today() { return formatDate(new Date()); }
+    
+    function escapeHtml(text) {
+        if (!text) return '';
+        const div = document.createElement('div');
+        div.textContent = text;
+        return div.innerHTML;
+    }
+    
+    function initials(name) {
+        if (!name) return '?';
+        const parts = name.trim().split(/\s+/);
+        return (parts[0][0] + (parts[1] ? parts[1][0] : '')).toUpperCase();
+    }
+    
+    function colorFor(str) {
+        let h = 0;
+        for (let i = 0; i < str.length; i++) h = (h * 31 + str.charCodeAt(i)) % 6;
+        return 'a' + h;
+    }
+
+    // --- LOGIN LOGIC ---
+    window.doLogin = async function() {
+        const user = document.getElementById('loginUser').value.trim();
+        const pass = document.getElementById('loginPass').value.trim();
+        const errDiv = document.getElementById('loginError');
+        errDiv.textContent = '';
+
+        if (!user || !pass) { errDiv.textContent = 'Please enter both fields.'; return; }
+
+        setLoading(true);
+        try {
+            // Check Admin password first
+            if (user === 'admin') {
+                const { data, error } = await supabase.from('admin').select('password_hash').limit(1).maybeSingle();
+                if (error) throw error;
+                
+                // We use a simple SHA-256 hash comparison
+                const msgBuffer = new TextEncoder().encode(pass);
+                const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
+                const hashArray = Array.from(new Uint8Array(hashBuffer));
+                const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+
+                if (data && data.password_hash === hashHex) {
+                    currentUser = { name: 'Admin', role: 'Admin' };
+                } else {
+                    errDiv.textContent = 'Invalid admin password.';
+                    setLoading(false); return;
+                }
             } else {
-                document.getElementById('logoutSection').style.display = 'none';
-                document.getElementById('loginOptions').style.display = 'block';
-                document.getElementById('loginFloatingBtn').innerHTML = '<i class="fas fa-user-circle"></i>';
-                document.getElementById('loginFloatingBtn').classList.remove('logged-in');
-            }
-        }
-
-        document.getElementById('closeLoginModal').addEventListener('click', () => document.getElementById('loginModal').classList.remove('active'));
-        document.getElementById('loginFloatingBtn').addEventListener('click', () => openLoginModal());
-        document.getElementById('logoutFromModalBtn').addEventListener('click', function() { 
-            currentUser = null; updateLoginUI(); showToast('🔒 Logged out');
-            document.getElementById('staffLocked').style.display = 'block';
-            document.getElementById('staffContent').style.display = 'none';
-            document.getElementById('adminLocked').style.display = 'block';
-            document.getElementById('adminContent').style.display = 'none';
-            document.getElementById('loginModal').classList.remove('active'); 
-            document.querySelector('.tab-btn[data-tab="staff"]').click();
-        });
-
-        document.querySelectorAll('.tab-btn').forEach(btn => {
-            btn.addEventListener('click', function() {
-                document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-                document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
-                this.classList.add('active');
-                const tab = this.dataset.tab;
-                document.getElementById(tab + 'Section').classList.add('active');
-            });
-        });
-
-        async function hashPassword(password) {
-            if (window.crypto && window.crypto.subtle) {
-                const data = new TextEncoder().encode(password);
-                const hash = await crypto.subtle.digest('SHA-256', data);
-                return Array.from(new Uint8Array(hash)).map(b => b.toString(16).padStart(2,'0')).join('');
-            }
-            return password; 
-        }
-
-        // --- DIAGNOSTIC & FORCE CREATE ---
-        window.forceCreateAdmin = async function() {
-            const box = document.getElementById('diagBox');
-            box.style.display = 'block';
-            box.innerHTML = 'Checking database...';
-
-            try {
-                const hash = await hashPassword('admin123');
-                box.innerHTML += `<br>Generated Hash for 'admin123': <br><b>${hash}</b>`;
-
-                // 1. Try to delete old entries
-                const { error: delErr } = await supabaseClient.from('admin').delete().neq('id', 0);
-                if (delErr) { box.innerHTML += `<br>❌ Delete Error: ${delErr.message}`; }
-
-                // 2. Insert new admin
-                const { error: insErr } = await supabaseClient.from('admin').insert({ password_hash: hash });
-                if (insErr) { box.innerHTML += `<br>❌ Insert Error: ${insErr.message}`; }
-                else { box.innerHTML += `<br>✅ Successfully forced admin account to 'admin123'`; showToast('✅ Admin password forced to admin123'); }
-            } catch (err) {
-                box.innerHTML += `<br>❌ Fatal: ${err.message}`;
-            }
-        };
-
-        async function staffLogin() {
-            const user = document.getElementById('staffLoginUsername').value.trim();
-            const pass = document.getElementById('staffLoginPassword').value.trim();
-            if (!user || !pass) { showToast('⚠️ Enter username and password', true); return; }
-            if (!supabaseClient || !isConnected) { showToast('⚠️ Database not connected', true); return; }
-
-            try {
-                const { data, error } = await supabaseClient.from('staff').select('*').eq('username', user).maybeSingle();
+                // Check Staff table
+                const { data, error } = await supabase.from('staff').select('*').eq('username', user).maybeSingle();
                 if (error) throw error;
-                if (!data) { showToast('❌ Staff not found. Create account via Admin first.', true); return; }
+                if (!data) { errDiv.textContent = 'User not found.'; setLoading(false); return; }
 
-                const hash = await hashPassword(pass);
-                if (data.password_hash !== hash) { showToast('❌ Invalid password', true); return; }
+                const msgBuffer = new TextEncoder().encode(pass);
+                const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
+                const hashArray = Array.from(new Uint8Array(hashBuffer));
+                const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
 
-                currentUser = { role: 'staff', name: data.name };
-                showToast('✅ Logged in as ' + data.name);
-                document.getElementById('loginModal').classList.remove('active');
-                updateLoginUI();
-                document.getElementById('staffLocked').style.display = 'none';
-                document.getElementById('staffContent').style.display = 'block';
-                document.getElementById('staffNameDisplay').textContent = 'Welcome, ' + data.name;
-                document.querySelector('.tab-btn[data-tab="staff"]').click();
-                await loadRoomsIntoCache();
-            } catch (err) {
-                showToast('❌ Error: ' + err.message, true);
+                if (data.password_hash === hashHex) {
+                    currentUser = { name: data.name, role: 'Staff' };
+                } else {
+                    errDiv.textContent = 'Invalid password.';
+                    setLoading(false); return;
+                }
             }
+
+            // Success
+            document.getElementById('loginScreen').classList.add('hidden');
+            document.getElementById('currentUserName').textContent = currentUser.name;
+            document.getElementById('currentUserInitials').textContent = currentUser.name[0].toUpperCase();
+            
+            loadAll(); // Load data
+            showToast('Logged in successfully!');
+
+        } catch (err) {
+            errDiv.textContent = 'Database Error: ' + err.message;
+        } finally {
+            setLoading(false);
         }
-        window.staffLogin = staffLogin;
+    };
 
-        async function adminLogin() {
-            const pass = document.getElementById('adminLoginPassword').value.trim();
-            if (!pass) { showToast('⚠️ Enter admin password', true); return; }
-            if (!supabaseClient || !isConnected) { showToast('⚠️ Database not connected', true); return; }
+    window.doLogout = function() {
+        currentUser = null;
+        document.getElementById('loginScreen').classList.remove('hidden');
+        document.getElementById('loginUser').value = '';
+        document.getElementById('loginPass').value = '';
+    };
 
-            try {
-                const { data, error } = await supabaseClient.from('admin').select('password_hash').limit(1).maybeSingle();
-                if (error) throw error;
-                if (!data) { showToast('❌ Admin not configured. Click the FORCE SETUP button below.', true); return; }
+    // --- NAVIGATION ---
+    window.switchView = function(viewName, btnElement) {
+        document.querySelectorAll('.nav-item').forEach(btn => btn.classList.remove('active'));
+        btnElement.classList.add('active');
 
-                const hash = await hashPassword(pass);
-                if (data.password_hash !== hash) { showToast('❌ Invalid admin password', true); return; }
+        document.querySelectorAll('.view').forEach(view => view.classList.remove('active'));
+        document.getElementById('view-' + viewName).classList.add('active');
 
-                currentUser = { role: 'admin' };
-                showToast('✅ Logged in as Admin');
-                document.getElementById('loginModal').classList.remove('active');
-                updateLoginUI();
-                document.getElementById('adminLocked').style.display = 'none';
-                document.getElementById('adminContent').style.display = 'block';
-                document.querySelector('.tab-btn[data-tab="admin"]').click();
-                
-                await loadRoomsIntoCache();
-                await loadAdminStats();
-                await loadRooms();
-                await loadStaffTable();
-                setupAdminTabs();
-            } catch (err) {
-                showToast('❌ Error: ' + err.message, true);
+        const titles = {
+            'dashboard': 'Dashboard Overview',
+            'rooms': 'All Rooms',
+            'guests': 'Guest History',
+            'billing': 'Billing & Finance'
+        };
+        document.getElementById('pageTitle').textContent = titles[viewName];
+    };
+
+    window.calculateTotal = function() {
+        const days = parseFloat(document.getElementById('daysInput').value) || 1;
+        const rate = parseFloat(document.getElementById('rateInput').value) || 0;
+        document.getElementById('totalAmountInput').value = days * rate;
+    };
+
+    // --- DATA LOADING ---
+    async function loadAll() {
+        if (!supabase) return;
+        setLoading(true);
+        try {
+            const [roomsRes, guestsRes] = await Promise.all([
+                supabase.from('rooms').select('*').order('id'),
+                supabase.from('guests').select('*').order('created_at', { ascending: false })
+            ]);
+            
+            if (roomsRes.error) throw roomsRes.error;
+            if (guestsRes.error) throw guestsRes.error;
+            
+            rooms = roomsRes.data || [];
+            guests = guestsRes.data || [];
+            
+            // Auto-Seed 40 Rooms if empty
+            if (rooms.length === 0) {
+                const seed = [];
+                for (let i = 101; i <= 116; i++) seed.push({ name: 'Room ' + i, capacity: 2, is_occupied: false });
+                for (let i = 201; i <= 216; i++) seed.push({ name: 'Room ' + i, capacity: 3, is_occupied: false });
+                for (let i = 301; i <= 308; i++) seed.push({ name: 'Room ' + i, capacity: 4, is_occupied: false });
+                await supabase.from('rooms').insert(seed);
+                rooms = (await supabase.from('rooms').select('*').order('id')).data || [];
             }
+
+            renderAll();
+        } catch (err) {
+            console.error(err);
+            showToast('Failed to load: ' + err.message, 'error', 5000);
+        } finally {
+            setLoading(false);
         }
-        window.adminLogin = adminLogin;
+    }
 
-        function setupAdminTabs() {
-            document.querySelectorAll('#adminTabs2 .admin-tab').forEach(tab => {
-                if (tab.dataset.bound) return;
-                tab.dataset.bound = 'true';
-                tab.addEventListener('click', function() {
-                    document.querySelectorAll('#adminTabs2 .admin-tab').forEach(t => t.classList.remove('active'));
-                    document.querySelectorAll('.admin-tab-content').forEach(c => c.classList.remove('active'));
-                    this.classList.add('active');
-                    document.getElementById(this.dataset.admintab).classList.add('active');
-                });
-            });
+    function renderAll() {
+        renderStats();
+        renderDashboardTable();
+        renderAllGuestsTable();
+        renderDashboardRooms();
+        renderAllRooms();
+        renderRoomSelect();
+        renderBilling();
+        updateBadges();
+    }
+
+    function renderStats() {
+        const active = guests.filter(g => g.still_lodging).length;
+        const totalPaid = guests.reduce((s, g) => s + (Number(g.amount_paid) || 0), 0);
+        const vacant = rooms.filter(r => !r.is_occupied).length;
+        const occupied = rooms.length - vacant;
+        const rate = rooms.length ? Math.round((occupied / rooms.length) * 100) : 0;
+
+        document.getElementById('statsGrid').innerHTML = `
+            <div class="stat-card">
+                <div class="stat-value">ZMW ${totalPaid.toLocaleString()}</div>
+                <div class="stat-meta">
+                    <span class="stat-label">Total Revenue</span>
+                    <span class="stat-trend trend-up"><i class="fas fa-arrow-up"></i> Live</span>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value">${active}</div>
+                <div class="stat-meta">
+                    <span class="stat-label">Guests in House</span>
+                    <span class="stat-trend trend-up"><i class="fas fa-arrow-up"></i> Active</span>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value">${rate}%</div>
+                <div class="stat-meta">
+                    <span class="stat-label">Occupancy Rate</span>
+                    <span class="stat-trend ${rate > 50 ? 'trend-up' : 'trend-down'}">
+                        <i class="fas fa-arrow-${rate > 50 ? 'up' : 'down'}"></i> ${vacant} vacant
+                    </span>
+                </div>
+            </div>
+        `;
+    }
+
+    function renderDashboardTable() {
+        const tbody = document.getElementById('guestTableBody');
+        const activeGuests = guests.filter(g => g.still_lodging);
+
+        if (!activeGuests.length) {
+            tbody.innerHTML = '<tr><td colspan="6" style="text-align:center; padding: 24px; color: var(--text-muted);">No active guests found.</td></tr>';
+            return;
         }
 
-        function initSupabase() {
-            if (typeof window.supabase === 'undefined') { showToast('⚠️ Supabase failed to load', true); return; }
-            supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY, { auth: { persistSession: false } });
-
-            supabaseClient.from('rooms').select('id', { count: 'exact', head: true })
-                .then(({ error }) => {
-                    if (error) {
-                        setConnectionStatus('offline', 'Error');
-                        showToast('❌ DB Error: ' + error.message, true);
-                    } else {
-                        isConnected = true;
-                        setConnectionStatus('online', 'Connected');
-                        ensure40Rooms();
-                    }
-                }).catch(err => {
-                    setConnectionStatus('offline', 'Error');
-                    showToast('❌ Connection failed', true);
-                });
-        }
-
-        async function ensure40Rooms() {
-            const { data } = await supabaseClient.from('rooms').select('id');
-            if (data && data.length >= 40) return; 
-
-            const seed = [];
-            for (let i = 101; i <= 116; i++) seed.push({ name: 'Room ' + i, capacity: 2, is_occupied: false });
-            for (let i = 201; i <= 216; i++) seed.push({ name: 'Room ' + i, capacity: 3, is_occupied: false });
-            for (let i = 301; i <= 308; i++) seed.push({ name: 'Room ' + i, capacity: 4, is_occupied: false });
+        tbody.innerHTML = activeGuests.map(g => {
+            const room = rooms.find(r => r.id === g.room_id);
+            const roomName = room ? room.name : '—';
+            const av = colorFor(g.name || 'x');
             
-            await supabaseClient.from('rooms').insert(seed);
+            return `<tr>
+                <td>
+                    <div class="guest-cell">
+                        <div class="avatar ${av}">${initials(g.name)}</div>
+                        <div>
+                            <div style="font-weight: 700; color: var(--text-main);">${escapeHtml(g.name)}</div>
+                            <div style="font-size: 13px; color: var(--text-muted);">${escapeHtml(g.origin || '—')}</div>
+                        </div>
+                    </div>
+                </td>
+                <td><span style="background: var(--bg-body); padding: 4px 8px; border-radius: 6px; font-size: 14px;">${roomName}</span></td>
+                <td>${g.check_in || '—'}</td>
+                <td><span class="status-badge status-active">Lodging</span></td>
+                <td>ZMW ${Number(g.amount_paid).toLocaleString()}</td>
+                <td>
+                    <button class="btn-icon" onclick="checkoutGuest('${g.id}')" title="Check out"><i class="fas fa-arrow-right-from-bracket"></i></button>
+                </td>
+            </tr>`;
+        }).join('');
+    }
+
+    function renderAllGuestsTable() {
+        const tbody = document.getElementById('allGuestsTableBody');
+        if (!guests.length) {
+            tbody.innerHTML = '<tr><td colspan="8" style="text-align:center; padding: 24px; color: var(--text-muted);">No guest records found.</td></tr>';
+            return;
         }
 
-        async function loadRoomsIntoCache() {
-            const { data } = await supabaseClient.from('rooms').select('id, name');
-            ROOM_CACHE = {};
-            (data || []).forEach(r => ROOM_CACHE[r.id] = r.name);
-        }
-
-        function getRoomDisplay(id) { return ROOM_CACHE[id] || ('Room #' + id); }
-
-        async function loadAdminStats() {
-            const { count: rCount } = await supabaseClient.from('rooms').select('*', { count: 'exact', head: true });
-            document.getElementById('totalRooms').textContent = rCount || 0;
-            const { count: sCount } = await supabaseClient.from('staff').select('*', { count: 'exact', head: true });
-            document.getElementById('totalStaff').textContent = sCount || 0;
-            const { count: gCount } = await supabaseClient.from('guests').select('*', { count: 'exact', head: true });
-            document.getElementById('totalBookings').textContent = gCount || 0;
-            const { data: rev } = await supabaseClient.from('guests').select('amount_paid');
-            const total = (rev || []).reduce((s, b) => s + (b.amount_paid || 0), 0);
-            document.getElementById('totalRevenue').textContent = total.toLocaleString();
-        }
-
-        async function loadRooms() {
-            const { data } = await supabaseClient.from('rooms').select('*').order('name');
-            const tb = document.getElementById('roomsTableBody');
-            if (!data || data.length === 0) { tb.innerHTML = '<tr><td colspan="5" style="text-align:center;">No rooms found</td></tr>'; return; }
+        tbody.innerHTML = guests.map(g => {
+            const room = rooms.find(r => r.id === g.room_id);
+            const roomName = room ? room.name : '—';
+            const av = colorFor(g.name || 'x');
+            const statusClass = g.still_lodging ? 'status-active' : 'status-inactive';
+            const statusText = g.still_lodging ? 'Lodging' : 'Checked Out';
+            const days = g.days || 1;
             
-            tb.innerHTML = data.map((r, i) => `
-                <tr>
-                    <td>${i+1}</td><td><strong>${r.name}</strong></td><td>${r.capacity}</td>
-                    <td><span class="badge ${r.is_occupied ? 'badge-danger' : 'badge-success'}">${r.is_occupied ? 'Occupied' : 'Available'}</span></td>
-                    <td><button class="btn btn-sm btn-danger" onclick="window.deleteRoom(${r.id})"><i class="fas fa-trash"></i></button></td>
-                </tr>
-            `).join('');
+            return `<tr>
+                <td>
+                    <div class="guest-cell">
+                        <div class="avatar ${av}">${initials(g.name)}</div>
+                        <div style="font-weight: 700; color: var(--text-main);">${escapeHtml(g.name)}</div>
+                    </div>
+                </td>
+                <td>${escapeHtml(g.origin || '—')}</td>
+                <td><span style="background: var(--bg-body); padding: 4px 8px; border-radius: 6px; font-size: 14px;">${roomName}</span></td>
+                <td>${g.check_in || '—'}</td>
+                <td>${days}</td>
+                <td>${g.check_out || '—'}</td>
+                <td><span class="status-badge ${statusClass}">${statusText}</span></td>
+                <td>ZMW ${Number(g.amount_paid).toLocaleString()}</td>
+            </tr>`;
+        }).join('');
+    }
+
+    function renderDashboardRooms() {
+        const grid = document.getElementById('roomsGrid');
+        if (!rooms.length) {
+            grid.innerHTML = '<div style="text-align:center; padding: 20px; font-size: 14px; color: var(--text-muted);">No rooms configured.</div>';
+            return;
+        }
+        
+        grid.innerHTML = rooms.slice(0, 20).map(room => {
+            const occ = room.is_occupied;
+            const occupant = occ ? guests.find(g => g.room_id === room.id && g.still_lodging) : null;
+            const guestName = occupant ? escapeHtml(occupant.name.split(' ')[0]) : 'Available';
+            
+            return `<div class="room-item ${occ ? 'occupied' : 'vacant'}">
+                <div class="room-top">
+                    <span class="room-num">${escapeHtml(room.name.replace('Room ',''))}</span>
+                    <span class="room-dot"></span>
+                </div>
+                <div class="room-guest">${guestName}</div>
+                <div class="room-status">${occ ? 'Occupied' : 'Vacant'}</div>
+            </div>`;
+        }).join('');
+        
+        const vacant = rooms.filter(r => !r.is_occupied).length;
+        document.getElementById('roomSummaryBadge').textContent = `${vacant} Vacant`;
+    }
+
+    function renderAllRooms() {
+        const grid = document.getElementById('allRoomsGrid');
+        if (!rooms.length) return;
+        
+        grid.innerHTML = rooms.map(room => {
+            const occ = room.is_occupied;
+            const occupant = occ ? guests.find(g => g.room_id === room.id && g.still_lodging) : null;
+            const guestName = occupant ? escapeHtml(occupant.name) : 'Available';
+            
+            return `<div class="room-item ${occ ? 'occupied' : 'vacant'}">
+                <div class="room-top">
+                    <span class="room-num">${escapeHtml(room.name)}</span>
+                    <span class="room-dot"></span>
+                </div>
+                <div class="room-guest">${guestName}</div>
+                <div class="room-status">${occ ? 'Occupied' : 'Vacant'}</div>
+            </div>`;
+        }).join('');
+        
+        const vacant = rooms.filter(r => !r.is_occupied).length;
+        document.getElementById('allRoomsSummaryBadge').textContent = `${vacant} Vacant / ${rooms.length} Total`;
+    }
+
+    function renderRoomSelect() {
+        const select = document.getElementById('roomSelect');
+        const vacant = rooms.filter(r => !r.is_occupied);
+        if (!vacant.length) {
+            select.innerHTML = '<option value="">No rooms available</option>';
+            select.disabled = true;
+            return;
+        }
+        select.disabled = false;
+        select.innerHTML = vacant.sort((a, b) => a.id - b.id)
+            .map(r => `<option value="${r.id}">${escapeHtml(r.name)}</option>`).join('');
+    }
+
+    function renderBilling() {
+        const totalRevenue = guests.reduce((s, g) => s + (Number(g.amount_paid) || 0), 0);
+        const todayStr = today();
+        const todayRevenue = guests
+            .filter(g => g.check_in === todayStr)
+            .reduce((s, g) => s + (Number(g.amount_paid) || 0), 0);
+
+        document.getElementById('billTotalRevenue').textContent = `ZMW ${totalRevenue.toLocaleString()}`;
+        document.getElementById('billTodayRevenue').textContent = `ZMW ${todayRevenue.toLocaleString()}`;
+
+        const tbody = document.getElementById('billingTableBody');
+        if (!guests.length) {
+            tbody.innerHTML = '<tr><td colspan="8" style="text-align:center; padding: 24px; color: var(--text-muted);">No transactions found.</td></tr>';
+            return;
         }
 
-        window.deleteRoom = async function(id) {
-            if (!confirm('Delete room?')) return;
-            await supabaseClient.from('rooms').delete().eq('id', id);
-            showToast('✅ Room deleted'); loadRooms(); loadAdminStats();
-        };
+        tbody.innerHTML = guests.slice(0, 20).map(g => {
+            const room = rooms.find(r => r.id === g.room_id);
+            const roomName = room ? room.name : '—';
+            const statusClass = g.still_lodging ? 'status-active' : 'status-inactive';
+            const statusText = g.still_lodging ? 'Lodging' : 'Checked Out';
+            const days = g.days || 1;
 
-        document.getElementById('addRoomBtn').addEventListener('click', async () => {
-            const name = document.getElementById('adminRoomName').value.trim();
-            const cap = parseInt(document.getElementById('adminRoomCapacity').value);
-            const occ = document.getElementById('adminRoomOccupied').value === 'true';
-            if (!name || !cap) { showToast('⚠️ Enter room name and capacity', true); return; }
-            await supabaseClient.from('rooms').insert({ name, capacity: cap, is_occupied: occ });
-            showToast('✅ Room added');
-            document.getElementById('adminRoomName').value = ''; document.getElementById('adminRoomCapacity').value = '';
-            loadRooms(); loadAdminStats();
-        });
+            return `<tr>
+                <td>${g.check_in || '—'}</td>
+                <td style="font-weight: 700;">${escapeHtml(g.name)}</td>
+                <td>${escapeHtml(g.origin || '—')}</td>
+                <td><span style="background: var(--bg-body); padding: 4px 8px; border-radius: 6px; font-size: 14px;">${roomName}</span></td>
+                <td>${days}</td>
+                <td><span class="status-badge ${statusClass}">${statusText}</span></td>
+                <td style="font-weight: 800; color: var(--primary);">ZMW ${Number(g.amount_paid).toLocaleString()}</td>
+                <td>
+                    <div style="display: flex; gap: 6px;">
+                        <button type="button" class="btn-receipt btn-receipt-wa" onclick="sendReceiptWhatsApp('${g.id}')"><i class="fab fa-whatsapp"></i> WA</button>
+                        <button type="button" class="btn-receipt btn-receipt-email" onclick="sendReceiptEmail('${g.id}')"><i class="fas fa-envelope"></i> Email</button>
+                    </div>
+                </td>
+            </tr>`;
+        }).join('');
+    }
 
-        async function loadStaffTable() {
-            const { data } = await supabaseClient.from('staff').select('*').order('name');
-            const tb = document.getElementById('staffTableBody');
-            if (!data || data.length === 0) { tb.innerHTML = '<tr><td colspan="4" style="text-align:center;">No staff found</td></tr>'; return; }
-            tb.innerHTML = data.map((s, i) => `
-                <tr><td>${i+1}</td><td><strong>${s.name}</strong></td><td>${s.username}</td>
-                <td><button class="btn btn-sm btn-danger" onclick="window.deleteStaff(${s.id})"><i class="fas fa-trash"></i></button></td></tr>
-            `).join('');
-        }
+    // --- RECEIPTS ---
+    window.sendReceiptWhatsApp = function(guestId) {
+        const g = guests.find(x => String(x.id) === String(guestId));
+        if (!g) return;
+        
+        const room = rooms.find(r => r.id === g.room_id);
+        const roomName = room ? room.name : '—';
+        const days = g.days || 1;
+        
+        const text = `*Lavevars Lodge - Receipt*\n\n` +
+                     `Guest: ${g.name}\n` +
+                     `Room: ${roomName}\n` +
+                     `Check-In: ${g.check_in}\n` +
+                     `Days: ${days}\n` +
+                     `Total Paid: ZMW ${Number(g.amount_paid).toLocaleString()}\n\n` +
+                     `Thank you for staying with us!`;
 
-        window.deleteStaff = async function(id) {
-            if (!confirm('Delete staff account?')) return;
-            await supabaseClient.from('staff').delete().eq('id', id);
-            showToast('✅ Staff deleted'); loadStaffTable(); loadAdminStats();
-        };
+        let phone = g.phone || '';
+        phone = phone.replace(/\D/g, ''); // Clean
+        if (phone.startsWith('0') && phone.length === 10) phone = '260' + phone.substring(1);
 
-        document.getElementById('addTeacherBtn').addEventListener('click', async () => {
-            const name = document.getElementById('adminTeacherName').value.trim();
-            const user = document.getElementById('adminTeacherUsername').value.trim();
-            const pass = document.getElementById('adminTeacherPassword').value.trim();
-            if (!name || !user || !pass) { showToast('⚠️ Fill all fields', true); return; }
+        let url = phone ? `https://wa.me/${phone}?text=${encodeURIComponent(text)}` : `https://wa.me/?text=${encodeURIComponent(text)}`;
+        window.open(url, '_blank');
+    };
 
-            const hash = await hashPassword(pass);
-            const { error } = await supabaseClient.from('staff').insert({ name, username: user, password_hash: hash });
-            if (error) { showToast('❌ ' + error.message, true); return; }
+    window.sendReceiptEmail = function(guestId) {
+        const g = guests.find(x => String(x.id) === String(guestId));
+        if (!g) return;
+        
+        const room = rooms.find(r => r.id === g.room_id);
+        const roomName = room ? room.name : '—';
+        const days = g.days || 1;
 
-            showToast('✅ Staff created');
-            document.getElementById('adminTeacherName').value = ''; document.getElementById('adminTeacherUsername').value = ''; document.getElementById('adminTeacherPassword').value = '';
-            loadStaffTable(); loadAdminStats();
-        });
+        const subject = `Receipt from Lavevars Lodge - ${g.name}`;
+        const body = `Dear ${g.name},\n\nThank you for staying at Lavevars Lodge.\n\n` +
+                     `Receipt Details:\n` +
+                     `- Room: ${roomName}\n` +
+                     `- Check-In: ${g.check_in}\n` +
+                     `- Days: ${days}\n` +
+                     `- Total Paid: ZMW ${Number(g.amount_paid).toLocaleString()}\n\n` +
+                     `We hope to see you again soon!`;
 
-        document.getElementById('loadGuestsBtn').addEventListener('click', async () => {
-            const from = document.getElementById('staffDateFrom').value;
-            const to = document.getElementById('staffDateTo').value;
-            const stay = document.getElementById('staffStayStatus').value;
+        window.location.href = `mailto:${g.email || ''}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    };
 
-            let q = supabaseClient.from('guests').select('*').order('check_in', { ascending: false });
-            if (from) q = q.gte('check_in', from);
-            if (to) q = q.lte('check_in', to);
-            if (stay) q = q.eq('still_lodging', stay === 'true');
+    // --- PRINT & WHATSAPP REPORT ---
+    function printHTML(htmlContent) {
+        const iframe = document.createElement('iframe');
+        iframe.style.position = 'fixed'; iframe.style.right = '0'; iframe.style.bottom = '0'; iframe.style.width = '0'; iframe.style.height = '0';
+        document.body.appendChild(iframe);
+        const doc = iframe.contentWindow.document;
+        doc.open(); doc.write(htmlContent); doc.close();
+        iframe.contentWindow.focus();
+        setTimeout(() => {
+            iframe.contentWindow.print();
+            setTimeout(() => { document.body.removeChild(iframe); }, 1000);
+        }, 500);
+    }
 
-            const { data, error } = await q;
-            if (error) { showToast('❌ ' + error.message, true); return; }
+    window.printReport = function() {
+        const totalRevenue = guests.reduce((s, g) => s + (Number(g.amount_paid) || 0), 0);
+        const activeGuests = guests.filter(g => g.still_lodging).length;
+        const vacantRooms = rooms.filter(r => !r.is_occupied).length;
+        
+        let tableRows = guests.map(g => `
+            <tr>
+                <td>${g.check_in}</td>
+                <td>${g.name}</td>
+                <td>${rooms.find(r => r.id === g.room_id)?.name || '—'}</td>
+                <td>${g.days || 1}</td>
+                <td>ZMW ${Number(g.amount_paid).toLocaleString()}</td>
+            </tr>
+        `).join('');
 
-            const tb = document.getElementById('guestsTable');
-            document.getElementById('guestsEntry').style.display = 'block';
-            if (!data || data.length === 0) { tb.innerHTML = '<tr><td colspan="8" style="text-align:center;">No guests found</td></tr>'; return; }
+        const html = `
+            <html><head><title>Report - Lavevars Lodge</title>
+                <style>
+                    body { font-family: Arial, sans-serif; padding: 40px; color: #000; }
+                    h1 { text-align: center; border-bottom: 2px solid #000; padding-bottom: 10px; }
+                    .stats { display: flex; justify-content: space-between; margin: 30px 0; font-weight: bold; }
+                    table { width: 100%; border-collapse: collapse; }
+                    th, td { border: 1px solid #000; padding: 10px; text-align: left; }
+                </style>
+            </head><body>
+                <h1>Lavevars Lodge - Management Report</h1>
+                <p style="text-align: center;">Generated on ${new Date().toLocaleString()}</p>
+                <div class="stats">
+                    <div>Total Revenue: ZMW ${totalRevenue.toLocaleString()}</div>
+                    <div>Active Guests: ${activeGuests}</div>
+                    <div>Vacant Rooms: ${vacantRooms} / ${rooms.length}</div>
+                </div>
+                <h2>Recent Transactions</h2>
+                <table>
+                    <thead><tr><th>Date</th><th>Guest</th><th>Room</th><th>Days</th><th>Amount</th></tr></thead>
+                    <tbody>${tableRows}</tbody>
+                </table>
+            </body></html>
+        `;
+        printHTML(html);
+    };
 
-            tb.innerHTML = data.map((g, i) => `
-                <tr>
-                    <td>${i+1}</td><td><strong>${g.name}</strong></td><td>${getRoomDisplay(g.room_id)}</td>
-                    <td>${g.check_in}</td><td>${g.check_out}</td><td>ZMW ${(g.amount_paid || 0).toLocaleString()}</td>
-                    <td><span class="badge ${g.still_lodging ? 'badge-success' : 'badge-info'}">${g.still_lodging ? 'In Lodge' : 'Checked Out'}</span></td>
-                    <td><button class="btn btn-sm btn-primary" onclick="window.checkoutGuest(${g.id})" ${!g.still_lodging ? 'disabled' : ''}><i class="fas fa-sign-out-alt"></i></button></td>
-                </tr>
-            `).join('');
-        });
+    window.shareToWhatsApp = function() {
+        const totalRevenue = guests.reduce((s, g) => s + (Number(g.amount_paid) || 0), 0);
+        const activeGuests = guests.filter(g => g.still_lodging).length;
+        const vacantRooms = rooms.filter(r => !r.is_occupied).length;
+        
+        const text = `*Lavevars Lodge - Management Report*\n` +
+                     `📅 Date: ${new Date().toLocaleDateString()}\n\n` +
+                     `💰 *Total Revenue:* ZMW ${totalRevenue.toLocaleString()}\n` +
+                     `🛏️ *Active Guests:* ${activeGuests}\n` +
+                     `🚪 *Vacant Rooms:* ${vacantRooms} / ${rooms.length}\n\n` +
+                     `_Generated automatically from the Lodge System._`;
 
-        window.checkoutGuest = async function(id) {
-            if (!confirm('Mark as checked out?')) return;
-            await supabaseClient.from('guests').update({ still_lodging: false }).eq('id', id);
-            showToast('✅ Guest checked out'); document.getElementById('loadGuestsBtn').click();
-        };
+        window.open(`https://wa.me/?text=${encodeURIComponent(text)}`, '_blank');
+    };
 
-        document.getElementById('addGuestBtn').addEventListener('click', async () => {
-            const name = prompt("Guest Name:"); if (!name) return;
-            const roomId = prompt("Room ID (number):"); if (!roomId) return;
-            const checkin = prompt("Check-in Date (YYYY-MM-DD):", new Date().toISOString().split('T')[0]); if (!checkin) return;
-            const checkout = prompt("Check-out Date (YYYY-MM-DD):"); if (!checkout) return;
-            const paid = prompt("Amount Paid (ZMW):", "0");
+    function updateBadges() {
+        const active = guests.filter(g => g.still_lodging).length;
+        document.getElementById('guestCountBadge').textContent = `${active} Active`;
+    }
 
-            await supabaseClient.from('guests').insert({ name, room_id: parseInt(roomId), check_in: checkin, check_out: checkout, amount_paid: parseFloat(paid) || 0, still_lodging: true });
-            await supabaseClient.from('rooms').update({ is_occupied: true }).eq('id', roomId);
-            showToast('✅ Guest added'); document.getElementById('loadGuestsBtn').click();
-        });
+    // --- ACTIONS ---
+    window.addGuest = async function() {
+        const name = document.getElementById('guestNameInput').value.trim();
+        const phone = document.getElementById('guestPhoneInput').value.trim();
+        const email = document.getElementById('guestEmailInput').value.trim();
+        const origin = document.getElementById('guestOriginInput').value.trim();
+        const roomId = document.getElementById('roomSelect').value;
+        const checkIn = document.getElementById('checkInDate').value;
+        const days = parseInt(document.getElementById('daysInput').value) || 1;
+        const amount = parseFloat(document.getElementById('totalAmountInput').value) || 0;
 
-        const importArea = document.getElementById('staffImportArea');
-        const fileInput = document.getElementById('staffFileInput');
-        importArea.addEventListener('click', () => fileInput.click());
-        fileInput.addEventListener('change', e => {
-            if (!e.target.files.length) return;
-            const reader = new FileReader();
-            reader.onload = ev => {
-                const wb = XLSX.read(new Uint8Array(ev.target.result), { type: 'array' });
-                const json = XLSX.utils.sheet_to_json(wb.Sheets[wb.SheetNames[0]]);
-                staffImportData = json;
-                
-                let html = '<table><thead><tr><th>Name</th><th>Room ID</th><th>Check In</th><th>Check Out</th></tr></thead><tbody>';
-                json.slice(0, 5).forEach(r => {
-                    html += `<tr><td>${r.name || '-'}</td><td>${r.room_id || '-'}</td><td>${r.check_in || '-'}</td><td>${r.check_out || '-'}</td></tr>`;
-                });
-                html += '</tbody></table>';
-                if (json.length > 5) html += `<p style="padding:8px;font-size:12px;">...and ${json.length-5} more rows</p>`;
-                
-                document.getElementById('staffImportPreview').innerHTML = html;
-                document.getElementById('staffImportPreview').style.display = 'block';
-                document.getElementById('staffImportBtn').style.display = 'inline-flex';
-                document.getElementById('staffImportClearBtn').style.display = 'inline-flex';
-            };
-            reader.readAsArrayBuffer(e.target.files[0]);
-        });
+        if (!name) return showToast('Please enter guest name', 'error');
+        if (!roomId) return showToast('No vacant room selected', 'error');
+        if (!checkIn) return showToast('Please pick check‑in date', 'error');
 
-        document.getElementById('staffImportClearBtn').addEventListener('click', () => {
-            staffImportData = null;
-            document.getElementById('staffImportPreview').style.display = 'none';
-            document.getElementById('staffImportBtn').style.display = 'none';
-            document.getElementById('staffImportClearBtn').style.display = 'none';
-            fileInput.value = '';
-        });
-
-        document.getElementById('staffImportBtn').addEventListener('click', async () => {
-            if (!staffImportData) return;
-            const records = staffImportData.map(r => ({
-                name: r.name,
-                room_id: parseInt(r.room_id),
-                check_in: r.check_in,
-                check_out: r.check_out,
-                amount_paid: parseFloat(r.amount_paid) || 0,
-                still_lodging: true
-            })).filter(r => r.name && r.room_id && r.check_in);
-
-            const { error } = await supabaseClient.from('guests').insert(records);
-            if (error) { showToast('❌ ' + error.message, true); }
-            else { showToast(`✅ Imported ${records.length} guests`); }
-
-            document.getElementById('staffImportClearBtn').click();
-            document.getElementById('loadGuestsBtn').click();
-        });
-
-        document.getElementById('generateAnalysisBtn').addEventListener('click', async () => {
-            const from = document.getElementById('analysisDateFrom').value;
-            const to = document.getElementById('analysisDateTo').value;
-            if (!from || !to) { showToast('⚠️ Select date range', true); return; }
-
-            const { data, error } = await supabaseClient.from('guests').select('*').gte('check_in', from).lte('check_in', to);
-            if (error) { showToast('❌ ' + error.message, true); return; }
-            if (!data || data.length === 0) { showToast('⚠️ No data in range', true); return; }
-
-            const rev = data.reduce((s, g) => s + (g.amount_paid || 0), 0);
-            const inLodge = data.filter(g => g.still_lodging).length;
-
-            document.getElementById('analysisSummaryTitle').textContent = `Report: ${from} to ${to}`;
-            document.getElementById('analysisStatCards').innerHTML = `
-                <div class="stat-card"><div class="icon"><i class="fas fa-users"></i></div><div class="number">${data.length}</div><div class="label">Total Guests</div></div>
-                <div class="stat-card"><div class="icon"><i class="fas fa-dollar-sign"></i></div><div class="number">ZMW ${rev.toLocaleString()}</div><div class="label">Total Revenue</div></div>
-                <div class="stat-card"><div class="icon"><i class="fas fa-bed"></i></div><div class="number">${inLodge}</div><div class="label">Still Lodging</div></div>
-                <div class="stat-card"><div class="icon"><i class="fas fa-sign-out-alt"></i></div><div class="number">${data.length - inLodge}</div><div class="label">Checked Out</div></div>
-            `;
-
-            let tableHtml = `<thead><tr><th>Date</th><th>Guest</th><th>Room</th><th>Paid</th></tr></thead><tbody>`;
-            data.slice(0, 10).forEach(g => {
-                tableHtml += `<tr><td>${g.check_in}</td><td>${g.name}</td><td>${getRoomDisplay(g.room_id)}</td><td>ZMW ${g.amount_paid || 0}</td></tr>`;
+        setLoading(true);
+        try {
+            // 1. Insert Guest
+            const { error: e1 } = await supabase.from('guests').insert({
+                name, phone, email, origin, room_id: Number(roomId), check_in: checkIn,
+                days: days, amount_paid: amount, still_lodging: true
             });
-            tableHtml += `</tbody>`;
-            document.getElementById('analysisTable').innerHTML = tableHtml;
-            document.getElementById('analysisResultsArea').style.display = 'block';
-        });
+            if (e1) throw e1;
 
+            // 2. Mark Room as Occupied
+            const { error: e2 } = await supabase.from('rooms').update({ is_occupied: true }).eq('id', Number(roomId));
+            if (e2) throw e2;
+
+            // Clear form
+            document.getElementById('guestNameInput').value = '';
+            document.getElementById('guestPhoneInput').value = '';
+            document.getElementById('guestEmailInput').value = '';
+            document.getElementById('guestOriginInput').value = '';
+            document.getElementById('daysInput').value = '1';
+            document.getElementById('rateInput').value = '500';
+            calculateTotal();
+
+            showToast('Guest checked in!');
+            await loadAll();
+        } catch (err) {
+            showToast(err.message, 'error');
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    window.checkoutGuest = async function(guestId) {
+        if (!confirm('Check out this guest?')) return;
+        const guest = guests.find(g => String(g.id) === String(guestId));
+        if (!guest) return;
+
+        setLoading(true);
+        try {
+            const { error: e1 } = await supabase.from('guests').update({ still_lodging: false, check_out: today() }).eq('id', guest.id);
+            if (e1) throw e1;
+            if (guest.room_id) {
+                const { error: e2 } = await supabase.from('rooms').update({ is_occupied: false }).eq('id', guest.room_id);
+                if (e2) throw e2;
+            }
+            showToast('Guest checked out');
+            await loadAll();
+        } catch (err) {
+            showToast(err.message, 'error');
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    window.markAllCheckedOut = async function() {
+        const active = guests.filter(g => g.still_lodging);
+        if (!active.length) return showToast('No active guests', 'error');
+        if (!confirm(`Check out all ${active.length} guest(s)?`)) return;
+
+        setLoading(true);
+        try {
+            const { error: e1 } = await supabase.from('guests').update({ still_lodging: false, check_out: today() }).eq('still_lodging', true);
+            if (e1) throw e1;
+            const { error: e2 } = await supabase.from('rooms').update({ is_occupied: false }).eq('is_occupied', true);
+            if (e2) throw e2;
+            showToast('All guests checked out');
+            await loadAll();
+        } catch (err) {
+            showToast(err.message, 'error');
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    // INIT
+    document.addEventListener('DOMContentLoaded', () => {
         initSupabase();
-    })();
-    </script>
+        document.getElementById('checkInDate').value = today();
+        calculateTotal();
+        document.getElementById('addGuestBtn').addEventListener('click', addGuest);
+    });
+</script>
 </body>
 </html>
