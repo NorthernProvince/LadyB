@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
-    <title>Lakeview Lodge</title>
+    <title>Lavevars Lodge</title>
     <meta name="theme-color" content="#1a237e">
-    <meta name="description" content="Lakeview Lodge - Kasama District, Zambia.">
+    <meta name="description" content="Lavevars Lodge - Kasama District, Zambia.">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -198,10 +198,10 @@
     <div class="topbar">
         <div class="brand">
             <div class="school-logo">
-                <img id="lodgeLogoImg" src="lodge_logo.png" alt="Lodge Logo" onerror="console.warn('Logo lodge_logo.png not found'); this.style.opacity=0.3;">
+                <img id="lodgeLogoImg" src="LadyB%20logo.jpeg" alt="Lavevars Lodge Logo" onerror="console.warn('Logo LadyB logo.jpeg not found'); this.style.opacity=0.3;">
             </div>
             <div class="ministry">Hospitality Management</div>
-            <h1 id="lodgeNameHeader">Lakeview Lodge</h1>
+            <h1 id="lodgeNameHeader">Lavevars Lodge</h1>
             <div class="motto" id="lodgeMottoHeader">Comfort · Elegance · Serenity</div>
         </div>
     </div>
@@ -210,7 +210,7 @@
         <div class="modal-content">
             <button class="close-btn" id="closeLoginModal">&times;</button>
             <div class="modal-header">
-                <div class="modal-logo"><img src="lodge_logo.png" alt="logo" onerror="console.warn('Logo lodge_logo.png not found'); this.style.opacity=0.3;"></div>
+                <div class="modal-logo"><img src="LadyB%20logo.jpeg" alt="Lavevars Lodge Logo" onerror="console.warn('Logo LadyB logo.jpeg not found'); this.style.opacity=0.3;"></div>
                 <h2><i class="fas fa-user-circle" style="color:var(--gold);"></i> Sign In</h2>
                 <p>Select your role below</p>
             </div>
@@ -219,16 +219,6 @@
                 <button class="btn btn-danger btn-block" id="logoutFromModalBtn"><i class="fas fa-sign-out-alt"></i> Sign Out</button>
             </div>
             <div id="loginOptions">
-                <div class="login-form" id="guestLoginForm">
-                    <div class="field">
-                        <label><i class="fas fa-id-card"></i> Booking Reference</label>
-                        <input type="text" id="guestLoginNumber" placeholder="e.g. BK-2024-001">
-                    </div>
-                    <button class="btn btn-primary btn-submit btn-block" onclick="guestLogin()">
-                        <i class="fas fa-sign-in-alt"></i> View Booking
-                    </button>
-                </div>
-
                 <div class="login-form" id="staffLoginForm">
                     <div class="field">
                         <label><i class="fas fa-user"></i> Username</label>
@@ -253,9 +243,6 @@
                     </button>
                 </div>
                 <div class="role-selector">
-                    <button class="btn btn-outline btn-sm" onclick="showLoginForm('guest')">
-                        <i class="fas fa-bed"></i> Guest
-                    </button>
                     <button class="btn btn-outline btn-sm" onclick="showLoginForm('staff')">
                         <i class="fas fa-concierge-bell"></i> Staff
                     </button>
@@ -269,39 +256,12 @@
 
     <div class="shell" id="app">
         <div class="tab-nav" id="tabNav">
-            <button class="tab-btn active" data-tab="guest"><i class="fas fa-bed"></i> Guest</button>
-            <button class="tab-btn" data-tab="staff" id="staffTabBtn"><i class="fas fa-concierge-bell"></i> Staff</button>
+            <button class="tab-btn active" data-tab="staff" id="staffTabBtn"><i class="fas fa-concierge-bell"></i> Staff</button>
             <button class="tab-btn" data-tab="admin" id="adminTabBtn"><i class="fas fa-user-shield"></i> Admin</button>
         </div>
 
-        <!-- GUEST SECTION -->
-        <div class="section active" id="guestSection">
-            <div class="card">
-                <div class="card-header">
-                    <h2><i class="fas fa-search"></i> Check Your Booking</h2>
-                    <span class="subtitle">Enter your booking reference to view your reservation details</span>
-                </div>
-                <div class="grid-2">
-                    <div class="field"><label><i class="fas fa-id-card"></i> Booking Reference</label><input type="text" id="guestBookingRef" placeholder="e.g. BK-2024-001" value="BK-2024-001"></div>
-                    <div class="field"><label><i class="fas fa-calendar-alt"></i> Check-in Date</label><input type="date" id="guestCheckIn" value="2025-01-15"></div>
-                </div>
-                <div class="grid-2">
-                    <div class="field"><label><i class="fas fa-calendar-check"></i> Check-out Date</label><input type="date" id="guestCheckOut" value="2025-01-20"></div>
-                    <div class="field" style="justify-content:flex-end;"><button class="btn btn-primary btn-block" id="viewBookingBtn"><i class="fas fa-eye"></i> View Booking Details</button></div>
-                </div>
-            </div>
-            <div id="guestBookingResults" style="display:none;">
-                <div class="card"><div class="card-header"><h2><i class="fas fa-user"></i> Guest Information</h2></div><div id="guestInfo"></div></div>
-                <div class="card">
-                    <div class="card-header"><h2><i class="fas fa-list"></i> Booking Details</h2>
-                    <button class="btn btn-sm btn-success no-print" id="downloadBookingBtn"><i class="fas fa-file-pdf"></i> Download PDF</button></div>
-                    <div id="bookingContent"></div>
-                </div>
-            </div>
-        </div>
-
         <!-- STAFF SECTION -->
-        <div class="section" id="staffSection">
+        <div class="section active" id="staffSection">
             <div class="card" id="staffLocked">
                 <div class="card-header"><h2><i class="fas fa-lock"></i> Staff Access Required</h2><span class="subtitle">Login as staff</span></div>
                 <div style="text-align:center;padding:40px 20px;">
@@ -348,13 +308,13 @@
                         <button class="btn btn-success" id="staffImportBtn" style="display:none;"><i class="fas fa-upload"></i> Import Bookings</button>
                         <button class="btn btn-outline" id="staffImportClearBtn" style="display:none;"><i class="fas fa-times"></i> Clear</button>
                     </div>
-                    <div id="staffImportStatus" style="margin-top:8px; font-size:13px; color:var(--ink-soft);"></div>
+                    <div id="staffImportStatusMsg" style="margin-top:8px; font-size:13px; color:var(--ink-soft);"></div>
                 </div>
                 <div id="bookingsEntry" style="display:none;">
                     <div class="card">
                         <div class="card-header"><h2><i class="fas fa-edit"></i> Manage Bookings</h2><button class="btn btn-sm btn-success" id="saveBookingsBtn"><i class="fas fa-save"></i> Save All</button></div>
                         <div class="table-wrapper">
-                            <table><thead><tr><th>#</th><th>Guest Name</th><th>Reference</th><th>Room</th><th>Status</th><th>Actions</th></tr></thead>
+                            <table><thead><tr><th>#</th><th>Booking Ref</th><th>Room</th><th>Check In</th><th>Check Out</th><th>Status</th></tr></thead>
                             <tbody id="bookingsTableBody"><tr><td colspan="6" style="text-align:center;color:var(--ink-faint);">No bookings loaded.</td></tr></tbody></table>
                         </div>
                     </div>
@@ -377,16 +337,16 @@
                     <div class="card-header"><h2><i class="fas fa-user-shield"></i> Admin Dashboard</h2><span class="subtitle">Overview</span></div>
                     <div class="grid-4">
                         <div class="stat-card"><div class="icon"><i class="fas fa-bed"></i></div><div class="number" id="totalRooms">0</div><div class="label">Total Rooms</div></div>
-                        <div class="stat-card"><div class="icon"><i class="fas fa-users"></i></div><div class="number" id="totalGuests">0</div><div class="label">Total Guests</div></div>
+                        <div class="stat-card"><div class="icon"><i class="fas fa-user-tie"></i></div><div class="number" id="totalStaff">0</div><div class="label">Total Staff</div></div>
                         <div class="stat-card"><div class="icon"><i class="fas fa-book"></i></div><div class="number" id="totalBookings">0</div><div class="label">Total Bookings</div></div>
-                        <div class="stat-card"><div class="icon"><i class="fas fa-dollar-sign"></i></div><div class="number" id="totalRevenue">0</div><div class="label">Total Revenue (ZMW)</div></div>
+                        <div class="stat-card"><div class="icon"><i class="fas fa-dollar-sign"></i></div><div class="number" id="totalRevenue">0</div><div class="label">Revenue (ZMW)</div></div>
                     </div>
                 </div>
 
                 <div class="card">
                     <div class="admin-tabs" id="adminTabs2">
                         <button class="admin-tab active" data-admintab="assignmentsTab2"><i class="fas fa-tasks"></i> Staff Assignments</button>
-                        <button class="admin-tab" data-admintab="learnersTab2"><i class="fas fa-users"></i> Guests</button>
+                        <button class="admin-tab" data-admintab="roomsTab2"><i class="fas fa-bed"></i> Rooms</button>
                         <button class="admin-tab" data-admintab="analysisTab2"><i class="fas fa-chart-bar"></i> Reports & Analysis</button>
                     </div>
 
@@ -394,9 +354,9 @@
                         <div class="card-header"><h2><i class="fas fa-tasks"></i> Staff Assignments</h2><span class="subtitle">Assign staff to departments and roles</span></div>
                         <div class="grid-3">
                             <div class="field"><label><i class="fas fa-user-tie"></i> Staff</label><select id="assignTeacherSelect2"><option value="">Select Staff</option></select></div>
-                            <div class="field"><label><i class="fas fa-building"></i> Department</label><select id="assignClassSelect2"><option value="">Select Department</option></select></div>
+                            <div class="field"><label><i class="fas fa-building"></i> Department</label><select id="assignClassSelect2"><option value="">Select Department</option><option value="Front Desk">Front Desk</option><option value="Housekeeping">Housekeeping</option><option value="Food & Beverage">Food & Beverage</option><option value="Maintenance">Maintenance</option><option value="Management">Management</option><option value="Security">Security</option><option value="Concierge">Concierge</option><option value="Kitchen">Kitchen</option></select></div>
                             <div class="field"><label><i class="fas fa-briefcase"></i> Role</label><select id="assignSubjectSelect2"><option value="">Select Role</option>
-                                <option value="Front Desk">Front Desk</option><option value="Housekeeping">Housekeeping</option><option value="Food & Beverage">Food & Beverage</option><option value="Maintenance">Maintenance</option><option value="Management">Management</option><option value="Security">Security</option><option value="Concierge">Concierge</option><option value="Kitchen">Kitchen</option>
+                                <option value="Receptionist">Receptionist</option><option value="Housekeeper">Housekeeper</option><option value="Chef">Chef</option><option value="Waiter/Waitress">Waiter/Waitress</option><option value="Manager">Manager</option><option value="Security Guard">Security Guard</option><option value="Concierge">Concierge</option><option value="Maintenance Worker">Maintenance Worker</option>
                             </select></div>
                         </div>
                         <div class="grid-3">
@@ -410,18 +370,18 @@
                         </div>
                     </div>
 
-                    <div id="learnersTab2" class="admin-tab-content">
-                        <div class="card-header"><h2><i class="fas fa-users"></i> Guest Management</h2><span class="subtitle">Manage guests</span></div>
+                    <div id="roomsTab2" class="admin-tab-content">
+                        <div class="card-header"><h2><i class="fas fa-bed"></i> Room Management</h2><span class="subtitle">Manage 40 rooms across 5 room types</span></div>
                         <div class="grid-3">
-                            <div class="field"><label><i class="fas fa-id-card"></i> Booking Reference</label><input type="text" id="adminStudentNumber2" placeholder="e.g. BK-2024-001"></div>
-                            <div class="field"><label><i class="fas fa-user"></i> Full Name</label><input type="text" id="adminStudentName2" placeholder="e.g. John Banda"></div>
-                            <div class="field"><label><i class="fas fa-door-open"></i> Room Type</label><select id="adminStudentClass2"><option value="">Select Room Type</option><option value="Standard">Standard</option><option value="Deluxe">Deluxe</option><option value="Executive">Executive</option><option value="Suite">Suite</option><option value="Presidential">Presidential</option></select></div>
+                            <div class="field"><label><i class="fas fa-door-open"></i> Room Type</label><select id="adminRoomType"><option value="">Select Room Type</option><option value="Standard">Standard</option><option value="Deluxe">Deluxe</option><option value="Executive">Executive</option><option value="Suite">Suite</option><option value="Presidential">Presidential</option></select></div>
+                            <div class="field"><label><i class="fas fa-hashtag"></i> Room Number</label><input type="text" id="adminRoomNumber" placeholder="e.g. 101"></div>
+                            <div class="field"><label><i class="fas fa-dollar-sign"></i> Rate (ZMW)</label><input type="number" id="adminRoomRate" placeholder="e.g. 500"></div>
                         </div>
-                        <button class="btn btn-success btn-block" id="addStudentBtn2"><i class="fas fa-plus"></i> Add Guest</button>
+                        <button class="btn btn-success btn-block" id="addRoomBtn"><i class="fas fa-plus"></i> Add Room</button>
                         <div style="margin-top:12px;">
                             <div class="table-wrapper">
-                                <table><thead><tr><th>#</th><th>Booking Reference</th><th>Name</th><th>Room Type</th><th>Action</th></tr></thead>
-                                <tbody id="studentsTableBody2"><tr><td colspan="5" style="text-align:center;color:var(--ink-faint);">Loading guests...</td></tr></tbody></table>
+                                <table><thead><tr><th>#</th><th>Room Number</th><th>Type</th><th>Status</th><th>Rate (ZMW)</th><th>Action</th></tr></thead>
+                                <tbody id="roomsTableBody"><tr><td colspan="6" style="text-align:center;color:var(--ink-faint);">Loading rooms...</td></tr></tbody></table>
                             </div>
                         </div>
                     </div>
@@ -442,29 +402,12 @@
                             <h3 id="analysisSummaryTitle" style="color:var(--marian-blue);font-family:var(--font-display);margin-bottom:12px;"></h3>
                             <div class="grid-4" id="analysisStatCards" style="margin-bottom:20px;"></div>
                             <div class="card" style="border-top-color: var(--gold);">
-                                <div class="card-header"><h2><i class="fas fa-chart-pie"></i> Occupancy Distribution</h2></div>
+                                <div class="card-header"><h2><i class="fas fa-chart-pie"></i> Booking Status Distribution</h2></div>
                                 <div id="analysisGradeDistribution"></div>
-                            </div>
-                            <div style="margin:16px 0;display:flex;gap:8px;flex-wrap:wrap;">
-                                <button class="btn btn-success no-print" id="analysisDownloadExcelBtn" style="display:none;"><i class="fas fa-file-excel"></i> Download Excel</button>
-                                <button class="btn btn-outline no-print" id="analysisDownloadPdfBtn" style="display:none;"><i class="fas fa-file-pdf"></i> Download PDF</button>
                             </div>
                             <div class="table-wrapper"><table id="analysisTable"></table></div>
                         </div>
                     </div>
-                </div>
-
-                <div class="card" style="border-top-color: var(--oxblood);">
-                    <div class="card-header"><h2><i class="fas fa-user-plus" style="color:var(--oxblood);"></i> Bulk Register Guests</h2><span class="subtitle">Upload Excel with booking references & names</span></div>
-                    <div class="grid-3">
-                        <div class="field"><label><i class="fas fa-door-open"></i> Default Room Type</label><select id="bulkClassSelect"><option value="">Select Room Type</option><option value="Standard">Standard</option><option value="Deluxe">Deluxe</option><option value="Executive">Executive</option><option value="Suite">Suite</option><option value="Presidential">Presidential</option></select></div>
-                        <div class="field" style="justify-content:flex-end;"><button class="btn btn-primary" id="bulkRegisterTemplateBtn" style="width:100%;"><i class="fas fa-download"></i> Template</button></div>
-                        <div class="field" style="justify-content:flex-end;"><button class="btn btn-warning" id="bulkRegisterBtn" style="width:100%;"><i class="fas fa-upload"></i> Register</button></div>
-                    </div>
-                    <div class="import-area" id="bulkImportArea" style="margin-top:8px;"><i class="fas fa-file-excel" style="color:var(--oxblood);"></i><h3>Click or Drag Excel</h3><p>Required: Booking Reference, Name</p><input type="file" class="file-input" id="bulkFileInput" accept=".xlsx,.xls"></div>
-                    <div id="bulkImportPreview" class="import-preview" style="display:none;"></div>
-                    <div style="margin-top:12px; display:flex; gap:8px; flex-wrap:wrap;"><button class="btn btn-success" id="bulkConfirmImportBtn" style="display:none;"><i class="fas fa-check-circle"></i> Confirm</button><button class="btn btn-outline" id="bulkClearPreviewBtn" style="display:none;"><i class="fas fa-times"></i> Clear</button></div>
-                    <div id="bulkImportStatus" style="margin-top:8px; font-size:13px; color:var(--ink-soft);"></div>
                 </div>
 
                 <div class="grid-2">
@@ -476,25 +419,10 @@
                         <button class="btn btn-success btn-block" id="addTeacherBtn"><i class="fas fa-plus"></i> Add Staff</button>
                     </div>
                 </div>
-
-                <div class="card">
-                    <div class="card-header"><h2><i class="fas fa-bed"></i> Room Management</h2><span class="subtitle">View & manage rooms</span></div>
-                    <div class="table-wrapper">
-                        <table><thead><tr><th>#</th><th>Room Number</th><th>Type</th><th>Status</th><th>Rate (ZMW)</th><th>Action</th></tr></thead>
-                        <tbody id="classesTableBody"><tr><td colspan="6" style="text-align:center;color:var(--ink-faint);">Loading...</td></tr></tbody></table>
-                    </div>
-                    <div style="margin-top:16px;">
-                        <div class="grid-3">
-                            <div class="field"><label><i class="fas fa-door-open"></i> Room Type</label><select id="newClassGrade"><option value="">Select</option><option value="Standard">Standard</option><option value="Deluxe">Deluxe</option><option value="Executive">Executive</option><option value="Suite">Suite</option><option value="Presidential">Presidential</option></select></div>
-                            <div class="field"><label><i class="fas fa-hashtag"></i> Room Number</label><select id="newClassStream"><option value="">Select</option><option value="101">101</option><option value="102">102</option><option value="103">103</option><option value="201">201</option><option value="202">202</option><option value="203">203</option><option value="301">301</option><option value="302">302</option></select></div>
-                        </div>
-                        <button class="btn btn-success btn-block" id="addClassBtn"><i class="fas fa-plus"></i> Add Room</button>
-                    </div>
-                </div>
             </div>
         </div>
 
-        <div class="footer-note">Lakeview Lodge · Kasama District · Under ICT &copy; 2026</div>
+        <div class="footer-note">Lavevars Lodge · Kasama District · Under ICT &copy; 2026</div>
     </div>
 
     <div class="toast" id="globalToast"><i class="fas fa-check-circle"></i> <span id="toastMsg">Saved</span></div>
@@ -503,27 +431,27 @@
     (function() {
         "use strict";
 
-        const SUPABASE_URL = 'https://vokfonpslvruqrrrzjzh.supabase.co';
-    const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZva2ZvbnBzbHZydXFycnJ6anpoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTAzNTI3MTEsImV4cCI6MjEwNTkyODcxMX0.aoXjKuUYPzduqxoj54fvUANF7yZ1zqS9wq1eKtXnRVw';
+        const SUPABASE_URL = 'https://injvpbahfqltozrsqcmc.supabase.co';
+        const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImluanZwYmFoZnFsdG96cnNxY21jIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODc5MDM0MzIsImV4cCI6MjEwMzQ3OTQzMn0.JoGibO2fqrw7sbmBbQ55EUKONQl94cqPTmkqxNoiXXk';
+
+        /* 40 rooms across 5 types */
         const ROOM_TYPES = [
-            { id: 'Standard', display: 'Standard Room' },
-            { id: 'Deluxe', display: 'Deluxe Room' },
-            { id: 'Executive', display: 'Executive Room' },
-            { id: 'Suite', display: 'Suite' },
-            { id: 'Presidential', display: 'Presidential Suite' }
+            { id: 'Standard', display: 'Standard Room', rate: 500 },
+            { id: 'Deluxe', display: 'Deluxe Room', rate: 850 },
+            { id: 'Executive', display: 'Executive Room', rate: 1200 },
+            { id: 'Suite', display: 'Suite', rate: 1800 },
+            { id: 'Presidential', display: 'Presidential Suite', rate: 3500 }
         ];
 
-        const DEPARTMENTS = [
-            'Front Desk', 'Housekeeping', 'Food & Beverage', 'Maintenance',
-            'Management', 'Security', 'Concierge', 'Kitchen'
-        ];
+        const DEPARTMENTS = ['Front Desk', 'Housekeeping', 'Food & Beverage', 'Maintenance', 'Management', 'Security', 'Concierge', 'Kitchen'];
+        const ROLES = ['Receptionist', 'Housekeeper', 'Chef', 'Waiter/Waitress', 'Manager', 'Security Guard', 'Concierge', 'Maintenance Worker'];
 
         let supabaseClient = null;
         let currentUser = null;
         let isConnected = false;
         let bulkData = null;
         let staffImportData = null;
-        let currentLodgeCode = 'LL';
+        let currentLodgeCode = 'LV';
         let currentAnalysisData = null;
         let ROOM_CACHE = {};
         let ROOM_LIST = [];
@@ -539,15 +467,6 @@
         const loginOptions = document.getElementById('loginOptions');
         const loggedInUserName = document.getElementById('loggedInUserName');
         const logoutFromModalBtn = document.getElementById('logoutFromModalBtn');
-
-        const guestBookingRef = document.getElementById('guestBookingRef');
-        const guestCheckIn = document.getElementById('guestCheckIn');
-        const guestCheckOut = document.getElementById('guestCheckOut');
-        const viewBookingBtn = document.getElementById('viewBookingBtn');
-        const guestBookingResults = document.getElementById('guestBookingResults');
-        const guestInfo = document.getElementById('guestInfo');
-        const bookingContent = document.getElementById('bookingContent');
-        const downloadBookingBtn = document.getElementById('downloadBookingBtn');
 
         const staffRoomType = document.getElementById('staffRoomType');
         const staffMonth = document.getElementById('staffMonth');
@@ -571,43 +490,29 @@
         const staffImportPreview = document.getElementById('staffImportPreview');
         const staffImportBtn = document.getElementById('staffImportBtn');
         const staffImportClearBtn = document.getElementById('staffImportClearBtn');
-        const staffImportStatusMsg = document.getElementById('staffImportStatus');
+        const staffImportStatusMsg = document.getElementById('staffImportStatusMsg');
 
         const assignTeacherSelect2 = document.getElementById('assignTeacherSelect2');
         const assignClassSelect2 = document.getElementById('assignClassSelect2');
         const assignSubjectSelect2 = document.getElementById('assignSubjectSelect2');
         const assignTeacherBtn2 = document.getElementById('assignTeacherBtn2');
         const assignmentsTableBody2 = document.getElementById('assignmentsTableBody2');
-        const adminStudentClass2 = document.getElementById('adminStudentClass2');
-        const addStudentBtn2 = document.getElementById('addStudentBtn2');
-        const studentsTableBody2 = document.getElementById('studentsTableBody2');
+        const adminRoomType = document.getElementById('adminRoomType');
+        const adminRoomNumber = document.getElementById('adminRoomNumber');
+        const adminRoomRate = document.getElementById('adminRoomRate');
+        const addRoomBtn = document.getElementById('addRoomBtn');
+        const roomsTableBody = document.getElementById('roomsTableBody');
 
-        const adminStudentNumber2 = document.getElementById('adminStudentNumber2');
-        const adminStudentName2 = document.getElementById('adminStudentName2');
         const adminTeacherName = document.getElementById('adminTeacherName');
         const adminTeacherUsername = document.getElementById('adminTeacherUsername');
         const adminTeacherPassword = document.getElementById('adminTeacherPassword');
         const addTeacherBtn = document.getElementById('addTeacherBtn');
         const totalRooms = document.getElementById('totalRooms');
-        const totalGuests = document.getElementById('totalGuests');
+        const totalStaff = document.getElementById('totalStaff');
         const totalBookings = document.getElementById('totalBookings');
         const totalRevenue = document.getElementById('totalRevenue');
         const adminLocked = document.getElementById('adminLocked');
         const adminContent = document.getElementById('adminContent');
-        const classesTableBody = document.getElementById('classesTableBody');
-        const newClassGrade = document.getElementById('newClassGrade');
-        const newClassStream = document.getElementById('newClassStream');
-        const addClassBtn = document.getElementById('addClassBtn');
-
-        const bulkClassSelect = document.getElementById('bulkClassSelect');
-        const bulkImportArea = document.getElementById('bulkImportArea');
-        const bulkFileInput = document.getElementById('bulkFileInput');
-        const bulkImportPreview = document.getElementById('bulkImportPreview');
-        const bulkConfirmImportBtn = document.getElementById('bulkConfirmImportBtn');
-        const bulkClearPreviewBtn = document.getElementById('bulkClearPreviewBtn');
-        const bulkImportStatus = document.getElementById('bulkImportStatus');
-        const bulkRegisterTemplateBtn = document.getElementById('bulkRegisterTemplateBtn');
-        const bulkRegisterBtn = document.getElementById('bulkRegisterBtn');
 
         const analysisClassSelect = document.getElementById('analysisClassSelect');
         const analysisSubjectSelect = document.getElementById('analysisSubjectSelect');
@@ -619,17 +524,14 @@
         const analysisStatCards = document.getElementById('analysisStatCards');
         const analysisGradeDistribution = document.getElementById('analysisGradeDistribution');
         const analysisTable = document.getElementById('analysisTable');
-        const analysisDownloadExcelBtn = document.getElementById('analysisDownloadExcelBtn');
-        const analysisDownloadPdfBtn = document.getElementById('analysisDownloadPdfBtn');
 
         const LODGE_CONFIG = {
             lodges: {
-                'LL': { code:'LL', name:'Lakeview Lodge', motto:'Comfort · Elegance · Serenity', logo:'lodge_logo.png', theme:{primary:'#1a237e',secondary:'#B8862E'}, location:'Kasama District' },
-                'HL': { code:'HL', name:'Hilltop Lodge', motto:'Where Comfort Meets Nature', logo:'lodge_logo.png', theme:{primary:'#006400',secondary:'#FFD700'}, location:'Northern Province' }
+                'LV': { code:'LV', name:'Lavevars Lodge', motto:'Comfort · Elegance · Serenity', logo:'LadyB%20logo.jpeg', theme:{primary:'#1a237e',secondary:'#B8862E'}, location:'Kasama District' }
             }
         };
 
-        function getCurrentLodge() { return LODGE_CONFIG.lodges[currentLodgeCode] || LODGE_CONFIG.lodges['LL']; }
+        function getCurrentLodge() { return LODGE_CONFIG.lodges[currentLodgeCode] || LODGE_CONFIG.lodges['LV']; }
 
         function applyLodgeBranding() {
             const lodge = getCurrentLodge();
@@ -646,7 +548,7 @@
 
         function setupAdminTabs() {
             const tabs = document.querySelectorAll('#adminTabs2 .admin-tab');
-            const contents = ['assignmentsTab2','learnersTab2','analysisTab2'];
+            const contents = ['assignmentsTab2','roomsTab2','analysisTab2'];
             tabs.forEach(tab => {
                 if (tab.dataset.bound === 'true') return;
                 tab.dataset.bound = 'true';
@@ -692,8 +594,7 @@
                 logoutSection.style.display = 'block';
                 if (loginOptions) loginOptions.style.display = 'none';
                 let displayName = 'User';
-                if (currentUser.role === 'guest') displayName = 'Guest: ' + currentUser.id;
-                else if (currentUser.role === 'staff') displayName = 'Staff: ' + (currentUser.name || currentUser.id);
+                if (currentUser.role === 'staff') displayName = 'Staff: ' + (currentUser.name || currentUser.id);
                 else if (currentUser.role === 'admin') displayName = 'Administrator';
                 loggedInUserName.textContent = displayName;
                 loginFloatingBtn.innerHTML = '<i class="fas fa-user-check"></i>';
@@ -715,29 +616,13 @@
             currentUser = null;
             updateLoginUI();
             showToast('🔒 Logged out');
-            guestBookingResults.style.display = 'none';
             bookingsEntry.style.display = 'none';
             staffLocked.style.display = 'block';
             staffContent.style.display = 'none';
             adminLocked.style.display = 'block';
             adminContent.style.display = 'none';
-            document.querySelector('.tab-btn[data-tab="guest"]').click();
+            document.querySelector('.tab-btn[data-tab="staff"]').click();
         }
-
-        function guestLogin() {
-            const id = document.getElementById('guestLoginNumber').value.trim();
-            if (!id) { showToast('⚠️ Please enter booking reference', true); return; }
-            currentUser = { role: 'guest', id };
-            showToast('✅ Logged in as guest: ' + id);
-            loginModal.classList.remove('active');
-            updateLoginUI();
-            document.querySelector('.tab-btn[data-tab="guest"]').click();
-            document.getElementById('guestBookingRef').value = id;
-            if (!guestCheckIn.value) guestCheckIn.value = '2025-01-15';
-            if (!guestCheckOut.value) guestCheckOut.value = '2025-01-20';
-            setTimeout(() => viewBookingBtn.click(), 120);
-        }
-        window.guestLogin = guestLogin;
 
         async function staffLogin() {
             const username = document.getElementById('staffLoginUsername').value.trim();
@@ -899,11 +784,9 @@
                 await loadRoomsIntoCache();
                 loadAdminStats();
                 loadRooms();
-                populateBulkRoomDropdown();
                 populateAdminDropdowns();
                 populateAnalysisRoomDropdown();
                 loadAssignments();
-                loadGuests();
                 setupAdminTabs();
             } catch (err) {
                 showToast('❌ Error: ' + err.message, true);
@@ -918,41 +801,33 @@
             (data || []).forEach(c => {
                 const display = c.display_name || ((c.room_type || '') + ' ' + (c.room_number || '')).trim();
                 ROOM_CACHE[String(c.id)] = display;
-                ROOM_LIST.push({ id: c.id, room_type: c.room_type, room_number: c.room_number, display });
+                ROOM_LIST.push({ id: c.id, room_type: c.room_type, room_number: c.room_number, display, rate: c.rate });
             });
         }
 
+        /* Seed all 40 rooms if missing */
         async function ensureRoomsExist() {
             if (!supabaseClient || !isConnected) return;
             try {
                 const { data: existing, error } = await supabaseClient
-                    .from('rooms').select('room_type, room_number');
+                    .from('rooms').select('room_number');
                 if (error) { console.warn('Cannot read rooms:', error.message); return; }
 
-                const existingKeys = new Set(
-                    (existing || []).map(c => `${(c.room_type||'').trim()}|${(c.room_number||'').trim()}`)
-                );
+                const existingNums = new Set((existing || []).map(r => String(r.room_number).trim()));
+                const seedRooms = [];
 
-                const toInsert = ROOM_TYPES
-                    .map(c => ({
-                        room_type: c.id,
-                        room_number: '',
-                        display_name: c.display,
-                        rate: c.id === 'Standard' ? 500 : c.id === 'Deluxe' ? 850 : c.id === 'Executive' ? 1200 : c.id === 'Suite' ? 1800 : 3500
-                    }))
-                    .filter(r => !existingKeys.has(`${r.room_type}|${r.room_number}`));
+                for (let i = 101; i <= 108; i++) seedRooms.push({ room_type:'Standard', room_number:String(i), display_name:'Standard '+i, rate:500, status:'Available' });
+                for (let i = 109; i <= 116; i++) seedRooms.push({ room_type:'Deluxe', room_number:String(i), display_name:'Deluxe '+i, rate:850, status:'Available' });
+                for (let i = 201; i <= 208; i++) seedRooms.push({ room_type:'Executive', room_number:String(i), display_name:'Executive '+i, rate:1200, status:'Available' });
+                for (let i = 209; i <= 214; i++) seedRooms.push({ room_type:'Suite', room_number:String(i), display_name:'Suite '+i, rate:1800, status:'Available' });
+                for (let i = 301; i <= 310; i++) seedRooms.push({ room_type:'Presidential', room_number:String(i), display_name:'Presidential '+i, rate:3500, status:'Available' });
 
-                if (toInsert.length === 0) {
-                    console.log(`✅ All room types already present`);
-                    return;
-                }
+                const toInsert = seedRooms.filter(r => !existingNums.has(r.room_number));
+                if (toInsert.length === 0) { console.log('✅ All 40 rooms already present'); return; }
 
                 const { error: insErr } = await supabaseClient.from('rooms').insert(toInsert);
-                if (insErr) {
-                    console.warn('Could not insert missing rooms:', insErr.message);
-                } else {
-                    console.log(`✅ Inserted ${toInsert.length} missing room type(s)`);
-                }
+                if (insErr) console.warn('Could not insert rooms:', insErr.message);
+                else console.log(`✅ Inserted ${toInsert.length} room(s)`);
             } catch (e) { console.error('ensureRoomsExist error:', e); }
         }
 
@@ -961,8 +836,8 @@
             try {
                 const { data, error } = await supabaseClient
                     .from('rooms')
-                    .select('id, room_type, room_number, display_name, rate')
-                    .order('room_type', { ascending: true });
+                    .select('id, room_type, room_number, display_name, rate, status')
+                    .order('room_number', { ascending: true });
                 if (error) throw error;
                 applyRoomData(data);
             } catch (e) {
@@ -975,8 +850,7 @@
             if (roomId === null || roomId === undefined || roomId === '') return 'N/A';
             const key = String(roomId);
             if (ROOM_CACHE[key]) return ROOM_CACHE[key];
-            const legacy = ROOM_TYPES.find(c => String(c.id) === key);
-            return legacy ? legacy.display : key;
+            return key;
         }
 
         function fillRoomDropdown(drop, firstOption) {
@@ -995,8 +869,7 @@
             }
         }
 
-        function populateRoomDropdowns() { fillRoomDropdown(staffRoomType, 'Select Room Type'); fillRoomDropdown(adminStudentClass2, 'Select Room Type'); }
-        function populateBulkRoomDropdown() { fillRoomDropdown(bulkClassSelect, 'Select Room Type'); }
+        function populateRoomDropdowns() { fillRoomDropdown(staffRoomType, 'Select Room Type'); }
         function populateAnalysisRoomDropdown() {
             if (!analysisClassSelect) return;
             analysisClassSelect.innerHTML = '<option value="">All Room Types</option>';
@@ -1007,7 +880,6 @@
             });
         }
         function populateAdminDropdowns() {
-            fillRoomDropdown(assignClassSelect2, 'Select Department');
             if (!supabaseClient || !isConnected) {
                 if (assignTeacherSelect2) assignTeacherSelect2.innerHTML = '<option value="">Select Staff</option>';
                 return;
@@ -1029,8 +901,6 @@
 
         function initSupabase() {
             try {
-                const savedLodge = localStorage.getItem('selectedLodge');
-                if (savedLodge && LODGE_CONFIG.lodges[savedLodge]) currentLodgeCode = savedLodge;
                 applyLodgeBranding();
 
                 if (typeof window.supabase === 'undefined' || !window.supabase.createClient) {
@@ -1043,7 +913,7 @@
                     auth: { persistSession:false, autoRefreshToken:false, detectSessionInUrl:false }
                 });
 
-                supabaseClient.from('guests').select('id', { count:'exact', head:true })
+                supabaseClient.from('rooms').select('id', { count:'exact', head:true })
                     .then(({ data, error }) => {
                         if (error) {
                             setConnectionStatus('offline', 'Error');
@@ -1073,26 +943,24 @@
             loadAdminStats();
             loadRooms();
             populateRoomDropdowns();
-            populateBulkRoomDropdown();
             populateAdminDropdowns();
             populateAnalysisRoomDropdown();
             loadAssignments();
-            loadGuests();
             updateLoginUI();
             setupAdminTabs();
         }
 
         async function loadAdminStats() {
             if (!supabaseClient || !isConnected) {
-                totalRooms.textContent = '?'; totalGuests.textContent = '?';
+                totalRooms.textContent = '?'; totalStaff.textContent = '?';
                 totalBookings.textContent = '?'; totalRevenue.textContent = '?';
                 return;
             }
             try {
                 const { count: rc } = await supabaseClient.from('rooms').select('*', { count:'exact', head:true });
                 totalRooms.textContent = rc || 0;
-                const { count: gc } = await supabaseClient.from('guests').select('*', { count:'exact', head:true });
-                totalGuests.textContent = gc || 0;
+                const { count: sc } = await supabaseClient.from('staff').select('*', { count:'exact', head:true });
+                totalStaff.textContent = sc || 0;
                 const { count: bc } = await supabaseClient.from('bookings').select('*', { count:'exact', head:true });
                 totalBookings.textContent = bc || 0;
                 const { data: revData } = await supabaseClient.from('bookings').select('total_amount').eq('status', 'checked_out');
@@ -1103,41 +971,37 @@
 
         async function loadRooms() {
             if (!supabaseClient || !isConnected) {
-                classesTableBody.innerHTML = `<tr><td colspan="6" style="text-align:center;color:var(--ink-faint);">Database not connected</td></tr>`;
+                roomsTableBody.innerHTML = `<tr><td colspan="6" style="text-align:center;color:var(--ink-faint);">Database not connected</td></tr>`;
                 return;
             }
             try {
-                const { data, error } = await supabaseClient.from('rooms').select('*').order('room_type', { ascending:true });
+                const { data, error } = await supabaseClient.from('rooms').select('*').order('room_number', { ascending:true });
                 if (error) throw error;
 
                 applyRoomData(data);
-
                 populateRoomDropdowns();
-                populateBulkRoomDropdown();
-                populateAnalysisRoomDropdown();
-                fillRoomDropdown(assignClassSelect2, 'Select Department');
 
                 if (!data || data.length === 0) {
-                    classesTableBody.innerHTML = `<tr><td colspan="6" style="text-align:center;color:var(--ink-faint);">No rooms yet — add one below.</td></tr>`;
+                    roomsTableBody.innerHTML = `<tr><td colspan="6" style="text-align:center;color:var(--ink-faint);">No rooms yet — add one above.</td></tr>`;
                     return;
                 }
 
                 let html = '';
                 data.forEach((c, i) => {
-                    const displayName = c.display_name || `${c.room_type} ${c.room_number}`;
-                    html += `<tr data-room-id="${c.id}">
+                    const statusClass = c.status === 'Occupied' ? 'badge-danger' : c.status === 'Maintenance' ? 'badge-warning' : 'badge-success';
+                    html += `<tr>
                         <td>${i+1}</td>
-                        <td><strong>${displayName}</strong></td>
+                        <td><strong>${c.room_number || ''}</strong></td>
                         <td>${c.room_type || ''}</td>
-                        <td>${c.status || 'Available'}</td>
+                        <td><span class="badge ${statusClass}">${c.status || 'Available'}</span></td>
                         <td>ZMW ${(c.rate || 0).toLocaleString()}</td>
                         <td><button class="btn btn-sm btn-danger" onclick="window.deleteRoom('${c.id}')"><i class="fas fa-trash"></i></button></td>
                     </tr>`;
                 });
-                classesTableBody.innerHTML = html;
+                roomsTableBody.innerHTML = html;
             } catch (e) {
                 console.error('Error loading rooms:', e);
-                classesTableBody.innerHTML = `<tr><td colspan="6" style="text-align:center;color:var(--ink-faint);">Error loading rooms</td></tr>`;
+                roomsTableBody.innerHTML = `<tr><td colspan="6" style="text-align:center;color:var(--ink-faint);">Error loading rooms</td></tr>`;
             }
         }
 
@@ -1151,6 +1015,32 @@
             }).catch(err => showToast('❌ ' + err.message, true));
         };
 
+        addRoomBtn.addEventListener('click', async function() {
+            if (!currentUser || currentUser.role !== 'admin') { showToast('🔒 Admin login required', true); return; }
+            const roomType = adminRoomType.value;
+            const roomNumber = adminRoomNumber.value.trim();
+            const rate = parseInt(adminRoomRate.value);
+
+            if (!roomType) { showToast('⚠️ Please select room type', true); return; }
+            if (!roomNumber) { showToast('⚠️ Please enter room number', true); return; }
+            if (!rate || rate <= 0) { showToast('⚠️ Please enter valid rate', true); return; }
+            if (!supabaseClient || !isConnected) { showToast('⚠️ Database not connected', true); return; }
+
+            try {
+                const displayName = roomType + ' ' + roomNumber;
+                const { error } = await supabaseClient.from('rooms')
+                    .insert({ room_type: roomType, room_number: roomNumber, display_name: displayName, status: 'Available', rate });
+                if (error) {
+                    if (/duplicate/i.test(error.message)) { showToast('❌ Room number already exists', true); }
+                    else throw error;
+                    return;
+                }
+                showToast('✅ Room added!');
+                adminRoomType.value = ''; adminRoomNumber.value = ''; adminRoomRate.value = '';
+                await loadRooms(); loadAdminStats();
+            } catch (err) { showToast('❌ Error: ' + err.message, true); console.error(err); }
+        });
+
         async function loadAssignments() {
             if (!supabaseClient || !isConnected) {
                 if (assignmentsTableBody2) assignmentsTableBody2.innerHTML = `<tr><td colspan="5" style="text-align:center;color:var(--ink-faint);">Database not connected</td></tr>`;
@@ -1159,8 +1049,8 @@
             try {
                 const { data, error } = await supabaseClient
                     .from('staff_assignments')
-                    .select('*, staff(name), departments(display_name)')
-                    .order('department_id');
+                    .select('*, staff(name)')
+                    .order('department');
                 if (error) throw error;
 
                 if (!data || data.length === 0) {
@@ -1170,14 +1060,13 @@
 
                 let html = '';
                 data.forEach((a, i) => {
-                    const deptDisplay = a.departments ? (a.departments.display_name || a.department_id) : getRoomDisplay(a.department_id);
                     const staffName = a.staff ? a.staff.name : 'Unknown';
                     html += `<tr class="assignment-row">
                         <td>${i+1}</td>
-                        <td><strong>${deptDisplay}</strong></td>
+                        <td><strong>${a.department}</strong></td>
                         <td><span class="badge badge-purple">${a.role}</span></td>
                         <td>${staffName}</td>
-                        <td><button class="btn btn-sm btn-danger" onclick="window.removeAssignment('${a.department_id}', '${a.role}')"><i class="fas fa-times"></i> Remove</button></td>
+                        <td><button class="btn btn-sm btn-danger" onclick="window.removeAssignment('${a.id}')"><i class="fas fa-times"></i> Remove</button></td>
                     </tr>`;
                 });
                 assignmentsTableBody2.innerHTML = html;
@@ -1187,14 +1076,12 @@
             }
         }
 
-        window.removeAssignment = async function(departmentId, role) {
+        window.removeAssignment = async function(id) {
             if (!currentUser || currentUser.role !== 'admin') { showToast('🔒 Admin only', true); return; }
             if (!confirm('Remove this assignment?')) return;
             if (!supabaseClient || !isConnected) { showToast('⚠️ Not connected to database', true); return; }
             try {
-                let q = supabaseClient.from('staff_assignments').delete().eq('department_id', departmentId);
-                if (role) q = q.eq('role', role);
-                await q;
+                await supabaseClient.from('staff_assignments').delete().eq('id', id);
                 showToast('✅ Assignment removed');
                 loadAssignments();
             } catch (err) { showToast('❌ Error: ' + err.message, true); console.error(err); }
@@ -1203,98 +1090,22 @@
         assignTeacherBtn2.addEventListener('click', async function() {
             if (!currentUser || currentUser.role !== 'admin') { showToast('🔒 Admin login required', true); return; }
             const staffId = assignTeacherSelect2.value;
-            const departmentId   = assignClassSelect2.value;
-            const role   = assignSubjectSelect2.value;
+            const department = assignClassSelect2.value;
+            const role = assignSubjectSelect2.value;
 
             if (!staffId) { showToast('⚠️ Please select a staff member', true); return; }
-            if (!departmentId)   { showToast('⚠️ Please select a department',   true); return; }
-            if (!role)   { showToast('⚠️ Please select a role', true); return; }
+            if (!department) { showToast('⚠️ Please select a department', true); return; }
+            if (!role) { showToast('⚠️ Please select a role', true); return; }
             if (!supabaseClient || !isConnected) { showToast('⚠️ Database not connected', true); return; }
 
             try {
-                const { data: existing } = await supabaseClient
-                    .from('staff_assignments').select('*')
-                    .eq('department_id', departmentId).eq('role', role).maybeSingle();
-
-                if (existing) {
-                    await supabaseClient.from('staff_assignments')
-                        .update({ staff_id: staffId })
-                        .eq('department_id', departmentId).eq('role', role);
-                } else {
-                    await supabaseClient.from('staff_assignments')
-                        .insert({ staff_id: staffId, department_id: departmentId, role });
-                }
+                const { error } = await supabaseClient.from('staff_assignments')
+                    .insert({ staff_id: staffId, department, role });
+                if (error) throw error;
 
                 const { data: staff } = await supabaseClient.from('staff').select('name').eq('id', staffId).maybeSingle();
-                showToast(`✅ ${staff ? staff.name : 'Staff'} assigned to ${role} in this department!`);
+                showToast(`✅ ${staff ? staff.name : 'Staff'} assigned!`);
                 loadAssignments();
-            } catch (err) { showToast('❌ Error: ' + err.message, true); console.error(err); }
-        });
-
-        async function loadGuests() {
-            if (!supabaseClient || !isConnected) {
-                if (studentsTableBody2) studentsTableBody2.innerHTML = `<tr><td colspan="5" style="text-align:center;color:var(--ink-faint);">Database not connected</td></tr>`;
-                return;
-            }
-            try {
-                const { data, error } = await supabaseClient.from('guests').select('*').order('name');
-                if (error) throw error;
-
-                if (!data || data.length === 0) {
-                    studentsTableBody2.innerHTML = `<tr><td colspan="5" style="text-align:center;color:var(--ink-faint);">No guests found.</td></tr>`;
-                    return;
-                }
-
-                let html = '';
-                data.forEach((s, i) => {
-                    const roomDisplay = getRoomDisplay(s.room_type);
-                    html += `<tr>
-                        <td>${i+1}</td>
-                        <td><strong>${s.booking_ref}</strong></td>
-                        <td>${s.name}</td>
-                        <td>${roomDisplay}</td>
-                        <td><button class="btn btn-sm btn-danger" onclick="window.deleteGuest('${s.id}')"><i class="fas fa-times"></i> Remove</button></td>
-                    </tr>`;
-                });
-                studentsTableBody2.innerHTML = html;
-            } catch (err) {
-                console.error('Error loading guests:', err);
-                studentsTableBody2.innerHTML = `<tr><td colspan="5" style="text-align:center;color:var(--ink-faint);">Error loading guests</td></tr>`;
-            }
-        }
-
-        window.deleteGuest = async function(id) {
-            if (!currentUser || currentUser.role !== 'admin') { showToast('🔒 Admin only', true); return; }
-            if (!confirm('Delete this guest?')) return;
-            if (!supabaseClient || !isConnected) { showToast('⚠️ Not connected to database', true); return; }
-            try {
-                await supabaseClient.from('guests').delete().eq('id', id);
-                showToast('✅ Guest deleted');
-                loadGuests(); loadAdminStats(); loadRooms();
-            } catch (err) { showToast('❌ Error: ' + err.message, true); console.error(err); }
-        };
-
-        addStudentBtn2.addEventListener('click', async function() {
-            if (!currentUser || currentUser.role !== 'admin') { showToast('🔒 Admin login required', true); return; }
-            const bookingRef = adminStudentNumber2.value.trim();
-            const name   = adminStudentName2.value.trim();
-            const roomType = adminStudentClass2.value;
-
-            if (!bookingRef)    { showToast('⚠️ Please enter booking reference', true); return; }
-            if (!name)      { showToast('⚠️ Please enter guest name',   true); return; }
-            if (!roomType) { showToast('⚠️ Please select room type',         true); return; }
-            if (!supabaseClient || !isConnected) { showToast('⚠️ Database not connected', true); return; }
-
-            try {
-                const { error } = await supabaseClient.from('guests')
-                    .insert({ booking_ref: bookingRef, name, room_type: String(roomType) });
-                if (error) throw error;
-
-                showToast('✅ Guest added successfully!');
-                adminStudentNumber2.value = '';
-                adminStudentName2.value = '';
-                adminStudentClass2.value = '';
-                loadGuests(); loadAdminStats(); loadRooms();
             } catch (err) { showToast('❌ Error: ' + err.message, true); console.error(err); }
         });
 
@@ -1305,8 +1116,8 @@
             const password = adminTeacherPassword.value.trim();
 
             if (!name)     { showToast('⚠️ Please enter staff name', true); return; }
-            if (!username) { showToast('⚠️ Please enter username',     true); return; }
-            if (!password) { showToast('⚠️ Please enter password',     true); return; }
+            if (!username) { showToast('⚠️ Please enter username', true); return; }
+            if (!password) { showToast('⚠️ Please enter password', true); return; }
             if (!supabaseClient || !isConnected) { showToast('⚠️ Database not connected', true); return; }
 
             try {
@@ -1327,42 +1138,15 @@
             } catch (err) { showToast('❌ Error: ' + err.message, true); console.error(err); }
         });
 
-        addClassBtn.addEventListener('click', async function() {
-            if (!currentUser || currentUser.role !== 'admin') { showToast('🔒 Admin login required', true); return; }
-            const roomType  = newClassGrade.value;
-            const roomNumber = newClassStream.value;
-
-            if (!roomType)  { showToast('⚠️ Please select a room type',  true); return; }
-            if (!roomNumber) { showToast('⚠️ Please select a room number', true); return; }
-            if (!supabaseClient || !isConnected) { showToast('⚠️ Database not connected', true); return; }
-
-            try {
-                const displayName = roomType + ' ' + roomNumber;
-                const { error } = await supabaseClient.from('rooms')
-                    .insert({ room_type: roomType, room_number: roomNumber, display_name: displayName, status: 'Available', rate: roomType === 'Standard' ? 500 : roomType === 'Deluxe' ? 850 : roomType === 'Executive' ? 1200 : roomType === 'Suite' ? 1800 : 3500 });
-                if (error) {
-                    if (/duplicate/i.test(error.message)) { showToast('❌ Room already exists', true); }
-                    else throw error;
-                    return;
-                }
-
-                showToast('✅ Room added successfully!');
-                newClassGrade.value = '';
-                newClassStream.value = '';
-                await loadRooms();
-            } catch (err) { showToast('❌ Error: ' + err.message, true); console.error(err); }
-        });
-
         loadBookingsBtn.addEventListener('click', async function() {
             if (!currentUser || currentUser.role !== 'staff') {
                 showToast('🔒 Staff login required', true);
                 return;
             }
 
-            const roomTypeValue = staffRoomType.value;
-            const month      = staffMonth.value;
-            const year         = staffYear.value;
-            const status     = staffBookingStatus.value;
+            const month = staffMonth.value;
+            const year = staffYear.value;
+            const status = staffBookingStatus.value;
 
             if (!month || !year || !status) {
                 showToast('⚠️ Please select month, year and status', true);
@@ -1375,10 +1159,9 @@
 
             try {
                 showToast('🔄 Loading bookings...');
-
                 const { data: bookings, error } = await supabaseClient
                     .from('bookings')
-                    .select('id, guest_id, booking_ref, room_id, check_in, check_out, status, total_amount')
+                    .select('id, booking_ref, room_id, check_in, check_out, status, total_amount')
                     .eq('month', month)
                     .eq('year', year)
                     .eq('status', status)
@@ -1419,55 +1202,13 @@
             return String(str ?? '').replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
         }
 
-        async function findGuestByBookingRef(rawInput) {
-            if (!rawInput) return { guest: null, error: null };
-            const base = String(rawInput).trim();
-            const candidates = new Set();
-            candidates.add(base);
-            candidates.add(base.replace(/\s+/g, ''));
-            const candidateList = [...candidates].filter(Boolean);
-            let lastError = null;
-
-            for (const candidate of candidateList) {
-                const { data, error } = await supabaseClient.from('guests').select('*').eq('booking_ref', candidate).maybeSingle();
-                if (error) { lastError = error; continue; }
-                if (data) return { guest: data, error: null };
-            }
-            try {
-                const safe = base.replace(/[%_]/g, '');
-                const { data: likeData, error: likeErr } = await supabaseClient
-                    .from('guests').select('*').ilike('booking_ref', `%${safe}%`).limit(5);
-                if (likeErr) lastError = likeErr;
-                else if (likeData && likeData.length === 1) return { guest: likeData[0], error: null };
-                else if (likeData && likeData.length > 1) {
-                    return { guest: null, error: new Error('Multiple guests match "' + base + '"') };
-                }
-            } catch (e) { lastError = e; }
-            return { guest: null, error: lastError };
-        }
-
-        function renderGuestInfoCard(guest, checkIn, checkOut) {
-            const roomDisplay = getRoomDisplay(guest.room_type);
-            return `
-                <div class="student-info-box">
-                    <div class="info-item"><span class="label"><i class="fas fa-user"></i> Full Name</span>
-                        <span class="value">${escapeHtml(guest.name)}</span></div>
-                    <div class="info-item"><span class="label"><i class="fas fa-id-card"></i> Booking Reference</span>
-                        <span class="value">${escapeHtml(guest.booking_ref)}</span></div>
-                    <div class="info-item"><span class="label"><i class="fas fa-door-open"></i> Room Type</span>
-                        <span class="value class-badge"><i class="fas fa-bed"></i> ${escapeHtml(roomDisplay)}</span></div>
-                    <div class="info-item"><span class="label"><i class="fas fa-calendar-alt"></i> Stay Dates</span>
-                        <span class="value">${escapeHtml(checkIn)} → ${escapeHtml(checkOut)}</span></div>
-                </div>`;
-        }
-
-        async function generateAnalysisReport() {
+        generateAnalysisBtn.addEventListener('click', async function() {
             if (!currentUser || currentUser.role !== 'admin') { showToast('🔒 Admin login required', true); return; }
 
-            const roomType  = analysisClassSelect.value;
-            const status  = analysisSubjectSelect.value;
-            const month     = analysisTermSelect.value;
-            const year     = analysisYearSelect.value;
+            const roomType = analysisClassSelect.value;
+            const status = analysisSubjectSelect.value;
+            const month = analysisTermSelect.value;
+            const year = analysisYearSelect.value;
 
             if (!month || !year) { showToast('⚠️ Please select month and year', true); return; }
             if (!supabaseClient || !isConnected) { showToast('⚠️ Database not connected', true); return; }
@@ -1476,9 +1217,8 @@
                 showToast('🔄 Generating analysis...');
 
                 let bQ = supabaseClient.from('bookings')
-                    .select('id, guest_id, booking_ref, room_id, check_in, check_out, status, total_amount')
+                    .select('id, booking_ref, room_id, check_in, check_out, status, total_amount')
                     .eq('month', month).eq('year', year);
-                if (roomType) bQ = bQ.eq('room_id', roomType);
                 if (status) bQ = bQ.eq('status', status);
 
                 const { data: bookings, error: bErr } = await bQ;
@@ -1511,20 +1251,19 @@
                 renderAnalysisReport(currentAnalysisData);
                 showToast(`✅ Analysis generated for ${rows.length} bookings`);
             } catch (err) { showToast('❌ Error: ' + err.message, true); console.error(err); }
-        }
+        });
 
         function renderAnalysisReport(data) {
-            const { rows, totalAmount, avgAmount, confirmed, checkedIn, checkedOut, cancelled, roomType, status, month, year } = data;
-            const roomLabel = roomType ? getRoomDisplay(roomType) : 'All Room Types';
+            const { rows, totalAmount, avgAmount, confirmed, checkedIn, checkedOut, cancelled, roomType, month, year } = data;
             const monthNames = ['','January','February','March','April','May','June','July','August','September','October','November','December'];
             const monthLabel = monthNames[parseInt(month)] || month;
 
-            analysisSummaryTitle.textContent = `${roomLabel} · ${monthLabel} ${year}`;
+            analysisSummaryTitle.textContent = `Bookings · ${monthLabel} ${year}`;
 
             analysisStatCards.innerHTML = `
                 <div class="stat-card"><div class="icon"><i class="fas fa-book"></i></div><div class="number">${rows.length}</div><div class="label">Total Bookings</div></div>
                 <div class="stat-card"><div class="icon"><i class="fas fa-dollar-sign"></i></div><div class="number">ZMW ${totalAmount.toLocaleString()}</div><div class="label">Total Revenue</div></div>
-                <div class="stat-card"><div class="icon"><i class="fas fa-chart-line"></i></div><div class="number">ZMW ${avgAmount.toLocaleString()}</div><div class="label">Average per Booking</div></div>
+                <div class="stat-card"><div class="icon"><i class="fas fa-chart-line"></i></div><div class="number">ZMW ${avgAmount.toLocaleString()}</div><div class="label">Avg per Booking</div></div>
                 <div class="stat-card"><div class="icon"><i class="fas fa-check-circle"></i></div><div class="number">${checkedOut}</div><div class="label">Completed Stays</div></div>`;
 
             const statusColors = { confirmed:'#e65100', checked_in:'#2e7d32', checked_out:'#0d47a1', cancelled:'#c62828' };
@@ -1558,7 +1297,70 @@
             analysisResultsArea.style.display = 'block';
         }
 
-        generateAnalysisBtn.addEventListener('click', generateAnalysisReport);
+        // Tab switching
+        document.querySelectorAll('.tab-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+                document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+                this.classList.add('active');
+                const tab = this.dataset.tab;
+                document.getElementById(tab + 'Section').classList.add('active');
+            });
+        });
+
+        // Excel import for staff
+        staffImportArea.addEventListener('click', () => staffFileInput.click());
+        staffImportArea.addEventListener('dragover', e => { e.preventDefault(); staffImportArea.classList.add('dragover'); });
+        staffImportArea.addEventListener('dragleave', () => staffImportArea.classList.remove('dragover'));
+        staffImportArea.addEventListener('drop', e => {
+            e.preventDefault(); staffImportArea.classList.remove('dragover');
+            if (e.dataTransfer.files.length) handleStaffExcel(e.dataTransfer.files[0]);
+        });
+        staffFileInput.addEventListener('change', e => { if (e.target.files.length) handleStaffExcel(e.target.files[0]); });
+
+        function handleStaffExcel(file) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                try {
+                    const data = new Uint8Array(e.target.result);
+                    const workbook = XLSX.read(data, { type: 'array' });
+                    const sheet = workbook.Sheets[workbook.SheetNames[0]];
+                    const json = XLSX.utils.sheet_to_json(sheet);
+                    if (json.length === 0) { showToast('⚠️ No data in file', true); return; }
+
+                    staffImportData = json;
+                    let html = '<table><thead><tr>';
+                    const cols = Object.keys(json[0]);
+                    cols.forEach(c => html += `<th>${escapeHtml(c)}</th>`);
+                    html += '</tr></thead><tbody>';
+                    json.slice(0, 10).forEach(row => {
+                        html += '<tr>';
+                        cols.forEach(c => html += `<td>${escapeHtml(String(row[c] ?? ''))}</td>`);
+                        html += '</tr>';
+                    });
+                    html += '</tbody></table>';
+                    if (json.length > 10) html += `<p style="padding:8px;font-size:12px;color:var(--ink-faint);">...and ${json.length - 10} more rows</p>`;
+                    staffImportPreview.innerHTML = html;
+                    staffImportPreview.style.display = 'block';
+                    staffImportBtn.style.display = 'inline-flex';
+                    staffImportClearBtn.style.display = 'inline-flex';
+                    staffImportStatusMsg.textContent = `✅ Loaded ${json.length} rows`;
+                } catch (err) {
+                    showToast('❌ Error reading file: ' + err.message, true);
+                }
+            };
+            reader.readAsArrayBuffer(file);
+        }
+
+        staffImportClearBtn.addEventListener('click', () => {
+            staffImportData = null;
+            staffImportPreview.innerHTML = '';
+            staffImportPreview.style.display = 'none';
+            staffImportBtn.style.display = 'none';
+            staffImportClearBtn.style.display = 'none';
+            staffImportStatusMsg.textContent = '';
+            staffFileInput.value = '';
+        });
 
         // Init
         initSupabase();
