@@ -12,7 +12,6 @@
     
     <style>
         :root {
-            /* Sky Blue Theme Colors */
             --bg-body: #E0F2FE; 
             --sidebar-bg: #111827;
             --sidebar-hover: #1F2937;
@@ -208,19 +207,22 @@
             border-radius: 12px; padding: 14px 12px; display: flex; flex-direction: column; gap: 8px;
             transition: 0.2s;
         }
+        .room-item:hover { border-color: var(--primary); box-shadow: var(--shadow-sm); }
         .room-item.vacant { border-left: 4px solid var(--success); }
         .room-item.occupied { border-left: 4px solid var(--warning); }
+        
         .room-top { display: flex; justify-content: space-between; align-items: center; }
         .room-num { font-size: 16px; font-weight: 800; color: var(--text-main); }
         .room-dot { width: 8px; height: 8px; border-radius: 50%; }
         .vacant .room-dot { background: var(--success); }
         .occupied .room-dot { background: var(--warning); }
+        
         .room-guest { font-size: 14px; font-weight: 600; color: var(--text-muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
         .room-status { font-size: 13px; font-weight: 700; text-align: center; padding: 6px; border-radius: 6px; }
         .vacant .room-status { background: var(--success-light); color: var(--success); }
         .occupied .room-status { background: var(--warning-light); color: var(--warning); }
 
-        /* FORMS - DROP DOWNS */
+        /* FORMS */
         .add-guest-form { display: flex; flex-direction: column; gap: 16px; }
         .form-row { display: flex; gap: 16px; }
         .form-group { flex: 1; }
@@ -233,7 +235,7 @@
             font-family: inherit; font-size: 16px; font-weight: 600; color: var(--text-main);
             outline: none; transition: 0.2s; appearance: none;
         }
-        .form-group input:focus, .form-group select:focus { border-color: var(--primary); background: white; }
+        .form-group input:focus, .form-group select:focus { border-color: var(--primary); background: white; box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1); }
         
         .btn-add {
             background: var(--primary); color: white; border: none;
@@ -241,7 +243,7 @@
             font-size: 18px; font-weight: 800; cursor: pointer;
             display: flex; align-items: center; justify-content: center; gap: 8px; transition: 0.2s;
         }
-        .btn-add:hover { background: #4338CA; }
+        .btn-add:hover { background: #4338CA; box-shadow: 0 4px 12px rgba(79, 70, 229, 0.3); }
 
         /* ACTION BUTTONS */
         .action-btn {
@@ -253,7 +255,8 @@
         .action-btn:hover { border-color: var(--primary); background: white; }
         .action-icon {
             width: 40px; height: 40px; border-radius: 10px;
-            display: flex; align-items: center; justify-content: center; color: white; font-size: 16px;
+            display: flex; align-items: center; justify-content: center;
+            color: white; font-size: 16px;
         }
         .bg-red { background: var(--danger); }
         .bg-blue { background: var(--primary); }
@@ -261,25 +264,31 @@
         .action-text small { display: block; font-size: 14px; font-weight: 600; color: var(--text-muted); margin-top: 2px; }
 
         /* BUTTONS */
-        .btn-print, .btn-print-wa {
-            border: 1px solid var(--border); color: var(--text-main);
-            padding: 10px 16px; border-radius: 8px; font-family: inherit;
-            font-size: 14px; font-weight: 700; cursor: pointer;
+        .btn-print {
+            background: var(--bg-body); border: 1px solid var(--border);
+            color: var(--text-main); padding: 10px 16px; border-radius: 8px;
+            font-family: inherit; font-size: 14px; font-weight: 700; cursor: pointer;
             display: inline-flex; align-items: center; gap: 8px; transition: 0.2s;
         }
-        .btn-print { background: var(--bg-body); }
         .btn-print:hover { background: white; border-color: var(--primary); color: var(--primary); }
-        .btn-print-wa { background: var(--whatsapp); border-color: var(--whatsapp); color: white; }
-        .btn-print-wa:hover { background: #128C7E; }
+        .btn-print-wa {
+            background: var(--whatsapp); border: 1px solid var(--whatsapp);
+            color: white; padding: 10px 16px; border-radius: 8px;
+            font-family: inherit; font-size: 14px; font-weight: 700; cursor: pointer;
+            display: inline-flex; align-items: center; gap: 8px; transition: 0.2s;
+        }
+        .btn-print-wa:hover { background: #128C7E; border-color: #128C7E; }
         
-        /* Receipt Buttons */
+        /* Digital Receipt Buttons */
         .btn-receipt {
             border: none; padding: 6px 10px; border-radius: 6px;
             font-family: inherit; font-size: 13px; font-weight: 700;
             cursor: pointer; transition: 0.2s; display: inline-flex; align-items: center; gap: 5px;
         }
         .btn-receipt-wa { background: #25D366; color: white; }
+        .btn-receipt-wa:hover { background: #128C7E; }
         .btn-receipt-email { background: var(--primary); color: white; }
+        .btn-receipt-email:hover { background: #4338CA; }
 
         /* TOAST & UTILS */
         #toast {
@@ -324,7 +333,7 @@
         
         <div class="login-form-group">
             <label>Username</label>
-            <input type="text" id="loginUser" placeholder="Enter username">
+            <input type="text" id="loginUser" placeholder="e.g. admin">
         </div>
         <div class="login-form-group">
             <label>Password</label>
@@ -360,6 +369,9 @@
         <button class="nav-item" onclick="switchView('billing', this)">
             <i class="fas fa-file-invoice-dollar"></i> Billing
         </button>
+        <button class="nav-item" id="adminNavBtn" onclick="switchView('admin', this)" style="display: none;">
+            <i class="fas fa-cog"></i> Admin Settings
+        </button>
         <button class="nav-item" onclick="doLogout()" style="margin-top: 20px; color: #ef4444;">
             <i class="fas fa-sign-out-alt"></i> Logout
         </button>
@@ -374,7 +386,7 @@
             <div class="user-profile">
                 <div class="user-info" style="text-align: right;">
                     <h4 id="currentUserName">Receptionist</h4>
-                    <p>Staff</p>
+                    <p id="currentUserRole">Staff</p>
                 </div>
                 <div class="avatar-profile" id="currentUserInitials">S</div>
             </div>
@@ -412,7 +424,7 @@
                         </div>
                     </div>
 
-                    <!-- NEW CHECK IN (WITH DROPDOWNS) -->
+                    <!-- NEW CHECK IN -->
                     <div class="card">
                         <div class="card-header">
                             <div class="card-title">New Check-In</div>
@@ -453,7 +465,7 @@
                                     <label>Assign Room (Dropdown)</label>
                                     <div class="input-wrap">
                                         <i class="fas fa-door-closed"></i>
-                                        <select id="roomSelect"></select>
+                                        <select id="roomSelect" onchange="updateRateFromRoom()"></select>
                                     </div>
                                 </div>
                             </div>
@@ -478,7 +490,7 @@
                                     <label>Rate per Night (ZMW)</label>
                                     <div class="input-wrap">
                                         <i class="fas fa-tag"></i>
-                                        <input type="number" id="rateInput" min="0" step="10" value="500" oninput="calculateTotal()">
+                                        <input type="number" id="rateInput" min="0" step="10" value="500" readonly style="background: #E2E8F0;">
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -614,6 +626,62 @@
             </div>
         </div>
 
+        <!-- VIEW 5: ADMIN SETTINGS -->
+        <div id="view-admin" class="view">
+            <div class="layout-grid">
+                <!-- Add New Room -->
+                <div class="left-col">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-title">Add New Room</div>
+                        </div>
+                        <div class="add-guest-form">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>Room Name/Number</label>
+                                    <div class="input-wrap">
+                                        <i class="fas fa-door-closed"></i>
+                                        <input type="text" id="newRoomName" placeholder="e.g. Room 101">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label>Price per Night (ZMW)</label>
+                                    <div class="input-wrap">
+                                        <i class="fas fa-tag"></i>
+                                        <input type="number" id="newRoomPrice" placeholder="e.g. 500">
+                                    </div>
+                                </div>
+                            </div>
+                            <button class="btn-add" onclick="addRoom()">
+                                <i class="fas fa-plus-circle"></i> Add Room to Database
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Existing Rooms Table -->
+                <div class="right-col" style="grid-column: span 1;">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-title">Manage Rooms & Prices</div>
+                        </div>
+                        <div class="table-wrap">
+                            <table class="guest-table">
+                                <thead>
+                                    <tr>
+                                        <th>Room</th>
+                                        <th>Price (ZMW)</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="adminRoomsTableBody"></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </div>
 </div>
 
@@ -621,7 +689,7 @@
 <div id="loading" class="loading-overlay hidden"><i class="fas fa-spinner fa-spin"></i></div>
 
 <script>
-    // YOUR NEW SUPABASE CREDENTIALS
+    // YOUR SUPABASE CREDENTIALS
     const SUPABASE_URL = 'https://vokfonpslvruqrrrzjzh.supabase.co';
     const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZva2ZvbnBzbHZydXFycnJ6anpoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTAzNTI3MTEsImV4cCI6MjEwNTkyODcxMX0.aoXjKuUYPzduqxoj54fvUANF7yZ1zqS9wq1eKtXnRVw';
 
@@ -685,12 +753,10 @@
 
         setLoading(true);
         try {
-            // Check Admin password first
             if (user === 'admin') {
                 const { data, error } = await supabase.from('admin').select('password_hash').limit(1).maybeSingle();
                 if (error) throw error;
                 
-                // We use a simple SHA-256 hash comparison
                 const msgBuffer = new TextEncoder().encode(pass);
                 const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
                 const hashArray = Array.from(new Uint8Array(hashBuffer));
@@ -703,7 +769,6 @@
                     setLoading(false); return;
                 }
             } else {
-                // Check Staff table
                 const { data, error } = await supabase.from('staff').select('*').eq('username', user).maybeSingle();
                 if (error) throw error;
                 if (!data) { errDiv.textContent = 'User not found.'; setLoading(false); return; }
@@ -721,12 +786,19 @@
                 }
             }
 
-            // Success
             document.getElementById('loginScreen').classList.add('hidden');
             document.getElementById('currentUserName').textContent = currentUser.name;
+            document.getElementById('currentUserRole').textContent = currentUser.role;
             document.getElementById('currentUserInitials').textContent = currentUser.name[0].toUpperCase();
             
-            loadAll(); // Load data
+            // Show Admin Tab if admin
+            if (currentUser.role === 'Admin') {
+                document.getElementById('adminNavBtn').style.display = 'flex';
+            } else {
+                document.getElementById('adminNavBtn').style.display = 'none';
+            }
+            
+            loadAll();
             showToast('Logged in successfully!');
 
         } catch (err) {
@@ -741,6 +813,7 @@
         document.getElementById('loginScreen').classList.remove('hidden');
         document.getElementById('loginUser').value = '';
         document.getElementById('loginPass').value = '';
+        document.getElementById('adminNavBtn').style.display = 'none';
     };
 
     // --- NAVIGATION ---
@@ -755,9 +828,22 @@
             'dashboard': 'Dashboard Overview',
             'rooms': 'All Rooms',
             'guests': 'Guest History',
-            'billing': 'Billing & Finance'
+            'billing': 'Billing & Finance',
+            'admin': 'Admin Settings'
         };
         document.getElementById('pageTitle').textContent = titles[viewName];
+    };
+
+    // --- CALCULATIONS & DROPDOWNS ---
+    window.updateRateFromRoom = function() {
+        const roomId = document.getElementById('roomSelect').value;
+        const room = rooms.find(r => r.id === Number(roomId));
+        if (room && room.price) {
+            document.getElementById('rateInput').value = room.price;
+        } else {
+            document.getElementById('rateInput').value = 500; // fallback
+        }
+        calculateTotal();
     };
 
     window.calculateTotal = function() {
@@ -781,13 +867,13 @@
             
             rooms = roomsRes.data || [];
             guests = guestsRes.data || [];
-            
-            // Auto-Seed 40 Rooms if empty
+
+            // Auto-Seed 40 Rooms if completely empty
             if (rooms.length === 0) {
                 const seed = [];
-                for (let i = 101; i <= 116; i++) seed.push({ name: 'Room ' + i, capacity: 2, is_occupied: false });
-                for (let i = 201; i <= 216; i++) seed.push({ name: 'Room ' + i, capacity: 3, is_occupied: false });
-                for (let i = 301; i <= 308; i++) seed.push({ name: 'Room ' + i, capacity: 4, is_occupied: false });
+                for (let i = 101; i <= 116; i++) seed.push({ name: 'Room ' + i, price: 500, capacity: 2, is_occupied: false });
+                for (let i = 201; i <= 216; i++) seed.push({ name: 'Room ' + i, price: 850, capacity: 3, is_occupied: false });
+                for (let i = 301; i <= 308; i++) seed.push({ name: 'Room ' + i, price: 1200, capacity: 4, is_occupied: false });
                 await supabase.from('rooms').insert(seed);
                 rooms = (await supabase.from('rooms').select('*').order('id')).data || [];
             }
@@ -809,6 +895,7 @@
         renderAllRooms();
         renderRoomSelect();
         renderBilling();
+        renderAdminRooms();
         updateBadges();
     }
 
@@ -973,7 +1060,10 @@
         }
         select.disabled = false;
         select.innerHTML = vacant.sort((a, b) => a.id - b.id)
-            .map(r => `<option value="${r.id}">${escapeHtml(r.name)}</option>`).join('');
+            .map(r => `<option value="${r.id}">${escapeHtml(r.name)} (ZMW ${r.price || 500})</option>`).join('');
+        
+        // Auto update rate to first available room
+        updateRateFromRoom();
     }
 
     function renderBilling() {
@@ -1017,6 +1107,69 @@
         }).join('');
     }
 
+    // --- ADMIN ROOM MANAGEMENT ---
+    function renderAdminRooms() {
+        const tbody = document.getElementById('adminRoomsTableBody');
+        if (!tbody) return;
+        
+        if (!rooms.length) {
+            tbody.innerHTML = '<tr><td colspan="3" style="text-align:center; color: var(--text-muted);">No rooms found.</td></tr>';
+            return;
+        }
+
+        tbody.innerHTML = rooms.map(r => `
+            <tr>
+                <td style="font-weight: 700;">${escapeHtml(r.name)}</td>
+                <td>ZMW ${Number(r.price || 500).toLocaleString()}</td>
+                <td>
+                    <button class="btn-icon" onclick="deleteRoom(${r.id})" title="Delete Room"><i class="fas fa-trash"></i></button>
+                </td>
+            </tr>
+        `).join('');
+    }
+
+    window.addRoom = async function() {
+        const name = document.getElementById('newRoomName').value.trim();
+        const price = parseFloat(document.getElementById('newRoomPrice').value);
+
+        if (!name || isNaN(price)) { showToast('Please fill both fields correctly.', 'error'); return; }
+
+        setLoading(true);
+        try {
+            const { error } = await supabase.from('rooms').insert({
+                name: name,
+                price: price,
+                capacity: 2,
+                is_occupied: false
+            });
+            if (error) throw error;
+            
+            showToast('Room added successfully!');
+            document.getElementById('newRoomName').value = '';
+            document.getElementById('newRoomPrice').value = '';
+            await loadAll();
+        } catch (err) {
+            showToast(err.message, 'error');
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    window.deleteRoom = async function(id) {
+        if (!confirm('Delete this room? This cannot be undone.')) return;
+        setLoading(true);
+        try {
+            const { error } = await supabase.from('rooms').delete().eq('id', id);
+            if (error) throw error;
+            showToast('Room deleted');
+            await loadAll();
+        } catch (err) {
+            showToast(err.message, 'error');
+        } finally {
+            setLoading(false);
+        }
+    };
+
     // --- RECEIPTS ---
     window.sendReceiptWhatsApp = function(guestId) {
         const g = guests.find(x => String(x.id) === String(guestId));
@@ -1035,7 +1188,7 @@
                      `Thank you for staying with us!`;
 
         let phone = g.phone || '';
-        phone = phone.replace(/\D/g, ''); // Clean
+        phone = phone.replace(/\D/g, ''); 
         if (phone.startsWith('0') && phone.length === 10) phone = '260' + phone.substring(1);
 
         let url = phone ? `https://wa.me/${phone}?text=${encodeURIComponent(text)}` : `https://wa.me/?text=${encodeURIComponent(text)}`;
@@ -1155,26 +1308,21 @@
 
         setLoading(true);
         try {
-            // 1. Insert Guest
             const { error: e1 } = await supabase.from('guests').insert({
                 name, phone, email, origin, room_id: Number(roomId), check_in: checkIn,
                 days: days, amount_paid: amount, still_lodging: true
             });
             if (e1) throw e1;
 
-            // 2. Mark Room as Occupied
             const { error: e2 } = await supabase.from('rooms').update({ is_occupied: true }).eq('id', Number(roomId));
             if (e2) throw e2;
 
-            // Clear form
             document.getElementById('guestNameInput').value = '';
             document.getElementById('guestPhoneInput').value = '';
             document.getElementById('guestEmailInput').value = '';
             document.getElementById('guestOriginInput').value = '';
             document.getElementById('daysInput').value = '1';
-            document.getElementById('rateInput').value = '500';
-            calculateTotal();
-
+            
             showToast('Guest checked in!');
             await loadAll();
         } catch (err) {
