@@ -652,8 +652,65 @@
         <!-- VIEW 5: ADMIN SETTINGS -->
         <div id="view-admin" class="view">
             <div class="layout-grid">
-                <!-- Add New Room -->
+                
+                <!-- ADD STAFF -->
                 <div class="left-col">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-title">Add New Staff Account</div>
+                        </div>
+                        <div class="add-guest-form">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>Full Name</label>
+                                    <div class="input-wrap">
+                                        <i class="fas fa-user"></i>
+                                        <input type="text" id="newStaffName" placeholder="e.g. John Banda">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label>Username</label>
+                                    <div class="input-wrap">
+                                        <i class="fas fa-user-tag"></i>
+                                        <input type="text" id="newStaffUser" placeholder="e.g. john123">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label>Password</label>
+                                    <div class="input-wrap">
+                                        <i class="fas fa-lock"></i>
+                                        <input type="password" id="newStaffPass" placeholder="Enter password">
+                                    </div>
+                                </div>
+                            </div>
+                            <button class="btn-add" onclick="addStaff()">
+                                <i class="fas fa-plus-circle"></i> Create Staff Account
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- STAFF AUDIT LOG -->
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-title">Staff Login Record (Audit Log)</div>
+                        </div>
+                        <div class="table-wrap">
+                            <table class="guest-table">
+                                <thead>
+                                    <tr>
+                                        <th>Staff Name</th>
+                                        <th>Username</th>
+                                        <th>Date & Time</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="staffLogTableBody"></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- MANAGE ROOMS -->
+                <div class="right-col" style="grid-column: span 1;">
                     <div class="card">
                         <div class="card-header">
                             <div class="card-title">Add New Room</div>
@@ -668,7 +725,7 @@
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label>Price per Night (ZMW)</label>
+                                    <label>Price (ZMW)</label>
                                     <div class="input-wrap">
                                         <i class="fas fa-tag"></i>
                                         <input type="number" id="newRoomPrice" placeholder="e.g. 500">
@@ -676,24 +733,21 @@
                                 </div>
                             </div>
                             <button class="btn-add" onclick="addRoom()">
-                                <i class="fas fa-plus-circle"></i> Add Room to Database
+                                <i class="fas fa-plus-circle"></i> Add Room
                             </button>
                         </div>
                     </div>
-                </div>
 
-                <!-- Existing Rooms Table -->
-                <div class="right-col" style="grid-column: span 1;">
                     <div class="card">
                         <div class="card-header">
-                            <div class="card-title">Manage Rooms & Prices</div>
+                            <div class="card-title">Manage Rooms</div>
                         </div>
                         <div class="table-wrap">
                             <table class="guest-table">
                                 <thead>
                                     <tr>
                                         <th>Room</th>
-                                        <th>Price (ZMW)</th>
+                                        <th>Price</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
@@ -720,7 +774,7 @@
     let rooms = [];
     let guests = [];
     let currentUser = null;
-    let loginRole = 'staff'; // 'staff' or 'admin'
+    let loginRole = 'staff';
 
     function initSupabase() {
         supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
@@ -777,7 +831,7 @@
             document.getElementById('usernameGroup').style.display = 'none';
             document.getElementById('loginSubtitle').textContent = 'Administrator Login';
             document.getElementById('passwordLabel').textContent = 'Admin Password';
-            document.getElementById('loginUser').value = 'admin'; // Auto-fill
+            document.getElementById('loginUser').value = 'admin';
         } else {
             document.getElementById('btnRoleAdmin').classList.remove('active');
             document.getElementById('btnRoleStaff').classList.add('active');
@@ -826,7 +880,7 @@
                 const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
 
                 if (data.password_hash === hashHex) {
-                    currentUser = { name: data.name, role: 'Staff' };
+                    currentUser = { name: data.name, role: 'Staff', id: data.id };
                 } else {
                     errDiv.textContent = 'Invalid password.';
                     setLoading(false); return;
@@ -842,6 +896,12 @@
                 document.getElementById('adminNavBtn').style.display = 'flex';
             } else {
                 document.getElementById('adminNavBtn').style.display = 'none';
+                
+                // Log the staff login to the database
+                await supabase.from('login_logs').insert({
+                    staff_id: currentUser.id,
+                    staff_name: currentUser.name
+                });
             }
             
             loadAll();
@@ -879,6 +939,10 @@
             'admin': 'Admin Settings'
         };
         document.getElementById('pageTitle').textContent = titles[viewName];
+        
+        if (viewName === 'admin') {
+            loadAdminData(); // Load staff logs when admin opens settings
+        }
     };
 
     // --- CALCULATIONS & DROPDOWNS ---
@@ -930,6 +994,28 @@
             showToast('Failed to load: ' + err.message, 'error', 5000);
         } finally {
             setLoading(false);
+        }
+    }
+
+    async function loadAdminData() {
+        if (currentUser && currentUser.role === 'Admin') {
+            // Load Staff Logs
+            const { data, error } = await supabase.from('login_logs').select('*').order('login_time', { ascending: false }).limit(50);
+            if (!error && data) {
+                const tbody = document.getElementById('staffLogTableBody');
+                if (data.length === 0) {
+                    tbody.innerHTML = '<tr><td colspan="3" style="text-align:center; color: var(--text-muted);">No login records yet.</td></tr>';
+                } else {
+                    tbody.innerHTML = data.map(log => {
+                        const d = new Date(log.login_time);
+                        return `<tr>
+                            <td style="font-weight: 700;">${escapeHtml(log.staff_name)}</td>
+                            <td><span style="background: var(--bg-body); padding: 4px 8px; border-radius: 6px; font-size: 13px;">System</span></td>
+                            <td>${d.toLocaleString()}</td>
+                        </tr>`;
+                    }).join('');
+                }
+            }
         }
     }
 
@@ -1152,7 +1238,7 @@
         }).join('');
     }
 
-    // --- ADMIN ROOM MANAGEMENT ---
+    // --- ADMIN ROOM & STAFF MANAGEMENT ---
     function renderAdminRooms() {
         const tbody = document.getElementById('adminRoomsTableBody');
         if (!tbody) return;
@@ -1208,6 +1294,38 @@
             if (error) throw error;
             showToast('Room deleted');
             await loadAll();
+        } catch (err) {
+            showToast(err.message, 'error');
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    window.addStaff = async function() {
+        const name = document.getElementById('newStaffName').value.trim();
+        const username = document.getElementById('newStaffUser').value.trim();
+        const password = document.getElementById('newStaffPass').value.trim();
+
+        if (!name || !username || !password) { showToast('Please fill all fields.', 'error'); return; }
+
+        setLoading(true);
+        try {
+            const msgBuffer = new TextEncoder().encode(password);
+            const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
+            const hashArray = Array.from(new Uint8Array(hashBuffer));
+            const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+
+            const { error } = await supabase.from('staff').insert({
+                name: name,
+                username: username,
+                password_hash: hashHex
+            });
+            if (error) throw error;
+            
+            showToast('Staff account created successfully!');
+            document.getElementById('newStaffName').value = '';
+            document.getElementById('newStaffUser').value = '';
+            document.getElementById('newStaffPass').value = '';
         } catch (err) {
             showToast(err.message, 'error');
         } finally {
@@ -1426,7 +1544,6 @@
         calculateTotal();
         document.getElementById('addGuestBtn').addEventListener('click', addGuest);
         
-        // Ensure default role is staff
         setLoginRole('staff');
     });
 </script>
