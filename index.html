@@ -5,7 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
     <title>Lavevars Lodge</title>
     <meta name="theme-color" content="#1a237e">
-    <meta name="description" content="Lavevars Lodge - Kasama District, Zambia.">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -112,6 +114,8 @@
         .login-form .field { margin-bottom: 12px; }
         .role-selector { display: flex; gap: 10px; margin-top: 16px; }
         .role-selector .btn { flex: 1; }
+        /* Diagnostic box */
+        #diagBox { display:none; background:#ffebee; color:#c62828; padding:10px; border-radius:8px; margin-top:10px; font-size:12px; word-break:break-all; }
     </style>
 </head>
 <body>
@@ -157,7 +161,8 @@
                         <input type="password" id="adminLoginPassword" placeholder="Enter admin password">
                     </div>
                     <button class="btn btn-danger btn-block" onclick="adminLogin()"><i class="fas fa-sign-in-alt"></i> Sign In</button>
-                    <button class="btn btn-outline btn-block" style="margin-top:8px; font-size:12px;" onclick="window.fixAdminPassword()">Fix Admin Password (Run This If Login Fails)</button>
+                    <button class="btn btn-outline btn-block" style="margin-top:8px; font-size:12px;" onclick="window.forceCreateAdmin()">🛠 FORCE SETUP ADMIN ACCOUNT</button>
+                    <div id="diagBox"></div>
                 </div>
                 <div class="role-selector">
                     <button class="btn btn-outline btn-sm" onclick="showLoginForm('staff')"><i class="fas fa-concierge-bell"></i> Staff</button>
@@ -375,7 +380,6 @@
             document.querySelector('.tab-btn[data-tab="staff"]').click();
         });
 
-        // --- TAB SWITCHING LOGIC ---
         document.querySelectorAll('.tab-btn').forEach(btn => {
             btn.addEventListener('click', function() {
                 document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
@@ -386,7 +390,6 @@
             });
         });
 
-        // --- SIMPLE HASH FALLBACK ---
         async function hashPassword(password) {
             if (window.crypto && window.crypto.subtle) {
                 const data = new TextEncoder().encode(password);
@@ -396,16 +399,29 @@
             return password; 
         }
 
-        // --- FIX ADMIN BUTTON ---
-        window.fixAdminPassword = async function() {
-            showToast('🔄 Forcing database reset...');
-            const hash = await hashPassword('admin123');
-            await supabaseClient.from('admin').delete().neq('id', 0);
-            await supabaseClient.from('admin').insert({ password_hash: hash });
-            showToast('✅ Fixed! Try password: admin123');
+        // --- DIAGNOSTIC & FORCE CREATE ---
+        window.forceCreateAdmin = async function() {
+            const box = document.getElementById('diagBox');
+            box.style.display = 'block';
+            box.innerHTML = 'Checking database...';
+
+            try {
+                const hash = await hashPassword('admin123');
+                box.innerHTML += `<br>Generated Hash for 'admin123': <br><b>${hash}</b>`;
+
+                // 1. Try to delete old entries
+                const { error: delErr } = await supabaseClient.from('admin').delete().neq('id', 0);
+                if (delErr) { box.innerHTML += `<br>❌ Delete Error: ${delErr.message}`; }
+
+                // 2. Insert new admin
+                const { error: insErr } = await supabaseClient.from('admin').insert({ password_hash: hash });
+                if (insErr) { box.innerHTML += `<br>❌ Insert Error: ${insErr.message}`; }
+                else { box.innerHTML += `<br>✅ Successfully forced admin account to 'admin123'`; showToast('✅ Admin password forced to admin123'); }
+            } catch (err) {
+                box.innerHTML += `<br>❌ Fatal: ${err.message}`;
+            }
         };
 
-        // --- LOGIN LOGIC ---
         async function staffLogin() {
             const user = document.getElementById('staffLoginUsername').value.trim();
             const pass = document.getElementById('staffLoginPassword').value.trim();
@@ -443,7 +459,7 @@
             try {
                 const { data, error } = await supabaseClient.from('admin').select('password_hash').limit(1).maybeSingle();
                 if (error) throw error;
-                if (!data) { showToast('❌ Admin not configured. Click "Fix Admin Password" below.', true); return; }
+                if (!data) { showToast('❌ Admin not configured. Click the FORCE SETUP button below.', true); return; }
 
                 const hash = await hashPassword(pass);
                 if (data.password_hash !== hash) { showToast('❌ Invalid admin password', true); return; }
@@ -594,7 +610,6 @@
             loadStaffTable(); loadAdminStats();
         });
 
-        // --- STAFF DASHBOARD ---
         document.getElementById('loadGuestsBtn').addEventListener('click', async () => {
             const from = document.getElementById('staffDateFrom').value;
             const to = document.getElementById('staffDateTo').value;
@@ -640,7 +655,6 @@
             showToast('✅ Guest added'); document.getElementById('loadGuestsBtn').click();
         });
 
-        // --- EXCEL IMPORT ---
         const importArea = document.getElementById('staffImportArea');
         const fileInput = document.getElementById('staffFileInput');
         importArea.addEventListener('click', () => fileInput.click());
@@ -694,7 +708,6 @@
             document.getElementById('loadGuestsBtn').click();
         });
 
-        // --- ANALYSIS ---
         document.getElementById('generateAnalysisBtn').addEventListener('click', async () => {
             const from = document.getElementById('analysisDateFrom').value;
             const to = document.getElementById('analysisDateTo').value;
